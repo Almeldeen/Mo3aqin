@@ -27,7 +27,7 @@ namespace Mo3aqin.Models
         public string HomeNumber { get; set; }
         public string Notes { get; set; }
         public bool Active { get; set; }
-        public GameDetails GameDetails { get; set; }
+        //public GameDetails GameDetails { get; set; }
         public Championship Championship { get; set; }
     }
 }

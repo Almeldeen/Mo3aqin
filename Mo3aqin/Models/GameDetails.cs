@@ -16,14 +16,13 @@ namespace Mo3aqin.Models
         public int GameId { get; set; }
         public virtual Game Game { get; set; }
         [Column(Order = 2), Key, ForeignKey("Employee")]
-        public int EmpId { get; set; }
-       
+        public int EmpId { get; set; }      
         [Column(Order = 3), Key, ForeignKey("Coach2")]
         public int CoachAssId { get; set; }
         public virtual Coach Coach2 { get; set; }
         [Column(Order = 4), Key, ForeignKey("Employee2")]
         public int SupervisorId { get; set; }
-        public virtual Employee Employee2 { get; set; }
+        public  Employee Employee2 { get; set; }
         public int PlayersNum { get; set; }
         public string Notes { get; set; }
         
