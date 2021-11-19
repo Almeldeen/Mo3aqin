@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-Mo3aqin-6A595938-FD1C-43BF-8847-76FAFACF4CDA</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\Coach\33cf9f46-e801-4a4e-93f6-4216c2f5d84ftree-736885__480.jpg" />
+    <None Include="wwwroot\Images\Coach\45796099-7672-432d-a828-2615f6c9b20btree-736885__480.jpg" />
+    <None Include="wwwroot\Images\Coach\50a159c9-db71-4285-a159-dc91215d4bb2tree-736885__480.jpg" />
+    <None Include="wwwroot\Images\Coach\5fe2981f-6300-4999-8bb5-02a0cbcf5daftree-736885__480.jpg" />
+    <None Include="wwwroot\Images\Coach\7434e741-d5f3-4fd7-b3d0-ef3c39df466ftree-736885__480.jpg" />
+    <None Include="wwwroot\Images\Coach\81a5bb9b-42ce-463e-aae7-54f5ec264e91tree-736885__480.jpg" />
+  </ItemGroup>
+
+</Project>

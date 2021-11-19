@@ -1,0 +1,158 @@
+﻿<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>اسم المدرب</th>
+            <th>صورة المدرب</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Data">
+    </tbody>
+</table>
+<!-- pagination -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+    </ul>
+</nav>
+<a href="/Coach/EditCoach?coachId=5" onclick="window.location.href = '/Coach/EditCoach?coachId=5';"></a>
+<script>
+
+    $(document).ready(function () {
+
+        LoadAllCoachs(1);
+    });
+    
+    function LoadAllCoachs(pageNum) {
+        $.ajax({
+            url: "/Coach/LoadAllCoachs?pageNumber=" + pageNum + "&pageSize=" + 10,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                $(".pagination").empty();
+                var html = '';
+
+                $.each(result.data, function (key, item) {
+                    debugger;
+                    $("#Data").append(SeedDataTabel(item));
+                });
+                PaggingTemplate(result.totalPages, result.currentPage);
+            }
+        });
+    }
+    function SeedDataTabel(data) {
+        return ' <tr id="tr_' + data.coachId + '"><td>' + data.coachName + '</td><td><img width="100" height="100" src="/Images/Coach/' + data.coachImageString + '" alt=""></td><td>' +
+            '<a class="btn btn-success" href="javascript:void(0);"  onclick="viewCoach(' + data.coachId + ')">تفاصيل</a>' +
+            '<a class="btn btn-primary" href="javascript:void(0);"  onclick="editCoach(' + data.coachId + ')">تعديل</a>' +
+            '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletCoach(' + data.coachId + ')">حذف</a></td> </tr>'
+    }
+    function PaggingTemplate(totalPage, currentPage) {
+
+        var template = "";
+        var TotalPages = totalPage;
+        var CurrentPage = currentPage;
+        var PageNumberArray = Array();
+
+
+        var countIncr = 1;
+        if (currentPage != 1) {
+
+            for (var i = currentPage - 1; i <= totalPage; i++) {
+
+                PageNumberArray[0] = currentPage - 1;
+                if (PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+        }
+        else {
+            for (var i = currentPage; i <= totalPage; i++) {
+
+                PageNumberArray[0] = currentPage;
+                if (totalPage != currentPage && PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+        }
+        PageNumberArray = PageNumberArray.slice(0, 5);
+        var FirstPage = 1;
+        var LastPage = totalPage;
+        if (totalPage != currentPage) {
+            var ForwardOne = currentPage + 1;
+        }
+        var BackwardOne = 1;
+        if (currentPage > 1) {
+            BackwardOne = currentPage - 1;
+        }
+
+        //template = "<p>" + CurrentPage + " of " + TotalPages + " pages</p>"
+        template = template + '<li class="page-item">' +
+            '<a onclick="LoadAllProudct(' + BackwardOne + ')" class="page-link"  aria-label="Previous">' +
+            '<span aria-hidden="true">&laquo;</span>' +
+            '<span class="sr-only">Previous</span>' +
+            '</a>' +
+            '</li>';
+
+
+        var numberingLoop = "";
+        for (var i = 0; i < PageNumberArray.length; i++) {
+            if (PageNumberArray[i] == currentPage) {
+                numberingLoop = numberingLoop + '<li  class="page-item active"><a onclick="LoadAllProudct(' + PageNumberArray[i] + ')"  class="page-link" href="#">' + PageNumberArray[i] + '</a></li>'
+            }
+            else {
+                numberingLoop = numberingLoop + '<li class="page-item"><a onclick="LoadAllProudct(' + PageNumberArray[i] + ')"  class="page-link" href="#">' + PageNumberArray[i] + '</a></li>'
+            }
+
+        }
+        template = template + numberingLoop + '<li class="page-item">' +
+            ' <a  onclick="LoadAllProudct(' + ForwardOne + ')" class="page-link"  aria-label="Next">' +
+            '<span aria-hidden="true">&raquo;</span>' +
+            '<span class="sr-only">Next</span>' +
+            '</a>' +
+            '</li>';
+
+        $(".pagination").append(template);
+
+
+    }
+    function editCoach(id) {
+        debugger;
+        window.location.href = "/Coach/EditCoach?coachId="+id;
+    }
+    function viewCoach(id) {
+       
+        window.location.href = "/Coach/ViewCoach?coachId=" + id;
+    }
+    function deletCoach(id) {
+        swal({
+            title: 'هل انت متأكد؟',
+            text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Coach/DeletCoach?id=" + id,
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (result) {
+
+                            if (result == true) {
+                                swal("تم الحذف بنجاح", {
+                                    icon: "success",
+                                });
+                                $('#tr_' + id).remove();
+                            }
+                            else {
+                                swal("حدث خطا او تم استخدام البيانات من قبل", "", "error");
+                            }
+                        }
+                    });
+
+                }
+            });
+    }
+</script>

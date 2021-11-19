@@ -1,0 +1,234 @@
+﻿@{ ViewData["Title"] = "تسجيل لاعب";
+    Layout = "~/Views/Shared/_newLayout.cshtml"; }
+<form class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تسجيل لاعب جديد </h2>
+    </div>
+    <div class="form-group">
+        <label for="text-one">اسم اللاعب</label>
+        <input type="text" class="form-control" id="text-one">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-two">رقم العضوية</label>
+            <input type="text" id="text-two" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-three">رقم الجواز</label>
+            <input type="text" id="text-three" class="form-control">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ انتهاء الجواز</label>
+            <div class="input-group">
+                <input type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-one">صورة الجواز</label>
+            <input type="file" id="file-one" class="form-control-file">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-two">صورة اللاعب</label>
+            <input type="file" id="file-two" class="form-control-file">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-three">مدنية اللاعب</label>
+            <input type="file" id="file-three" class="form-control-file">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-three">تاريخ ميلاد</label>
+            <div class="input-group">
+                <input type="text" class="form-control drgpicker" id="date-input-three" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-four">شهادة الميلاد</label>
+            <input type="file" id="file-four" class="form-control-file">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-five"> تقرير طبي</label>
+            <input type="file" id="file-five" class="form-control-file">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-six">شهادة إعاقة</label>
+            <input type="file" id="file-six" class="form-control-file">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-one">الجنسية</label>
+            <select class="form-control select2" id="select-one">
+                <option value="opt-one-one">كويتي</option>
+                <option value="opt-one-two">غير كويتي</option>
+                <option value="opt-one-three">سعودي </option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="check-one">الحالة الإجتماعية</label>
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio-one" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio-one">متزوج</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio-two" name="customRadio" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="customRadio-two">أعزب</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-four">الرقم المدنى</label>
+            <input type="text" id="text-four" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-five">مكان العمل</label>
+            <input type="text" id="text-five" class="form-control">
+        </div>
+    </div>
+    <hr class="col-12">
+    <div class="d-flex flex-wrap w-100">
+        <p class="col-12 font-weight-bold">عنوان السكن</p>
+        <div class="form-group col-md-6">
+            <label for="text-six">	المحافظة</label>
+            <input type="text" id="text-six" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-seven">		المنطقة</label>
+            <input type="text" id="text-seven" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-eight">			قطعة</label>
+            <input type="text" id="text-eight" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-nine">			جادة</label>
+            <input type="text" id="text-nine" class="form-control">
+        </div>
+    </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="d-flex flex-wrap w-100">
+            <p class="col-12 font-weight-bold"> هواتف</p>
+            <div class="form-group col-md-6">
+                <label for="text-ten">		الوالد</label>
+                <input type="text" id="text-ten" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-eleven">			المنزل</label>
+                <input type="text" id="text-eleven" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-twelve">				الموبايل</label>
+                <input type="text" id="text-twelve" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-thirteen">				اخرى</label>
+                <input type="text" id="text-thirteen" class="form-control">
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <div class="d-flex flex-wrap align-items-center">
+            <label class="m-0 mr-3" for="name">حالة اللاعب</label>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="status_active" name="status" class="custom-control-input">
+                <label class="custom-control-label" for="status_active">فعّال</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="status_not_active" name="status" class="custom-control-input" checked>
+                <label class="custom-control-label" for="status_not_active">غير فعّال</label>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-fourteen">توصية الدكتور </label>
+        <textarea name="" class="form-control" id="text-fourteen" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-two">اللعبة</label>
+            <select class="form-control select2" id="select-two">
+                <option value="opt-two-one">العاب القوى</option>
+                <option value="opt-two-two">السباحة</option>
+                <option value="opt-two-three">تنس الطاولة</option>
+                <option value="opt-two-four">كرة السلة</option>
+                <option value="opt-two-five">طائرة جلوس</option>
+                <option value="opt-two-six">المبارزة</option>
+                <option value="opt-two-seven">الرماية</option>
+                <option value="opt-two-eight">بوشيا</option>
+                <option value="opt-two-nine">كرة الهدف</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="select-three"> الفئة</label>
+            <select class="form-control select2" id="select-three">
+                <option value="opt-three-one">F1</option>
+                <option value="opt-three-two">F2</option>
+                <option value="opt-three-three">F3</option>
+                <option value="opt-three-four">F4</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-fifteen">الإعاقة</label>
+            <input type="text" id="text-fifteen" class="form-control">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one"> اللعبة </label>
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" value="" id="check-one-one">
+            <label class="custom-control-label" for="check-one-one"> السباحة</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" value="" id="check-one-two">
+            <label class="custom-control-label" for="check-one-two"> كرة السلة</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" value="" id="check-one-three">
+            <label class="custom-control-label" for="check-one-three"> البوشيا</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" value="" id="check-one-four">
+            <label class="custom-control-label" for="check-one-four"> كرة الهدف</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" value="" id="check-one-five">
+            <label class="custom-control-label" for="check-one-five"> تنس الطاولة</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" value="" id="check-one-six">
+            <label class="custom-control-label" for="check-one-six"> العاب قوى</label>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-sixteen"> ملاحظات </label>
+        <textarea name="" class="form-control" id="text-sixteen" cols="30" rows="5"></textarea>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">تسجيل اللاعب</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>

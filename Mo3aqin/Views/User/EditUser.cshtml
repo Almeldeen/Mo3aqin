@@ -1,0 +1,27 @@
+﻿@model EditUserViewModel
+
+@{ ViewData["Title"] = "تعديل مستخدم"; Layout = "~/Views/Shared/_newLayout.cshtml"; }
+
+
+
+
+<form asp-action="EditUser" method="post">
+    <h4>تعديل مستخدم</h4>
+    <hr />
+    <input type="hidden" asp-for="UserId" />
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for=" UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for=" Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary d-block mt-4">تعديل</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

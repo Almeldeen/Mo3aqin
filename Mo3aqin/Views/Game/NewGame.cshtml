@@ -1,0 +1,209 @@
+﻿
+@{ ViewData["Title"] = "رياضة جديدة";
+    Layout = "~/Views/Shared/_newLayout.cshtml"; }
+<form id="" class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تسجيل لعبة جديدة</h2>
+    </div>
+    <div class="form-group">
+        <input style="display:none" id="hidnId" value="" />
+        <label for="text-one">إسم اللعبة</label>
+        <input type="text" class="form-control" id="Name">
+        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+    </div>
+
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <label for="select-one">المنافسة</label>
+            <select class="form-control" id="select-one">
+            </select>
+            <small id="select-oneError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون منافسة</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="" for="text-three"> ملاحظات </label>
+        <textarea name="" class="form-control" id="Notes" cols="30" rows="5"></textarea>
+    </div>
+    <button onclick="AddGame();" id="add" type="button" class="btn btn-primary">اضافة لعبة جديدة</button>
+    <button onclick="updateGame()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>اسم اللعبة</th>
+            <th>اسم المنافسة</th>
+            <th>ملاحظات</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Data">
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+
+        LoadALLCompetition();
+        LoadALLGames();
+
+    });
+    function LoadALLCompetition() {
+        $.ajax({
+            url: "/Game/GetAllCompetition",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                var html = '<option value="-1">اختر منافسة</option>';
+                $.each(result, function (key, item) {
+                    debugger;
+                    html += '<option value="' + item.competitionId + '">' + item.competitionName + '</option>';
+              
+                });
+
+                $("#select-one").html(html)
+
+            }
+
+
+        });
+    }
+    function SeedDataTabel(data) {
+        return ' <tr id="tr_' + data.gameId+'"><td>' + data.gameName + '</td><td>' + data.competitionName + '</td><td>' + data.notes + '</td><td>' +
+            '<a class="btn btn-primary" href="javascript:void(0);" onclick="getGame(' + data.gameId + ')">تعديل</a>' +
+            '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletGame(' + data.gameId + ')">حذف</a></td> </tr>'
+    }
+    function LoadALLGames() {
+        $.ajax({
+            url: "/Game/GetAllGames",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                $.each(result, function (key, item) {
+                    $("#Data").append(SeedDataTabel(item));
+                });
+            }
+
+        });
+    }
+    function AddGame() {
+
+        var Name = $('#Name').val();
+        var comp = $('#select-one').val();
+        var Notes = $('#Notes').val();
+
+        $('.error').hide();
+        if (Name == "" || Name == null) {
+            $('#NameError').show();
+        }
+        else if (comp == -1 || comp == null) {
+            $('#select-oneError').show();
+        }
+
+        else {
+
+
+            $.ajax({
+                url: "/Game/AddNewGame?GameName=" + Name + "&CompetitionId=" + comp +"&Notes="+Notes,
+                type: "POST",
+                success: function (result) {
+
+                    if (result == false) {
+                        swal("حدث خطأ", "", "error");
+                       
+                    }
+                    else {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        $("#Data").append(SeedDataTabel(result));
+                    }
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+        }
+
+    }
+    function getGame(id) {
+        console.log(id);
+        $.ajax({
+            url: "/Game/GetGameById?GameId=" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                $('#hidnId').val(id);
+                $('#Name').val(result.gameName);
+                $('#select-one').val(result.competitionId);
+                $('#Notes').val(result.notes);
+                $('#add').hide();
+                $('#edit').show();
+            }
+        });
+    }
+    function updateGame() {
+        debugger;
+        var id = $('#hidnId').val();
+        var Name = $('#Name').val();
+        var comp = $('#select-one').val();
+        var Notes = $('#Notes').val();
+        $.ajax({
+            url: "/Game/UpdateGameById?GameId=" + id + "&GameName=" + Name + "&CompetitionId=" + comp + "&Notes=" + Notes,
+            type: "POST",
+            dataType: 'json',
+            success: function (result) {
+                if (result == false) {
+                    swal("حدث خطأ", "", "error");
+                   
+                }
+                else {
+                    swal("تم الحفظ بنجاح", "", "success");
+                    $("form")[0].reset();
+                    $('#tr_' + id).remove();
+                    $("#Data").append(SeedDataTabel(result));
+                    $('#add').show();
+                    $('#edit').hide();
+                }
+            }
+        });
+    }
+    function deletGame(id) {
+        swal({
+            title: 'هل انت متأكد؟',
+            text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Game/DeletGame?id=" + id,
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (result) {
+
+                            if (result == true) {
+                                swal("تم الحذف بنجاح", {
+                                    icon: "success",
+                                });
+                                $('#tr_' + id).remove();
+                            }
+                            else {
+                                swal("حدث خطا او تم استخدام البيانات من قبل", "", "error");                             
+                            }
+                        }
+                    });
+
+                }
+            });
+    }
+</script>

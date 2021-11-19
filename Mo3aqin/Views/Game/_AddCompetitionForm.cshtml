@@ -1,0 +1,11 @@
+﻿@model Competition_VM
+
+<form method="post" asp-action="AddCompetition">
+    <div class="input-group mb-3">
+        <input asp-for="CompetitionName" class="form-control" placeholder="اسم المنافسة..." />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">اضافة منافسة جديدة</button>
+        </div>
+    </div>
+    <span asp-validation-for="CompetitionName" class="text-danger"></span>
+</form>

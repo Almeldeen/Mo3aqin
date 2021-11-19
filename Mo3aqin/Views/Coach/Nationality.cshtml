@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "اضافة جنسية";
+}
+
+<form>
+    <div class="input-group mb-3">
+        <input style="display:none" id="hidnId" value="" />
+        <input id="Name" class="form-control" placeholder="اسم الجنسية..." />
+        <hr />
+        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+        <div class="input-group-append">
+            <button onclick="AddNationality()" id="add" type="button" class="btn btn-primary">اضافة جنسية جديدة</button>
+            <button onclick="updateNationality()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
+        </div>
+    </div>
+    <span class="text-danger"></span>
+</form>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+
+            <th>اسم الجنسية</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Data">
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+
+        LoadALLNationality();
+
+    });
+    function LoadALLNationality() {
+        $.ajax({
+            url: "/Coach/GetAllNationality",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                var html = '';
+                $.each(result, function (key, item) {
+                    debugger;
+                    html += ' <tr><td>' + item.nationalityName + '</td><td>' +
+                        '<a class="btn btn-primary" href="javascript:void(0);" onclick="getNationality(' + item.nationalityId + ')">تعديل</a>' +
+                        '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletNationality(' + item.nationalityId + ')">حذف</a></td> </tr>'
+                });
+
+                $("#Data").html(html)
+
+            }
+
+
+        });
+    }
+    function AddNationality() {
+
+        var Name = $('#Name').val();
+
+        $('.error').hide();
+        if (Name == "" || Name == null) {
+            $('#NameError').show();
+        }
+
+        else {
+
+
+            $.ajax({
+                url: "/Coach/AddNationality?NationalityName=" + Name,
+                type: "POST",
+                success: function (result) {
+
+                    if (result == true) {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $('#Name').val("");
+
+                        LoadALLNationality();
+                    }
+                    else {
+                        swal("حدث خطأ", "", "error");
+                    }
+                },
+            });
+        }
+
+    }
+    function getNationality(id) {
+        console.log(id);
+        $.ajax({
+            url: "/Coach/GetNationalityById?NationalityId=" + id,
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                $('#hidnId').val(id);
+                $('#Name').val(result);
+                $('#add').hide();
+                $('#edit').show();
+
+            }
+
+
+        });
+
+
+
+
+    }
+    function updateNationality() {
+        var id = $('#hidnId').val();
+        var Name = $('#Name').val();
+        $.ajax({
+            url: "/Coach/UpdateNationalityById?Id=" + id + "&Name=" + Name,
+            type: "POST",
+
+            dataType: 'json',
+
+            success: function (result) {
+
+                if (result == true) {
+                    swal("تم الحفظ بنجاح", "", "success");
+                    $('#Name').val("");
+
+                    LoadALLNationality();
+                    $('#add').show();
+                    $('#edit').hide();
+                }
+                else {
+                    swal("حدث خطأ", "", "error");
+                }
+            }
+        });
+    }
+    function deletNationality(id) {
+        swal({
+            title: 'هل انت متأكد؟',
+            text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Coach/DeletNationality?NationalityId=" + id,
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (result) {
+
+                            if (result == true) {
+                                swal("تم الحذف بنجاح", {
+                                    icon: "success",
+                                });
+                                LoadALLNationality();
+                            }
+                            else {
+                                swal("حدث خطا او تم استخدام البيانات من قبل", "", "error");
+                            }
+                        }
+                    });
+
+                }
+            });
+    }
+
+
+
+</script>

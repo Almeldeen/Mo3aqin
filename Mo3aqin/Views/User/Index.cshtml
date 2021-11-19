@@ -1,0 +1,31 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{ ViewData["Title"] = "المستخدمين";
+                Layout = "~/Views/Shared/_newLayout.cshtml"; }
+
+<h1>المستخدمين</h1>
+<a asp-action="AddNewUser" class="btn btn-primary"> اضافة جديد </a>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>اسم المستخدم</th>
+            <th>الايميل</th>
+            <th>الادوار</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+<tr>
+    <td>@user.UserName</td>
+    <td>@user.Email</td>
+    <td>@string.Join(" , ", user.Roles.ToList())</td>
+    <td>
+        <a class="btn btn-primary" asp-controller="User" asp-action="ManageRoles" asp-route-userId="@user.Id">ادارة الادوار</a>
+        <a class="btn btn-primary" asp-controller="User" asp-action="EditUser" asp-route-userId="@user.Id">تعديل</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>

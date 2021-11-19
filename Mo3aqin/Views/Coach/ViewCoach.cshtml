@@ -1,0 +1,184 @@
+﻿@{ ViewData["Title"] = "تفاصيل مدرب";
+}
+
+<input type="hidden" id="hdncoachId" value="@ViewBag.coachId" />
+<form name="form" action="AddCoach" enctype="multipart/form-data" method="post">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تفاصيل مدرب  </h2>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-one">اسم المدرب</label>
+            <input readonly type="text" id="name" class="form-control">
+            <small id="nameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-two">صورة المدرب</label>
+            <input readonly type="file" name="file" id="imageUpload1" class="form-control-file">
+            <small id="imageUpload1Error" style="display:none" class="text-danger  error"> لايمكنك الاضافة بدون صورة المدرب</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-one">مدنية المدرب</label>
+            <input readonly type="file" id="imageUpload2" class="form-control-file">
+            <small id="imageUpload2Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة مدنية</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-two">صورة الجواز</label>
+            <input readonly type="file" id="imageUpload3" class="form-control-file">
+            <small id="imageUpload3Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة الجواز</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ انتهاء الجواز</label>
+            <div class="input-group">
+                <input readonly type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+                <small id="date-input-oneError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون تاريخ انتهاء الجواز</small>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-three">رقم الجواز</label>
+            <input readonly type="text" id="passnumber" class="form-control">
+            <small id="passnumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم الجواز</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-one">الجنسية</label>
+            <select readonly class="form-control " id="nationality">
+                <option value="opt-one-one">كويتي</option>
+                <option value="opt-one-two">غير كويتي</option>
+                <option value="opt-one-three">سعودي </option>
+            </select>
+            <small id="nationalityError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الجنسية</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-two">تاريخ ميلاد</label>
+            <div class="input-group">
+                <input readonly type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+                <small id="date-input-twoError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون تاريخ الميلاد</small>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="check-one">الحالة الإجتماعية</label>
+            <div class="d-flex flex-wrap align-items-center" id="check-one">
+                <div class="custom-control custom-radio">
+                    <input readonly type="text" id="one" name="first" value="متزوج" class="custom-control-input">
+                    <label class="custom-control-label" for="one">متزوج</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input readonly type="text" id="two" name="first" value="أعزب" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="two">أعزب</label>
+
+                </div>
+            </div>
+            <small id="oneError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الحالة الاجتماعية</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="check-two">نوع الدوام</label>
+            <div class="d-flex flex-wrap align-items-center" id="check-two">
+                <div class="custom-control custom-radio">
+                    <input readonly type="text" id="three" name="second" value="نصف دوام" class="custom-control-input">
+                    <label class="custom-control-label" for="three">نصف دوام</label>
+
+                </div>
+                <div class="custom-control custom-radio">
+                    <input readonly type="text" id="four" name="second" value="دوام كامل" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="four">دوام كامل</label>
+                </div>
+            </div>
+            <small id="secondError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون نوع الدوام</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-four">الرقم المدنى</label>
+            <input readonly type="text" id="CivilianNumber" class="form-control">
+            <small id="CivilianNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الرقم المدني</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-five">عنوان السكن</label>
+            <input readonly type="text" id="Address" class="form-control">
+            <small id="AddressError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون عنوان السكن</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <p class="col-12 font-weight-bold">الهواتف</p>
+        <div class="form-group col-md-6">
+            <label for="text-six">الموبايل</label>
+            <input readonly type="text" id="PhoneNumber" class="form-control">
+            <small id="PhoneNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الموبايل</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-seven">المنزل</label>
+            <input readonly type="text" id="HomeNumber" class="form-control">
+        </div>
+    </div>
+
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-eight">ملاحظات</label>
+        <textarea readonly id="notes" name="" class="form-control" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <div class="form-group text-center">
+        <button class="btn btn-lg btn-primary " onclick="editCoach(@ViewBag.coachId);" type="button">تعديل</button>
+        <button class="btn btn-lg btn-secondary " onclick="back()" type="button">رجوع</button>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    $(document).ready(function () {
+
+        GetCoach();
+    });
+    function GetCoach() {
+
+        var coachId = $('#hdncoachId').val();
+        $.ajax({
+            url: "/Coach/GetCoachById?coachId=" + coachId,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+
+                $('#name').val(result.coachName);
+                $('#date-input-one').val(result.passportExpDate);
+                $('#passnumber').val(result.passportNumber);
+                $('#nationality').val(result.nationality);
+                $('#date-input-two').val(result.birthdate);
+                result.maritalStatus == "1" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
+                result.timeType == "1" ? $("#three").prop("checked", true) : $("#four").prop("checked", true);
+                $('#CivilianNumber').val(result.civilianNumber);
+                $('#Address').val(result.address);
+                $('#PhoneNumber').val(result.phoneNumber);
+                $('#HomeNumber').val(result.homeNumber);
+                $('#notes').val(result.notes);
+
+            }
+        });
+    }
+    function editCoach(id) {
+
+        window.location.href = "/Coach/EditCoach?coachId=" + id;
+    }
+    function back() {
+
+        window.location.href = "/Coach/Index";
+    }
+</script>

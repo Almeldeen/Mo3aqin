@@ -1,0 +1,43 @@
+﻿@model AddUserViewModel
+
+@{ ViewData["Title"] = "اضافة مستخدم جديد"; Layout = "~/Views/Shared/_newLayout.cshtml"; }
+
+
+
+
+<form asp-action="AddNewUser" method="post">
+    <h4>اضافة مستخدم جديد</h4>
+    <hr />
+    
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for=" UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for=" Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for=" Password"></label>
+        <input asp-for=" Password" class="form-control" />
+        <span asp-validation-for=" Password" class="text-danger"></span>
+    </div>
+    <hr />
+    <h6>الادوار</h6>
+    @for (int i = 0; i < Model.Roles.Count; i++)
+    {
+<div class="form-check m-1">
+    <input type="hidden" asp-for="@Model.Roles[i].DisplayValue" />
+    <input asp-for="@Model.Roles[i].IsSelected" class="form-check-input" />
+    <label class="form-check-label" asp-for="@Model.Roles[i].IsSelected">
+        @Model.Roles[i].DisplayValue
+    </label>
+</div>      }
+    <span asp-validation-for=" Roles" class="text-danger"></span>
+    <button type="submit" class="btn btn-primary d-block mt-4">حفظ</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
