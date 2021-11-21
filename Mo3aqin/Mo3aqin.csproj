@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.11" />
@@ -22,6 +24,10 @@
     <None Include="wwwroot\Images\Coach\5fe2981f-6300-4999-8bb5-02a0cbcf5daftree-736885__480.jpg" />
     <None Include="wwwroot\Images\Coach\7434e741-d5f3-4fd7-b3d0-ef3c39df466ftree-736885__480.jpg" />
     <None Include="wwwroot\Images\Coach\81a5bb9b-42ce-463e-aae7-54f5ec264e91tree-736885__480.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Emp\" />
   </ItemGroup>
 
 </Project>

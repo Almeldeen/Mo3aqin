@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mo3aqin.Constane;
 using Mo3aqin.Data;
+using Mo3aqin.Helpers;
 using Mo3aqin.Models;
 using Mo3aqin.ViewModels;
+ 
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,16 +37,16 @@ namespace Mo3aqin.Controllers
                 Coach coac = new Coach();
                 coac.Address = coach.Address;
                 coac.Birthdate = coach.Birthdate;
-                coac.CivilianCoach = await SaveFile(coach.CivilianCoach, FilePath.CoachPath);
+                coac.CivilianCoach = await Help.SaveFileAsync(coach.CivilianCoach, FilePath.CoachPath);
                 coac.CivilianNumber = coach.CivilianNumber;
-                coac.CoachImage = await SaveFile(coach.CoachImage, FilePath.CoachPath);
+                coac.CoachImage = await Help.SaveFileAsync(coach.CoachImage, FilePath.CoachPath);
                 coac.CoachName = coach.CoachName;
                 coac.HomeNumber = coach.HomeNumber;
                 coac.MaritalStatus = coach.MaritalStatus;
                 coac.NationalityId = coach.NationalityId;
                 coac.Notes = coach.Notes;
                 coac.PassportExpDate = coach.PassportExpDate;
-                coac.PassportImage = await SaveFile(coach.PassportImage, FilePath.CoachPath);
+                coac.PassportImage = await Help.SaveFileAsync(coach.PassportImage, FilePath.CoachPath);
                 coac.PassportNumber = coach.PassportNumber;
                 coac.PhoneNumber = coach.PhoneNumber;
                 coac.TimeType = coach.TimeType;
@@ -67,25 +69,7 @@ namespace Mo3aqin.Controllers
             }
             
         }
-        public async Task<string> SaveFile(IFormFile file,string path)
-        {
-            // Get Directory
-            string FilePath = Directory.GetCurrentDirectory() + path /*FolderPath*/;
-
-            // Get File Name
-            string FileName = Guid.NewGuid() + Path.GetFileName(file.FileName);
-
-            // Merge The Directory With File Name
-            string FinalPath = Path.Combine(FilePath, FileName);
-
-
-            // Save Your File As Stream "Data Overtime"
-            using (var Stream = new FileStream(FinalPath, FileMode.Create)) // save like 0 1 
-            {
-               await file.CopyToAsync(Stream);
-            }
-            return FileName;
-        }
+    
         public async Task<IActionResult> LoadAllCoachs(int pageNumber=1,int pageSize = 10)
         {
             var coach = await db.Coaches.Select(x => new Coach_VM
@@ -138,16 +122,16 @@ namespace Mo3aqin.Controllers
                 {
                     coach.Address = coach_.Address;
                     coach.Birthdate = coach_.Birthdate;
-                    coach.CivilianCoach = coach_.CivilianCoach == null ? coach.CivilianCoach : await SaveFile(coach_.CivilianCoach, FilePath.CoachPath);
+                    coach.CivilianCoach = coach_.CivilianCoach == null ? coach.CivilianCoach : await Help.SaveFileAsync(coach_.CivilianCoach, FilePath.CoachPath);
                     coach.CivilianNumber = coach_.CivilianNumber;
-                    coach.CoachImage = coach_.CoachImage == null ? coach.CoachImage : await SaveFile(coach_.CoachImage, FilePath.CoachPath);
+                    coach.CoachImage = coach_.CoachImage == null ? coach.CoachImage : await Help.SaveFileAsync(coach_.CoachImage, FilePath.CoachPath);
                     coach.CoachName = coach_.CoachName;
                     coach.HomeNumber = coach_.HomeNumber;
                     coach.MaritalStatus = coach_.MaritalStatus;
                     //coach.Nationality = coach_.Nationality;
                     coach.Notes = coach_.Notes;
                     coach.PassportExpDate = coach_.PassportExpDate;
-                    coach.PassportImage = coach_.PassportImage == null ? coach.PassportImage : await SaveFile(coach_.PassportImage, FilePath.CoachPath);
+                    coach.PassportImage = coach_.PassportImage == null ? coach.PassportImage : await Help.SaveFileAsync(coach_.PassportImage, FilePath.CoachPath);
                     coach.PassportNumber = coach_.PassportNumber;
                     coach.PhoneNumber = coach_.PhoneNumber;
                     coach.TimeType = coach_.TimeType;

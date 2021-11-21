@@ -8,5 +8,6 @@ namespace Mo3aqin.Constane
     public class FilePath
     {
          static public readonly string CoachPath = "/wwwroot/Images/Coach/";
+        static public readonly string EmpPath = "/wwwroot/Images/Emp/";
     }
 }
