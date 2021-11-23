@@ -15,8 +15,12 @@ namespace Mo3aqin.Helpers.Mapper
 
             CreateMap<Employee, Employee_VM>();
             CreateMap<Employee_VM,Employee >();
+
             CreateMap<GameDetails, GameDetail_VM>();
             CreateMap<GameDetail_VM, GameDetails>();
+
+            CreateMap<Player, Player_VM>();
+            CreateMap<Player_VM, Player>();
         }
     }
 }

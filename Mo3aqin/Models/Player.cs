@@ -11,10 +11,11 @@ namespace Mo3aqin.Models
     {
         [Key]
         public int PlayerId { get; set; }
+        public string PlayerName { get; set; }
         public string MemberId { get; set; }
         public int PassportNum { get; set; }
         public DateTime PassportExpDate { get; set; }
-        public String PassportImg { get; set; }
+        public string PassportImg { get; set; }
         public string PlayerImage { get; set; }
         public string PlayerCity { get; set; }
         public string BirthOfDateImage { get; set; }

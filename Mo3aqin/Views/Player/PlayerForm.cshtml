@@ -1,0 +1,263 @@
+﻿@model Player_VM 
+<form class="Form" asp-controller="Player" asp-action="PlayerForm" enctype="multipart/form-data" method="post">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تسجيل لاعب جديد </h2>
+    </div>
+    <div class="form-group">
+        <label for="text-one">اسم اللاعب</label>
+        <input asp-for="PlayerName" type="text" id="text-one" class="form-control">
+        <span class="text-danger" asp-validation-for="PlayerName"></span>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-two">رقم العضوية</label>
+            <input asp-for="MemberId" type="text" id="text-two" class="form-control">
+            <span class="text-danger" asp-validation-for="MemberId"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-three">رقم الجواز</label>
+            <input asp-for="PassportNum" type="text" id="text-three" class="form-control">
+            <span class="text-danger" asp-validation-for="PassportNum"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ انتهاء الجواز</label>
+            <div class="input-group">
+                <input asp-for="PassportExpDate" name="PassportExpDate" type="text" class="form-control drgpicker" id="date-input-one"  aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                    <span asp-validation-for="PassportExpDate" class="fe fe-calendar fe-16"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-one">صورة الجواز</label>
+            <input asp-for="PassportImg" type="file" id="file-one" class="form-control-file">
+            <span asp-validation-for="PassportImg" class="fe fe-calendar fe-16"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-two">صورة اللاعب</label>
+            <input asp-for="PlayerImage" type="file" id="file-two" class="form-control-file">
+            <span asp-validation-for="PlayerImage" class="fe fe-calendar fe-16"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-three">مدنية اللاعب</label>
+            <input asp-for="PlayerCityImg" type="file" id="file-two" class="form-control-file">
+            <span asp-validation-for="PlayerCityImg" class="fe fe-calendar fe-16"></span>
+
+
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-three">تاريخ ميلاد</label>
+            <div class="input-group">
+                <input asp-for="BirthOfDate" name="BirthOfDate" type="text" class="form-control drgpicker" id="date-input-three"  aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                    <span asp-validation-for="BirthOfDate" class="fe fe-calendar fe-16"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-four">شهادة الميلاد</label>
+            <input asp-for="BirthOfDateImage" type="file" id="file-two" class="form-control-file">
+            <span asp-validation-for="BirthOfDateImage" class="fe fe-calendar fe-16"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-five"> تقرير طبي</label>
+            <input asp-for="MedicalReportImg" type="file" id="file-two" class="form-control-file">
+            <span asp-validation-for="MedicalReportImg" class="fe fe-calendar fe-16"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-six">شهادة إعاقة</label>
+            <input asp-for="DisableImg" type="file" id="file-two" class="form-control-file">
+            <span asp-validation-for="DisableImg" class="fe fe-calendar fe-16"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-one">الجنسية</label>
+            <select asp-for="NationalityId" class="form-control " id="nationality">   
+            </select>
+            <span class="text-danger" asp-validation-for="NationalityId"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="check-one">الحالة الإجتماعية</label>
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="custom-control custom-radio">
+                    <input asp-for="MaritalStatus" value="متزوج" type="radio" id="customRadio-one" name="MaritalStatus" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio-one">متزوج</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input asp-for="MaritalStatus" value="اعزب" type="radio" id="customRadio-two" name="MaritalStatus" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="customRadio-two">أعزب</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-four">الرقم المدنى</label>
+            <input asp-for="CivilianNumber" type="text" id="text-four" class="form-control">
+            <span asp-validation-for="CivilianNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-five">مكان العمل</label>
+            <input asp-for="WorkPlace" type="text" id="text-four" class="form-control">
+            <span asp-validation-for="WorkPlace" class="text-danger"></span>
+        </div>
+    </div>
+    <hr class="col-12">
+    <div class="d-flex flex-wrap w-100">
+        <p class="col-12 font-weight-bold">عنوان السكن</p>
+        <div class="form-group col-md-6">
+            <label for="text-six">	المحافظة</label>
+            <input asp-for="Governorate" type="text" id="text-four" class="form-control">
+            <span asp-validation-for="Governorate" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-seven"> المنطقة</label>
+            <input asp-for="Regain" type="text" id="text-four" class="form-control">
+            <span asp-validation-for="Regain" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-eight">			قطعة</label>
+            <input asp-for="Plot" type="text" id="text-four" class="form-control">
+            <span asp-validation-for="Plot" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-nine">			جادة</label>
+            <input asp-for="Gada" type="text" id="text-four" class="form-control">
+            <span asp-validation-for="Gada" class="text-danger"></span>
+        </div>
+    </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="d-flex flex-wrap w-100">
+            <p class="col-12 font-weight-bold"> هواتف</p>
+            <div class="form-group col-md-6">
+                <label for="text-ten">		الوالد</label>
+                <input asp-for="ParentNumber" type="text" id="text-four" class="form-control">
+                <span asp-validation-for="ParentNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-eleven">			المنزل</label>
+                <input asp-for="ParentNumber" type="text" id="text-four" class="form-control">
+           
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-twelve">				الموبايل</label>
+                <input asp-for="PhoneNumber" type="text" id="text-four" class="form-control">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-thirteen">				اخرى</label>
+                <input asp-for="OtherNumber" type="text" id="text-four" class="form-control">
+               
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <div class="d-flex flex-wrap align-items-center">
+            <label class="m-0 mr-3" for="name">حالة اللاعب</label>
+            <div class="custom-control custom-radio">
+                <input asp-for="Active" value="فعّال" type="radio" id="status_active" name="Active" class="custom-control-input">
+                <label class="custom-control-label" for="status_active">فعّال</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input asp-for="Active" value="غير فعّال" type="radio" id="status_not_active" name="Active" class="custom-control-input" checked>
+                <label class="custom-control-label" for="status_not_active">غير فعّال</label>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-fourteen">توصية الدكتور </label>
+        <textarea asp-for="DocRecommendation" name="" class="form-control" id="text-fourteen" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-three"> الفئة</label>
+            <select asp-for="ClassId" class="form-control " id="class">
+            </select>
+            <span class="text-danger" asp-validation-for="ClassId"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-fifteen">الإعاقة</label>
+            <input asp-for="Disabality" type="text" id="text-fifteen" class="form-control">
+        </div>
+    </div>
+   
+    
+    <hr class="my-2">
+    <div class="form-group">
+        <label  class="" for="text-sixteen"> ملاحظات </label>
+        <textarea asp-for="Notes" name="Notes" class="form-control" id="text-sixteen" cols="30" rows="5"></textarea>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">تسجيل اللاعب</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    $(document).ready(function () {
+
+        LoadALLNationality();
+        LoadALLClass();
+    });
+    function LoadALLNationality() {
+        $.ajax({
+            url: "/Coach/GetAllNationality",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر جنسية</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.nationalityId + '">' + item.nationalityName + '</option>';
+
+                });
+
+                $("#nationality").html(html)
+
+            }
+
+
+        });
+    }
+    function LoadALLClass() {
+        $.ajax({
+            url: "/Game/GetAllClass",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر فئة</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.classId + '">' + item.className + '</option>';
+
+                });
+
+                $("#class").html(html)
+
+            }
+
+
+        });
+    }
+</script>
