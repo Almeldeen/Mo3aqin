@@ -1,0 +1,80 @@
+﻿@model GameDetail_VM
+@{
+    ViewData["Title"] = "GameDetails";
+    var game = (Game_VM)ViewBag.Game;
+}
+
+<form class="" asp-action="GameDetails" method="post">
+    <input type="hidden" asp-for="GameId" value="@game.GameId"/>
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">بيانات لعبة @game.GameName</h2>
+    </div>
+    <div class="form-group">
+        <label for="text-one">اسم المدرب</label>
+        <select asp-for="CoachId" class="form-control select2 " id="Coach">
+            <option id="-1">اختر </option>
+            @foreach (var item in ViewBag.Coach)
+            {
+                <option value="@item.CoachId">@item.CoachName</option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="CoachId"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label for="text-one">المدرب المساعد</label>
+        <select asp-for="CoachAssId" class="form-control select2 " id="Coach2">
+            <option id="-1">اختر </option>
+            @foreach (var item in ViewBag.Coach)
+            {
+                <option value="@item.CoachId">@item.CoachName</option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="CoachAssId"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label for="text-two">اسم المشرف</label>
+        <select asp-for="SupervisorId" class="form-control select2 " id="Emp">
+            <option id="-1">اختر </option>
+            @foreach (var item in ViewBag.Emp)
+            {
+                <option value="@item.EmpId">@item.EmpName</option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="SupervisorId"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label for="text-three">الموظف المسئول</label>
+        <select asp-for="EmpId" class="form-control select2 " id="Emp2">
+            <option id="-1">اختر </option>
+            @foreach (var item in ViewBag.Emp)
+            {
+                <option value="@item.EmpId">@item.EmpName</option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="EmpId"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label for="text-four">عدد اللاعبين</label>
+        <input asp-for="PlayersNum" type="text" class="form-control" id="text-four">
+        <span class="text-danger" asp-validation-for="PlayersNum"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-six"> ملاحظات </label>
+        <textarea asp-for="Notes" class="form-control" id="text-six" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">حفظ</button>
+    <hr class="my-2">
+    <div class="form-row">
+        <button class="btn btn-lg btn-primary col-md-5" type="button">اللاعبين</button>
+        <div class="form-group col-md-2"></div>
+        <button class="btn btn-lg btn-primary col-md-5" type="button">البطولات</button>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+

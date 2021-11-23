@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,11 +14,13 @@ namespace Mo3aqin.Models
         public string EmpName { get; set; }
         public string JopName { get; set; }
         public string EmpImage { get; set; }
-        public string CivilianCoach { get; set; }
+        public string CivilianEmp { get; set; }
         public string PassportImage { get; set; }
         public DateTime PassportExpDate { get; set; }
         public string PassportNumber { get; set; }
-        public string Nationality { get; set; }
+        [ForeignKey("Nationality")]
+        public int NationalityId { get; set; }
+        public Nationality Nationality { get; set; }
         public DateTime Birthdate { get; set; }
         public string MaritalStatus { get; set; }
         public string TimeType { get; set; }
@@ -28,6 +31,6 @@ namespace Mo3aqin.Models
         public string Notes { get; set; }
         public bool Active { get; set; }
         //public GameDetails GameDetails { get; set; }
-        public Championship Championship { get; set; }
+        //public Championship Championship { get; set; }
     }
 }

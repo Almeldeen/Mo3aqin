@@ -13,7 +13,7 @@ namespace Mo3aqin.Models
         public int ClassId { get; set; }
         public string ClassName { get; set; }
         public string ClassDis { get; set; }
-        public int GameId { get; set; }
-        public virtual Game Game { get; set; }
+        //public int GameId { get; set; }
+        //public virtual Game Game { get; set; }
     }
 }

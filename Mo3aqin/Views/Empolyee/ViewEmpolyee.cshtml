@@ -1,51 +1,44 @@
-﻿@model Employee_VM
+﻿@{ ViewData["Title"] = "تفاصيل موظف";
+}
 
-<form class="Form" asp-action="EmpolyeeForm" asp-controller="Empolyee" enctype="multipart/form-data" method="post">
+<input type="hidden" id="hdnempId" value="@ViewBag.empId" />
+<form class="Form">
     <div class="mx-auto text-center my-4">
-        <h2 class="my-3">تسجيل موظف جديد </h2>
+        <h2 class="my-3">تفاصيل موظف  </h2>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-one">اسم الموظف</label>
-            <input asp-for="EmpName" type="text" id="text-one" class="form-control">
-            <span class="text-danger" asp-validation-for="EmpName"></span>
+            <input readonly type="text" id="name" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-two">المسمى الوظيفي</label>
-            <input asp-for="JopName" type="text" id="text-two" class="form-control">
-            <span class="text-danger" asp-validation-for="JopName"></span>
+            <input readonly type="text" id="jopname" class="form-control">
         </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-one">صورة الموظف</label>
-            <div class="d-flex align-items-center ">
-                <input asp-for="EmpImage" type="file" id="file-one" class="form-control-file w-auto">
-                <img class="rounded-circle m-2"  src="~/Images/Coach/0fa71eea-ae9d-4bf7-a57e-ee2e466b6082tree-736885__480.jpg" alt="img" width="150" height="150" />
-            </div>
-            <span class="text-danger" asp-validation-for="EmpImage"></span>
+            <input readonly type="file" id="file-one" class="form-control-file">
         </div>
         <div class="form-group col-md-6">
             <label for="file-two">مدنية الموظف</label>
-            <input asp-for="CivilianEmp" type="file" id="file-two" class="form-control-file">
-            <span class="text-danger" asp-validation-for="CivilianEmp"></span>
+            <input readonly type="file" id="file-two" class="form-control-file">
         </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-three">صورة الجواز</label>
-            <input asp-for="PassportImage" type="file" id="file-three" class="form-control-file">
-            <span class="text-danger" asp-validation-for="PassportImage"></span>
+            <input readonly type="file" id="file-three" class="form-control-file">
 
         </div>
         <div class="form-group col-md-6">
             <label for="date-input-one">تاريخ الميلاد </label>
             <div class="input-group">
-                <input asp-for="Birthdate" type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <input readonly type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
                 <br />
-                <span class="text-danger" asp-validation-for="Birthdate"></span>
 
                 <div class="input-group-append">
                     <div class="input-group-text" id="button-addon-date">
@@ -57,9 +50,8 @@
         <div class="form-group col-md-6">
             <label for="date-input-one">تاريخ انتهاء الجواز</label>
             <div class="input-group">
-                <input asp-for="PassportExpDate" type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <input readonly type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
                 <br />
-                <span class="text-danger" asp-validation-for="PassportExpDate"></span>
 
                 <div class="input-group-append">
                     <div class="input-group-text" id="button-addon-date">
@@ -74,15 +66,13 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-three">رقم الجواز</label>
-            <input asp-for="PassportNumber" type="text" id="text-three" class="form-control">
-            <span class="text-danger" asp-validation-for="PassportNumber"></span>
+            <input readonly type="text" id="passnumber" class="form-control">
 
         </div>
         <div class="form-group col-md-6">
             <label for="select-one">الجنسية</label>
-            <select asp-for="NationalityId" class="form-control " id="nationality">
+            <select readonly class="form-control " id="nationality">
             </select>
-            <span class="text-danger" asp-validation-for="NationalityId"></span>
 
         </div>
     </div>
@@ -90,13 +80,11 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-four">الرقم المدنى</label>
-            <input asp-for="CivilianNumber" type="text" id="text-four" class="form-control">
-            <span class="text-danger" asp-validation-for="CivilianNumber"></span>
+            <input readonly type="text" id="CivilianNumber" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-five">عنوان السكن</label>
-            <input asp-for="Address" type="text" id="text-five" class="form-control">
-            <span class="text-danger" asp-validation-for="Address"> </span>
+            <input readonly type="text" id="Address" class="form-control">
         </div>
     </div>
     <hr class="my-2">
@@ -105,11 +93,11 @@
             <label for="check-one">الحالة الإجتماعية</label>
             <div class="d-flex flex-wrap align-items-center" id="check-one">
                 <div class="custom-control custom-radio">
-                    <input asp-for="MaritalStatus" value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
+                    <input readonly value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
                     <label class="custom-control-label" for="one">متزوج</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input asp-for="MaritalStatus" type="radio" id="two" value="أعزب" name="MaritalStatus" class="custom-control-input" checked>
+                    <input readonly type="radio" id="two" value="أعزب" name="MaritalStatus" class="custom-control-input" checked>
                     <label class="custom-control-label" for="two">أعزب</label>
                 </div>
             </div>
@@ -118,11 +106,11 @@
             <label for="check-two">نوع الدوام</label>
             <div class="d-flex flex-wrap align-items-center" id="check-two">
                 <div class="custom-control custom-radio">
-                    <input asp-for="TimeType" value="نصف دوام" type="radio" id="three" name="TimeType" class="custom-control-input">
+                    <input readonly value="نصف دوام" type="radio" id="three" name="TimeType" class="custom-control-input">
                     <label class="custom-control-label" for="three">نصف دوام</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input asp-for="TimeType" value="دوام كامل" type="radio" id="four" name="TimeType" class="custom-control-input" checked>
+                    <input readonly value="دوام كامل" type="radio" id="four" name="TimeType" class="custom-control-input" checked>
                     <label class="custom-control-label" for="four">دوام كامل</label>
                 </div>
             </div>
@@ -133,12 +121,11 @@
         <p class="col-12 font-weight-bold">الهواتف</p>
         <div class="form-group col-md-6">
             <label for="text-six">الموبايل</label>
-            <input asp-for="PhoneNumber" type="text" id="text-six" class="form-control">
-            <span class="text-danger" asp-validation-for="PhoneNumber"> </span>
+            <input readonly type="text" id="PhoneNumber" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-seven">المنزل</label>
-            <input asp-for="HomeNumber" type="text" id="text-seven" class="form-control">
+            <input readonly type="text" id="HomeNumber" class="form-control">
 
         </div>
     </div>
@@ -147,11 +134,11 @@
         <div class="d-flex flex-wrap align-items-center">
             <label class="m-0 mr-3" for="name">حالة الموظف</label>
             <div class="custom-control custom-radio">
-                <input asp-for="Active" type="radio" id="status_active" value="1" name="Active" class="custom-control-input" checked>
+                <input readonly type="radio" id="status_active" value="1" name="Active" class="custom-control-input" checked>
                 <label class="custom-control-label" for="status_active">فعّال</label>
             </div>
             <div class="custom-control custom-radio">
-                <input asp-for="Active" type="radio" id="status_not_active" value="0" name="Active" class="custom-control-input">
+                <input readonly type="radio" id="status_not_active" value="0" name="Active" class="custom-control-input">
                 <label class="custom-control-label" for="status_not_active">غير فعّال</label>
             </div>
         </div>
@@ -159,17 +146,20 @@
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-nine">ملاحظات</label>
-        <textarea asp-for="Notes" id="text-nine" name="Notes" class="form-control" id="" cols="30" rows="5"></textarea>
+        <textarea readonly id="notes" name="Notes" class="form-control" cols="30" rows="5"></textarea>
     </div>
     <hr class="my-2">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">حفظ</button>
-    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+    <div class="text-center">
+        <button class="btn btn-lg btn-primary " onclick="editEmp(@ViewBag.empId);" type="button">تعديل</button>
+        <button class="btn btn-lg btn-secondary " onclick="back()" type="button">رجوع</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+    </div>
+    
 </form>
-
 <script>
     $(document).ready(function () {
-
         LoadALLNationality();
+        Getemp();
     });
     function LoadALLNationality() {
         $.ajax({
@@ -192,5 +182,39 @@
 
 
         });
+    }
+    function Getemp() {
+
+        var empId = $('#hdnempId').val();
+        $.ajax({
+            url: "/Empolyee/GetEmpById?empId=" + empId,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                $('#name').val(result.empName);
+                $('#jopname').val(result.jopName);
+                $('#date-input-one').val(result.passportExpDate);
+                $('#passnumber').val(result.passportNumber);
+                $('#nationality').val(result.nationalityId);
+                $('#date-input-two').val(result.birthdate);
+                result.maritalStatus == "متزوج" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
+                result.timeType == "نصف دوام" ? $("#three").prop("checked", true) : $("#four").prop("checked", true);
+                result.active == 1 ? $("#status_active").prop("checked", true) : $("#status_not_active").prop("checked", true);
+                $('#CivilianNumber').val(result.civilianNumber);
+                $('#Address').val(result.address);
+                $('#PhoneNumber').val(result.phoneNumber);
+                $('#HomeNumber').val(result.homeNumber);
+                $('#notes').val(result.notes);
+
+            }
+        });
+    }
+    function editEmp(id) {
+
+        window.location.href = "/Empolyee/EditEmployee?empId=" + id;
+    }
+    function back() {
+
+        window.location.href = "/Empolyee/Index";
     }
 </script>

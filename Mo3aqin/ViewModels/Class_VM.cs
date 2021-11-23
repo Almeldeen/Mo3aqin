@@ -13,7 +13,8 @@ namespace Mo3aqin.ViewModels
         public string ClassName { get; set; }
         [Required]
         public string ClassDis { get; set; }
-        [Required]
-        public int GameId { get; set; }
+        //[Required]
+        //public int GameId { get; set; }
+        //public string GameName { get; set; }
     }
 }

@@ -1,0 +1,332 @@
+﻿<input type="hidden" id="hdnempId" value="@ViewBag.empId" />
+<form class="Form">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تفاصيل موظف  </h2>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-one">اسم الموظف</label>
+            <input type="text" id="name" class="form-control">
+            <small id="nameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-two">المسمى الوظيفي</label>
+            <input type="text" id="jopname" class="form-control">
+            <small id="jopnameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-one">صورة الموظف</label>
+            <input type="file" id="imageUpload1" class="form-control-file">
+            <small id="imageUpload1Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة</small>
+
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-two">مدنية الموظف</label>
+            <input type="file" id="imageUpload2" class="form-control-file">
+            <small id="imageUpload2Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة</small>
+
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-three">صورة الجواز</label>
+            <input type="file" id="imageUpload3" class="form-control-file">
+            <small id="imageUpload3Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة</small>
+
+
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ الميلاد </label>
+            <div class="input-group">
+                <input type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
+                <br />
+                <small id="date-input-twoError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون تاريخ </small>
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <span class="fe fe-calendar fe-16"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ انتهاء الجواز</label>
+            <div class="input-group">
+                <input type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <small id="date-input-oneError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون تاريخ </small>
+
+                <br />
+
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <span class="fe fe-calendar fe-16"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-three">رقم الجواز</label>
+            <input type="text" id="passnumber" class="form-control">
+            <small id="passnumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم الجواز </small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="select-one">الجنسية</label>
+            <select class="form-control " id="nationality">
+            </select>
+            <small id="nationalityError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الجنسية </small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-four">الرقم المدنى</label>
+            <input type="text" id="CivilianNumber" class="form-control">
+            <small id="CivilianNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الرقم المدني </small>
+
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-five">عنوان السكن</label>
+            <input type="text" id="Address" class="form-control">
+            <small id="AddressError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون عنوان السكن </small>
+
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="check-one">الحالة الإجتماعية</label>
+            <div class="d-flex flex-wrap align-items-center" id="check-one">
+                <div class="custom-control custom-radio">
+                    <input value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
+                    <label class="custom-control-label" for="one">متزوج</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="two" value="أعزب" name="MaritalStatus" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="two">أعزب</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="check-two">نوع الدوام</label>
+            <div class="d-flex flex-wrap align-items-center" id="check-two">
+                <div class="custom-control custom-radio">
+                    <input value="نصف دوام" type="radio" id="three" name="TimeType" class="custom-control-input">
+                    <label class="custom-control-label" for="three">نصف دوام</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input value="دوام كامل" type="radio" id="four" name="TimeType" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="four">دوام كامل</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <p class="col-12 font-weight-bold">الهواتف</p>
+        <div class="form-group col-md-6">
+            <label for="text-six">الموبايل</label>
+            <input type="text" id="PhoneNumber" class="form-control">
+            <small id="PhoneNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم المويايل </small>
+
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-seven">المنزل</label>
+            <input type="text" id="HomeNumber" class="form-control">
+
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <div class="d-flex flex-wrap align-items-center">
+            <label class="m-0 mr-3" for="name">حالة الموظف</label>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="status_active" value="1" name="Active" class="custom-control-input" checked>
+                <label class="custom-control-label" for="status_active">فعّال</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="status_not_active" value="0" name="Active" class="custom-control-input">
+                <label class="custom-control-label" for="status_not_active">غير فعّال</label>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-nine">ملاحظات</label>
+        <textarea id="notes" name="Notes" class="form-control" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <div class="text-center">
+        <button class="btn btn-lg btn-primary " onclick="EditEmp(@ViewBag.empId);" type="button">تعديل</button>
+        <button class="btn btn-lg btn-secondary " onclick="back()" type="button">رجوع</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+    </div>
+
+</form>
+<script>
+    $(document).ready(function () {
+        LoadALLNationality();
+        Getemp();
+    });
+    function LoadALLNationality() {
+        $.ajax({
+            url: "/Coach/GetAllNationality",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر جنسية</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.nationalityId + '">' + item.nationalityName + '</option>';
+
+                });
+
+                $("#nationality").html(html)
+
+            }
+
+
+        });
+    }
+    function Getemp() {
+
+        var empId = $('#hdnempId').val();
+        $.ajax({
+            url: "/Empolyee/GetEmpById?empId=" + empId,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                $('#name').val(result.empName);
+                $('#jopname').val(result.jopName);
+                $('#date-input-one').val(result.passportExpDate);
+                $('#passnumber').val(result.passportNumber);
+                $('#nationality').val(result.nationalityId);
+                $('#date-input-two').val(result.birthdate);
+                result.maritalStatus == "متزوج" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
+                result.timeType == "نصف دوام" ? $("#three").prop("checked", true) : $("#four").prop("checked", true);
+                result.active == 1 ? $("#status_active").prop("checked", true) : $("#status_not_active").prop("checked", true);
+                $('#CivilianNumber').val(result.civilianNumber);
+                $('#Address').val(result.address);
+                $('#PhoneNumber').val(result.phoneNumber);
+                $('#HomeNumber').val(result.homeNumber);
+                $('#notes').val(result.notes);
+
+            }
+        });
+    }
+    function EditEmp() {
+        debugger;
+        var empId = $('#hdnempId').val();
+        var name = $('#name').val();
+        var jopname = $('#jopname').val()
+        var exppass = $('#date-input-one').val();
+        var passnumber = $('#passnumber').val();
+        var nationality = $('#nationality').val();
+        var databirth = $('#date-input-two').val();
+        var status = $('input[name="MaritalStatus"]:checked').val();
+        var timetype = $('input[name="TimeType"]:checked').val();
+        var Active = $('input[name="Active"]:checked').val();
+        var CivilianNumber = $('#CivilianNumber').val();
+        var Address = $('#Address').val();
+        var PhoneNumber = $('#PhoneNumber').val();
+        var HomeNumber = $('#HomeNumber').val();
+        var notes = $('#notes').val();
+        debugger;
+        var formData = new FormData();
+        var totalFiles1 = document.getElementById("imageUpload1").files.length;
+        var totalFiles2 = document.getElementById("imageUpload2").files.length;
+        var totalFiles3 = document.getElementById("imageUpload3").files.length;
+        $('.error').hide();
+        if (name == "" || name == null) {
+            $('#nameError').show();
+        }
+        if (jopname == "" || jopname == null) {
+            $('#jopnameError').show();
+        }
+        else if (exppass == "" || exppass == null) {
+            $('#date-input-oneError').show();
+        }
+        else if (passnumber == "" || passnumber == null) {
+            $('#passnumberError').show();
+        }
+        else if (nationality == -1 || nationality == null) {
+            $('#nationalityError').show();
+        }
+        else if (databirth == "" || databirth == null) {
+            $('#date-input-twoError').show();
+        }
+        else if (CivilianNumber == "" || CivilianNumber == null) {
+            $('#CivilianNumberError').show();
+        }
+        else if (Address == "" || Address == null) {
+            $('#AddressError').show();
+        }
+        else if (PhoneNumber == "" || passnumber == null) {
+            $('#PhoneNumberError').show();
+        }
+        else {
+            formData.append("EmpId", empId)
+            formData.append("JopName", jopname)
+            formData.append("EmpName", name)
+            formData.append("PassportExpDate", exppass)
+            formData.append("PassportNumber", passnumber)
+            formData.append("NationalityId", nationality)
+            formData.append("Birthdate", databirth)
+            formData.append("MaritalStatus", status)
+            formData.append("TimeType", timetype)
+            formData.append("Address", Address)
+            formData.append("PhoneNumber", PhoneNumber)
+            formData.append("HomeNumber", HomeNumber)
+            formData.append("Notes", notes)
+            formData.append("Active", Active)
+            formData.append("CivilianNumber", CivilianNumber)
+            for (var i = 0; i < totalFiles1; i++) {
+                var file1 = document.getElementById("imageUpload1").files[i];
+                formData.append("EmpImages", file1);
+            }
+            for (var i = 0; i < totalFiles2; i++) {
+                var file2 = document.getElementById("imageUpload2").files[i];
+                formData.append("CivilianEmp", file2);
+            }
+            for (var i = 0; i < totalFiles3; i++) {
+                var file3 = document.getElementById("imageUpload3").files[i];
+                formData.append("PassportImage", file3);
+            }
+            $.ajax({
+                url: "/Empolyee/EditEmpById",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+
+                    if (result == true) {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        window.location.href = "/Empolyee/Index";
+                    }
+                    else {
+                        swal("حدث خطأ", "", "error");
+
+                    }
+                }
+            });
+        }
+
+
+    }
+
+    function back() {
+
+        window.location.href = "/Empolyee/Index";
+    }
+</script>

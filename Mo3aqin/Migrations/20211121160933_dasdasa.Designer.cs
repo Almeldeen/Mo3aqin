@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mo3aqin.Data;
 
 namespace Mo3aqin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211121160933_dasdasa")]
+    partial class dasdasa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,7 +275,13 @@ namespace Mo3aqin.Migrations
                     b.Property<string>("ClassName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
                     b.HasKey("ClassId");
+
+                    b.HasIndex("GameId")
+                        .IsUnique();
 
                     b.ToTable("Classes");
                 });
@@ -459,9 +467,6 @@ namespace Mo3aqin.Migrations
                     b.Property<int?>("ChampionshipChampId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CompetitionId")
                         .HasColumnType("int");
 
@@ -474,8 +479,6 @@ namespace Mo3aqin.Migrations
                     b.HasKey("GameId");
 
                     b.HasIndex("ChampionshipChampId");
-
-                    b.HasIndex("ClassId");
 
                     b.HasIndex("CompetitionId")
                         .IsUnique()
@@ -608,6 +611,17 @@ namespace Mo3aqin.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.Class", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Game", "Game")
+                        .WithOne("Class")
+                        .HasForeignKey("Mo3aqin.Models.Class", "GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Coach", b =>
                 {
                     b.HasOne("Mo3aqin.Models.Championship", "Championship")
@@ -669,17 +683,11 @@ namespace Mo3aqin.Migrations
                         .WithMany()
                         .HasForeignKey("ChampionshipChampId");
 
-                    b.HasOne("Mo3aqin.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
                     b.HasOne("Mo3aqin.Models.Competition", "Competition")
                         .WithOne("Game")
                         .HasForeignKey("Mo3aqin.Models.Game", "CompetitionId");
 
                     b.Navigation("Championship");
-
-                    b.Navigation("Class");
 
                     b.Navigation("Competition");
                 });
@@ -759,6 +767,8 @@ namespace Mo3aqin.Migrations
             modelBuilder.Entity("Mo3aqin.Models.Game", b =>
                 {
                     b.Navigation("Championship_Games");
+
+                    b.Navigation("Class");
 
                     b.Navigation("GameDetails");
                 });

@@ -19,6 +19,10 @@ namespace Mo3aqin.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        public async Task<IActionResult> Main()
+        {
+            return View();
+        }
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.Select(user => new UserViewModel
@@ -30,6 +34,7 @@ namespace Mo3aqin.Controllers
             }).ToListAsync();
             return View(users);
         }
+        
         public async Task<IActionResult> ManageRoles(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);

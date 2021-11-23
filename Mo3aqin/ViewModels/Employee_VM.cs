@@ -19,18 +19,19 @@ namespace Mo3aqin.ViewModels
         [Required(ErrorMessage ="هذا الحقل مطلوب")]
         public IFormFile EmpImage { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public IFormFile CivilianCoach { get; set; }
+        public IFormFile CivilianEmp { get; set; }
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public IFormFile PassportImage { get; set; }
         public string EmpImageString { get; set; }
-        public string CivilianCoachString { get; set; }
+        public string CivilianEmpString { get; set; }
         public string PassportImageString { get; set; }
         [Required(ErrorMessage = "ادخل تاريخ انتهاء جواز السفر")]
         public DateTime PassportExpDate { get; set; }
         [Required(ErrorMessage = "ادخل رقم جواز السفر")]
         public string PassportNumber { get; set; }
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        
         public string Nationality { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "من فضلك اختر جنسية")]
         public int NationalityId { get; set; }
         [Required(ErrorMessage = "ادخل تاريخ الميلاد")]
         public DateTime Birthdate { get; set; }

@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "اضافة منافسة";
+}
+
+<form>
+    <div class="input-group mb-3">
+        <input style="display:none" id="hidnId" value="" />
+        <input id="Name" class="form-control" placeholder="اسم المنافسة..." />
+        <hr />
+        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+        <div class="input-group-append">
+            <button onclick="AddCompetition()" id="add" type="button" class="btn btn-primary">اضافة منافسة جديدة</button>
+            <button onclick="updateCompetition()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+
+            <th>اسم المنافسة</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Data">
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+
+        LoadALLCompetition();
+
+    });
+    function LoadALLCompetition() {
+        $.ajax({
+            url: "/Game/GetAllCompetition",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                var html = '';
+                $.each(result, function (key, item) {
+                    debugger;
+                    html += ' <tr><td>' + item.competitionName + '</td><td>' +
+                        '<a class="btn btn-primary" href="javascript:void(0);" onclick="getCompetition(' + item.competitionId + ')">تعديل</a>' +
+                        '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletCompetition(' + item.competitionId + ')">حذف</a></td> </tr>'
+                });
+                
+                $("#Data").html(html)
+
+            }
+
+
+        });
+    }
+    function AddCompetition() {
+
+        var Name = $('#Name').val();
+
+        $('.error').hide();
+        if (Name == "" || Name == null) {
+            $('#NameError').show();
+        }
+
+        else {
+
+
+            $.ajax({
+                url: "/Game/AddCompetition?CompetitionName=" + Name,
+                type: "POST",
+                success: function (result) {
+
+                    if (result == true) {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $('#Name').val("");
+
+                        LoadALLCompetition();
+                    }
+                    else {
+                        swal("حدث خطأ", "", "error");
+                    }
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+        }
+
+    }
+    function getCompetition(id) {
+        console.log(id);
+        $.ajax({
+            url: "/Game/GetCompetitionById?CompetitionId=" + id,
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                $('#hidnId').val(id);
+                $('#Name').val(result);
+                $('#add').hide();
+                $('#edit').show();
+
+            }
+
+
+        });
+
+
+
+
+    }
+    function updateCompetition() {
+        var id = $('#hidnId').val();
+        var Name = $('#Name').val();
+        $.ajax({
+            url: "/Game/UpdateCompetitionById?Id=" + id + "&Name=" + Name,
+            type: "POST",
+
+            dataType: 'json',
+
+            success: function (result) {
+
+                if (result == true) {
+                    swal("تم الحفظ بنجاح", "", "success");
+                    $('#Name').val("");
+
+                    LoadALLCompetition();
+                    $('#add').show();
+                    $('#edit').hide();
+                }
+                else {
+                    swal("حدث خطأ", "", "error");
+                }
+            }
+        });
+    }
+    function deletCompetition(id) {
+        swal({
+            title: 'هل انت متأكد؟',
+            text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Game/DeletCompetition?CompetitionId=" + id,
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (result) {
+
+                            if (result == true) {
+                                swal("تم الحذف بنجاح", {
+                                    icon: "success",
+                                });
+                                LoadALLCompetition();
+                            }
+                            else {
+                                swal("حدث خطا او تم استخدام البيانات من قبل", "", "error");
+                            }
+                        }
+                    });
+                  
+                }
+            });
+    }
+
+    
+
+</script>
+

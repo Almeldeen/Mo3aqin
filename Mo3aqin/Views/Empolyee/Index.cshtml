@@ -1,11 +1,11 @@
 ﻿<div class="input-group-append">
-    <a asp-action="CoachForm" id="add" type="button" class="btn btn-primary">اضافة مدرب جديدة</a>
+    <a asp-action="EmpolyeeForm" id="add" type="button" class="btn btn-primary">اضافة موظف جديدة</a>
 </div>
 <table class="table table-striped mt-4">
     <thead>
         <tr class="bg-primary text-white">
-            <th>اسم المدرب</th>
-            <th>صورة المدرب</th>
+            <th>اسم الموظف</th>
+            <th>صورة الموظف</th>
             <th></th>
         </tr>
     </thead>
@@ -18,13 +18,15 @@
     </ul>
 </nav>
 <script>
+
     $(document).ready(function () {
-        LoadAllCoachs(1);
+
+        LoadAllEmps(1);
     });
-    
-    function LoadAllCoachs(pageNum) {
+
+    function LoadAllEmps(pageNum) {
         $.ajax({
-            url: "/Coach/LoadAllCoachs?pageNumber=" + pageNum + "&pageSize=" + 10,
+            url: "/Empolyee/LoadAllEmps?pageNumber=" + pageNum + "&pageSize=" + 10,
             type: "GET",
             dataType: "json",
             success: function (result) {
@@ -40,10 +42,10 @@
         });
     }
     function SeedDataTabel(data) {
-        return ' <tr id="tr_' + data.coachId + '"><td>' + data.coachName + '</td><td><img width="100" height="100" src="/Images/Coach/' + data.coachImageString + '" alt=""></td><td>' +
-            '<a class="btn btn-success" href="javascript:void(0);"  onclick="viewCoach(' + data.coachId + ')">تفاصيل</a>' +
-            '<a class="btn btn-primary" href="javascript:void(0);"  onclick="editCoach(' + data.coachId + ')">تعديل</a>' +
-            '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletCoach(' + data.coachId + ')">حذف</a></td> </tr>'
+        return ' <tr id="tr_' + data.empId + '"><td>' + data.empName + '</td><td><img width="100" height="100" src="/Images/Emp/' + data.empImageString + '" alt=""></td><td>' +
+            '<a class="btn btn-success" href="javascript:void(0);"  onclick="ViewEmpolyee(' + data.empId + ')">تفاصيل</a>' +
+            '<a class="btn btn-primary" href="javascript:void(0);"  onclick="EditEmployee(' + data.empId + ')">تعديل</a>' +
+            '<a class="btn btn-danger" href="javascript:void(0);" onclick="DeletEmp(' + data.empId + ')">حذف</a></td> </tr>'
     }
     function PaggingTemplate(totalPage, currentPage) {
 
@@ -116,15 +118,15 @@
 
 
     }
-    function editCoach(id) {
+    function EditEmployee(id) {
         debugger;
-        window.location.href = "/Coach/EditCoach?coachId="+id;
+        window.location.href = "/Empolyee/EditEmployee?empId="+id;
     }
-    function viewCoach(id) {
-       
-        window.location.href = "/Coach/ViewCoach?coachId=" + id;
+    function ViewEmpolyee(id) {
+
+        window.location.href = "/Empolyee/ViewEmpolyee?empId=" + id;
     }
-    function deletCoach(id) {
+    function DeletEmp(id) {
         swal({
             title: 'هل انت متأكد؟',
             text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
@@ -135,7 +137,7 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        url: "/Coach/DeletCoach?id=" + id,
+                        url: "/Empolyee/DeletEmp?id=" + id,
                         type: "POST",
                         dataType: 'json',
                         success: function (result) {
