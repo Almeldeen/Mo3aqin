@@ -25,6 +25,8 @@ namespace Mo3aqin.Data
         public DbSet<Class> Classes { get; set; }
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Nationality> Nationalities { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<PlayerGames> PlayerGames { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -37,6 +39,9 @@ namespace Mo3aqin.Data
             builder.Entity<championship_Games>()
               .HasKey(b => new { b.ChampId, b.GameId })
               .HasName("PK_championship_Games");
+            builder.Entity<PlayerGames>()
+             .HasKey(b => new { b.GameId, b.PlayerId })
+             .HasName("PK_PlayerGames");
             builder.Entity<IdentityUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");

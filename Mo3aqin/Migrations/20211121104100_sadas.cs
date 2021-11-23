@@ -4,6 +4,8 @@ namespace Mo3aqin.Migrations
 {
     public partial class sadas : Migration
     {
+
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
