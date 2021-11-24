@@ -21,55 +21,62 @@
         <div class="form-group col-md-6">
             <label for="file-one">صورة الموظف</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="EmpImage" type="file" id="file-one" class="form-control-file w-auto">
-                <img class="rounded-circle m-2"  src="~/Images/Coach/0fa71eea-ae9d-4bf7-a57e-ee2e466b6082tree-736885__480.jpg" alt="img" width="150" height="150" />
+                <input asp-for="EmpImage" type="file" id="imageUpload1" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload1img" style="display:none" src="" alt="img" width="150" height="150" />
             </div>
             <span class="text-danger" asp-validation-for="EmpImage"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="file-two">مدنية الموظف</label>
-            <input asp-for="CivilianEmp" type="file" id="file-two" class="form-control-file">
-            <span class="text-danger" asp-validation-for="CivilianEmp"></span>
+            <div class="d-flex align-items-center ">
+                <input asp-for="CivilianEmp" type="file" id="imageUpload2" class="form-control-file w-auto">
+
+                <img class="rounded-circle m-2" id="imageUpload2img" style="display:none" src="" alt="img" width="150" height="150" />
+                </div>
+                <span class="text-danger" asp-validation-for="CivilianEmp"></span>
+            </div>
         </div>
-    </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-three">صورة الجواز</label>
-            <input asp-for="PassportImage" type="file" id="file-three" class="form-control-file">
-            <span class="text-danger" asp-validation-for="PassportImage"></span>
+            <div class="d-flex align-items-center ">
+                <input asp-for="PassportImage" type="file" id="imageUpload3" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload3img" style="display:none" src="" alt="img" width="150" height="150" />
+                </div>
+                <span class="text-danger" asp-validation-for="PassportImage"></span>
 
-        </div>
-        <div class="form-group col-md-6">
-            <label for="date-input-one">تاريخ الميلاد </label>
-            <div class="input-group">
-                <input asp-for="Birthdate" type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
-                <br />
-                <span class="text-danger" asp-validation-for="Birthdate"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="date-input-one">تاريخ الميلاد </label>
+                <div class="input-group">
+                    <input asp-for="Birthdate" type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                    <br />
+                    <span class="text-danger" asp-validation-for="Birthdate"></span>
 
-                <div class="input-group-append">
-                    <div class="input-group-text" id="button-addon-date">
-                        <span class="fe fe-calendar fe-16"></span>
+                    <div class="input-group-append">
+                        <div class="input-group-text" id="button-addon-date">
+                            <span class="fe fe-calendar fe-16"></span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="date-input-one">تاريخ انتهاء الجواز</label>
-            <div class="input-group">
-                <input asp-for="PassportExpDate" type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
-                <br />
-                <span class="text-danger" asp-validation-for="PassportExpDate"></span>
+            <div class="form-group col-md-6">
+                <label for="date-input-one">تاريخ انتهاء الجواز</label>
+                <div class="input-group">
+                    <input asp-for="PassportExpDate" type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                    <br />
+                    <span class="text-danger" asp-validation-for="PassportExpDate"></span>
 
-                <div class="input-group-append">
-                    <div class="input-group-text" id="button-addon-date">
-                        <span class="fe fe-calendar fe-16"></span>
+                    <div class="input-group-append">
+                        <div class="input-group-text" id="button-addon-date">
+                            <span class="fe fe-calendar fe-16"></span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -192,5 +199,20 @@
 
 
         });
+    }
+    document.getElementById('imageUpload1').onchange = function () {
+        $('#imageUpload1img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload1img').src = src
+    }
+    document.getElementById('imageUpload2').onchange = function () {
+        $('#imageUpload2img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload2img').src = src
+    }
+    document.getElementById('imageUpload3').onchange = function () {
+        $('#imageUpload3img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload3img').src = src
     }
 </script>

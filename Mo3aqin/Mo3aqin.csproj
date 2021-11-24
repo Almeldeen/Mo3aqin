@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\Emp\" />
+    <Folder Include="wwwroot\Images\Player\" />
   </ItemGroup>
 
 </Project>

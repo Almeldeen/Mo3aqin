@@ -13,23 +13,32 @@
         </div>
         <div class="form-group col-md-6">
             <label for="text-two">صورة المدرب</label>
-            <input type="file" name="file" id="imageUpload1" class="form-control-file">
-            <small id="imageUpload1Error" style="display:none" class="text-danger  error"> لايمكنك الاضافة بدون صورة المدرب</small>
-        </div>
+            <div class="d-flex align-items-center ">
+                <input type="file" name="file" id="imageUpload1" class="form-control-file w-auto">
+                <img class="rounded-circle m-2"  alt="img" id="imageUpload1img" width="150" height="150" />
+                </div>
+                <small id="imageUpload1Error" style="display:none" class="text-danger  error"> لايمكنك الاضافة بدون صورة المدرب</small>
+            </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-one">مدنية المدرب</label>
-            <input type="file" id="imageUpload2" class="form-control-file">
-            <small id="imageUpload2Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة مدنية</small>
+            <div class="d-flex align-items-center ">
+                <input type="file" id="imageUpload2" class="form-control-file w-auto">
+                <img class="rounded-circle m-2"  id="imageUpload2img" alt="img" width="150" height="150" />
+                </div>
+                <small id="imageUpload2Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة مدنية</small>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="file-two">صورة الجواز</label>
+                <div class="d-flex align-items-center ">
+                    <input type="file" id="imageUpload3" class="form-control-file w-auto">
+                    <img class="rounded-circle m-2"  id="imageUpload3img" alt="img" width="150" height="150" />
+                </div>
+                <small id="imageUpload3Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة الجواز</small>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="file-two">صورة الجواز</label>
-            <input type="file" id="imageUpload3" class="form-control-file">
-            <small id="imageUpload3Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة الجواز</small>
-        </div>
-    </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -166,7 +175,10 @@
                 $('#PhoneNumber').val(result.phoneNumber);
                 $('#HomeNumber').val(result.homeNumber);
                 $('#notes').val(result.notes);
-
+                $('#notes').val(result.notes);
+                document.getElementById('imageUpload1img').src = "/Images/Coach/" + result.coachImageString
+                document.getElementById('imageUpload2img').src = "/Images/Coach/" + result.civilianCoachString
+                document.getElementById('imageUpload3img').src = "/Images/Coach/" + result.passportImageString
 
 
             }
@@ -269,5 +281,20 @@
     }
     function back() {
         window.location.href = "/Coach/Index";
+    }
+    document.getElementById('imageUpload1').onchange = function () {
+       
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload1img').src = src
+    }
+    document.getElementById('imageUpload2').onchange = function () {
+        
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload2img').src = src
+    }
+    document.getElementById('imageUpload3').onchange = function () {
+        
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload3img').src = src
     }
 </script>

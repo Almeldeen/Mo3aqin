@@ -1,23 +1,21 @@
-﻿@model Player_VM
+﻿
+<input type="hidden" id="hdnplayerIdId" value="@ViewBag.playerId" />
 <form class="Form" asp-controller="Player" asp-action="PlayerForm" enctype="multipart/form-data" method="post">
     <div class="mx-auto text-center my-4">
         <h2 class="my-3">تسجيل لاعب جديد </h2>
     </div>
     <div class="form-group">
         <label for="text-one">اسم اللاعب</label>
-        <input asp-for="PlayerName" type="text" id="text-one" class="form-control">
-        <span class="text-danger" asp-validation-for="PlayerName"></span>
+        <input readonly type="text" id="name" class="form-control">
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-two">رقم العضوية</label>
-            <input asp-for="MemberId" type="text" id="text-two" class="form-control">
-            <span class="text-danger" asp-validation-for="MemberId"></span>
+            <input readonly type="text" id="memberId" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-three">رقم الجواز</label>
-            <input asp-for="PassportNum" type="text" id="text-three" class="form-control">
-            <span class="text-danger" asp-validation-for="PassportNum"></span>
+            <input readonly type="text" id="passnumber" class="form-control">
         </div>
     </div>
     <hr class="my-2">
@@ -25,10 +23,9 @@
         <div class="form-group col-md-6">
             <label for="date-input-one">تاريخ انتهاء الجواز</label>
             <div class="input-group">
-                <input asp-for="PassportExpDate" name="PassportExpDate" type="text" class="form-control drgpicker" id="date-input-one" aria-describedby="button-addon2">
+                <input readonly name="PassportExpDate" type="text" class="form-control drgpicker" id="PassportExpDate" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <div class="input-group-text" id="button-addon-date">
-                        <span asp-validation-for="PassportExpDate" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -36,10 +33,8 @@
         <div class="form-group col-md-6">
             <label for="file-one">صورة الجواز</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="PassportImg" type="file" id="imageUpload1" class="form-control-file w-auto">
                 <img class="rounded-circle m-2" id="imageUpload1img" style="display:none" src="" alt="img" width="150" height="150" />
             </div>
-            <span asp-validation-for="PassportImg" class="text-danger"></span>
         </div>
     </div>
     <hr class="my-2">
@@ -47,18 +42,14 @@
         <div class="form-group col-md-6">
             <label for="file-two">صورة اللاعب</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="PlayerImage" type="file" id="imageUpload2" class="form-control-file w-auto">
-                <img class="rounded-circle m-2" id="imageUpload2img" style="display:none" src="" alt="img" width="150" height="150" />
+                <img class="rounded-circle m-2" id="imageUpload2img" src="" alt="img" width="150" height="150" />
             </div>
-            <span asp-validation-for="PlayerImage" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="file-three">مدنية اللاعب</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="PlayerCityImg" type="file" id="imageUpload3" class="form-control-file w-auto">
-                <img class="rounded-circle m-2" id="imageUpload3img" style="display:none" src="" alt="img" width="150" height="150" />
+                <img class="rounded-circle m-2" id="imageUpload3img" src="" alt="img" width="150" height="150" />
             </div>
-            <span asp-validation-for="PlayerCityImg" class="text-danger"></span>
 
 
         </div>
@@ -68,10 +59,9 @@
         <div class="form-group col-md-6">
             <label for="date-input-three">تاريخ ميلاد</label>
             <div class="input-group">
-                <input asp-for="BirthOfDate" name="BirthOfDate" type="text" class="form-control drgpicker" id="date-input-three" aria-describedby="button-addon2">
+                <input readonly name="BirthOfDate" type="text" class="form-control drgpicker" id="BirthOfDate" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <div class="input-group-text" id="button-addon-date">
-                        <span asp-validation-for="BirthOfDate" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -79,45 +69,38 @@
         <div class="form-group col-md-6">
             <label for="file-four">شهادة الميلاد</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="BirthOfDateImage" type="file" id="imageUpload4" class="form-control-file w-auto">
-                <img class="rounded-circle m-2" id="imageUpload4img" style="display:none" src="" alt="img" width="150" height="150" />
+                <img class="rounded-circle m-2" id="imageUpload4img" src="" alt="img" width="150" height="150" />
             </div>
-            <span asp-validation-for="BirthOfDateImage" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="file-five"> تقرير طبي</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="MedicalReportImg" type="file" id="imageUpload5" class="form-control-file w-auto">
-                <img class="rounded-circle m-2" id="imageUpload5img" style="display:none" src="" alt="img" width="150" height="150" />
-            </div>           
-            <span asp-validation-for="MedicalReportImg" class="text-danger"></span>
+                <img class="rounded-circle m-2" id="imageUpload5img" src="" alt="img" width="150" height="150" />
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="file-six">شهادة إعاقة</label>
             <div class="d-flex align-items-center ">
-                <input asp-for="DisableImg" type="file" id="imageUpload6" class="form-control-file w-auto">
-                <img class="rounded-circle m-2" id="imageUpload6img" style="display:none" src="" alt="img" width="150" height="150" />
+                <img class="rounded-circle m-2" id="imageUpload6img" src="" alt="img" width="150" height="150" />
             </div>
-            <span asp-validation-for="DisableImg" class="text-danger"></span>
         </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="select-one">الجنسية</label>
-            <select asp-for="NationalityId" class="form-control " id="nationality">
+            <select readonly class="form-control " id="nationality">
             </select>
-            <span class="text-danger" asp-validation-for="NationalityId"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="check-one">الحالة الإجتماعية</label>
             <div class="d-flex flex-wrap align-items-center">
                 <div class="custom-control custom-radio">
-                    <input asp-for="MaritalStatus" value="متزوج" type="radio" id="customRadio-one" name="MaritalStatus" class="custom-control-input">
+                    <input readonly value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio-one">متزوج</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input asp-for="MaritalStatus" value="اعزب" type="radio" id="customRadio-two" name="MaritalStatus" class="custom-control-input" checked>
+                    <input readonly value="اعزب" type="radio" id="two" name="MaritalStatus" class="custom-control-input" checked>
                     <label class="custom-control-label" for="customRadio-two">أعزب</label>
                 </div>
             </div>
@@ -127,13 +110,11 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-four">الرقم المدنى</label>
-            <input asp-for="CivilianNumber" type="text" id="text-four" class="form-control">
-            <span asp-validation-for="CivilianNumber" class="text-danger"></span>
+            <input readonly type="text" id="CivilianNumber" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-five">مكان العمل</label>
-            <input asp-for="WorkPlace" type="text" id="text-four" class="form-control">
-            <span asp-validation-for="WorkPlace" class="text-danger"></span>
+            <input readonly type="text" id="WorkPlace" class="form-control">
         </div>
     </div>
     <hr class="col-12">
@@ -141,23 +122,19 @@
         <p class="col-12 font-weight-bold">عنوان السكن</p>
         <div class="form-group col-md-6">
             <label for="text-six">	المحافظة</label>
-            <input asp-for="Governorate" type="text" id="text-four" class="form-control">
-            <span asp-validation-for="Governorate" class="text-danger"></span>
+            <input readonly type="text" id="Governorate" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-seven"> المنطقة</label>
-            <input asp-for="Regain" type="text" id="text-four" class="form-control">
-            <span asp-validation-for="Regain" class="text-danger"></span>
+            <input readonly type="text" id="Regain" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-eight">			قطعة</label>
-            <input asp-for="Plot" type="text" id="text-four" class="form-control">
-            <span asp-validation-for="Plot" class="text-danger"></span>
+            <input readonly type="text" id="Plot" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-nine">			جادة</label>
-            <input asp-for="Gada" type="text" id="text-four" class="form-control">
-            <span asp-validation-for="Gada" class="text-danger"></span>
+            <input readonly type="text" id="Gada" class="form-control">
         </div>
     </div>
     </div>
@@ -167,22 +144,19 @@
             <p class="col-12 font-weight-bold"> هواتف</p>
             <div class="form-group col-md-6">
                 <label for="text-ten">		الوالد</label>
-                <input asp-for="ParentNumber" type="text" id="text-four" class="form-control">
-                <span asp-validation-for="ParentNumber" class="text-danger"></span>
+                <input readonly type="text" id="ParentNumber" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label for="text-eleven">			المنزل</label>
-                <input asp-for="HomeNumber" type="text" id="text-four" class="form-control">
-                <span asp-validation-for="HomeNumber" class="text-danger"></span>
+                <input readonly type="text" id="HomeNumber" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label for="text-twelve">				الموبايل</label>
-                <input asp-for="PhoneNumber" type="text" id="text-four" class="form-control">
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <input readonly type="text" id="PhoneNumber" class="form-control">
             </div>
             <div class="form-group col-md-6">
                 <label for="text-thirteen">				اخرى</label>
-                <input asp-for="OtherNumber" type="text" id="text-four" class="form-control">
+                <input readonly type="text" id="OtherNumber" class="form-control">
 
             </div>
         </div>
@@ -192,11 +166,11 @@
         <div class="d-flex flex-wrap align-items-center">
             <label class="m-0 mr-3" for="name">حالة اللاعب</label>
             <div class="custom-control custom-radio">
-                <input asp-for="Active" value="1" type="radio" id="status_active" name="Active" class="custom-control-input">
+                <input readonly value="1" type="radio" id="status_active" name="Active" class="custom-control-input">
                 <label class="custom-control-label" for="status_active">فعّال</label>
             </div>
             <div class="custom-control custom-radio">
-                <input asp-for="Active" value="0" type="radio" id="status_not_active" name="Active" class="custom-control-input" checked>
+                <input readonly value="0" type="radio" id="status_not_active" name="Active" class="custom-control-input" checked>
                 <label class="custom-control-label" for="status_not_active">غير فعّال</label>
             </div>
         </div>
@@ -204,20 +178,18 @@
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-fourteen">توصية الدكتور </label>
-        <textarea asp-for="DocRecommendation" name="" class="form-control" id="text-fourteen" cols="30" rows="5"></textarea>
+        <textarea readonly name="" class="form-control" id="DocRecommendation" cols="30" rows="5"></textarea>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="select-three"> الفئة</label>
-            <select asp-for="ClassId" class="form-control " id="class">
+            <select readonly class="form-control " id="class">
             </select>
-            <span class="text-danger" asp-validation-for="ClassId"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="text-fifteen">الإعاقة</label>
-            <input asp-for="Disabality" type="text" id="text-fifteen" class="form-control">
-            <span class="text-danger" asp-validation-for="Disabality"></span>
+            <input readonly type="text" id="Disabality" class="form-control">
         </div>
     </div>
 
@@ -225,16 +197,17 @@
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-sixteen"> ملاحظات </label>
-        <textarea asp-for="Notes" name="Notes" class="form-control" id="text-sixteen" cols="30" rows="5"></textarea>
+        <textarea readonly name="Notes" class="form-control" id="notes" cols="30" rows="5"></textarea>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">تسجيل اللاعب</button>
+    <a class="btn btn-lg btn-primary " asp-action="EditPlayer" asp-route-PlayerId="@ViewBag.empId" >تعديل</a>
+    <a class="btn btn-lg btn-secondary " asp-action="Index" >رجوع</a>
     <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
 </form>
 <script>
     $(document).ready(function () {
-
         LoadALLNationality();
         LoadALLClass();
+        GetPlayer();
     });
     function LoadALLNationality() {
         $.ajax({
@@ -280,34 +253,52 @@
 
         });
     }
-    document.getElementById('imageUpload1').onchange = function () {
-        $('#imageUpload1img').show();
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('imageUpload1img').src = src
+    function GetPlayer() {
+
+        var playerId = $('#hdnplayerIdId').val();
+        $.ajax({
+            url: "/Player/GetPlayerById?PlayerId=" + playerId,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                $('#name').val(result.playerName);
+                $('#WorkPlace').val(result.workPlace);
+                $('#memberId').val(result.memberId);
+                $('#PassportExpDate').val(result.passportExpDate);
+                $('#passnumber').val(result.passportNum);
+                $('#nationality').val(result.nationalityId);
+                $('#BirthOfDate').val(result.birthOfDate);
+                result.maritalStatus == "متزوج" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
+                result.active == 1 ? $("#status_active").prop("checked", true) : $("#status_not_active").prop("checked", true);
+                $('#CivilianNumber').val(result.civilianNumber);
+                $('#Governorate').val(result.governorate);
+                $('#Regain').val(result.regain);
+                $('#Plot').val(result.plot);
+                $('#Gada').val(result.gada);
+                $('#ParentNumber').val(result.parentNumber);
+                $('#OtherNumber').val(result.otherNumber);
+                $('#DocRecommendation').val(result.docRecommendation);
+                $('#class').val(result.classId);
+                $('#Disabality').val(result.classId);               
+                $('#PhoneNumber').val(result.phoneNumber);
+                $('#HomeNumber').val(result.homeNumber);
+                $('#notes').val(result.notes);
+                document.getElementById('imageUpload1img').src = "/Images/Player/" + result.playerImageStr
+                document.getElementById('imageUpload2img').src = "/Images/Player/" + result.playerCityImgStr
+                document.getElementById('imageUpload3img').src = "/Images/Player/" + result.passportImgStr
+                document.getElementById('imageUpload4img').src = "/Images/Player/" + result.birthOfDateImageStr
+                document.getElementById('imageUpload5img').src = "/Images/Player/" + result.medicalReportImgStr
+                document.getElementById('imageUpload6img').src = "/Images/Player/" + result.disableImgStr
+
+            }
+        });
     }
-    document.getElementById('imageUpload2').onchange = function () {
-        $('#imageUpload2img').show();
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('imageUpload2img').src = src
+    function editEmp(id) {
+
+        window.location.href = "/Empolyee/EditEmployee?empId=" + id;
     }
-    document.getElementById('imageUpload3').onchange = function () {
-        $('#imageUpload3img').show();
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('imageUpload3img').src = src
-    }
-    document.getElementById('imageUpload4').onchange = function () {
-        $('#imageUpload4img').show();
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('imageUpload4img').src = src
-    }
-    document.getElementById('imageUpload5').onchange = function () {
-        $('#imageUpload5img').show();
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('imageUpload5img').src = src
-    }
-    document.getElementById('imageUpload6').onchange = function () {
-        $('#imageUpload6img').show();
-        var src = URL.createObjectURL(this.files[0])
-        document.getElementById('imageUpload6img').src = src
+    function back() {
+
+        window.location.href = "/Empolyee/Index";
     }
 </script>

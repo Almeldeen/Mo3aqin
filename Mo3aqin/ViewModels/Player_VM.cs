@@ -61,13 +61,13 @@ namespace Mo3aqin.ViewModels
         public string PhoneNumber { get; set; }
         public string HomeNumber { get; set; }
         public string OtherNumber { get; set; }
-        [Required(ErrorMessage = "أدخل تاريخ الميلاد")]
         public string DocRecommendation { get; set; }
         [Required(ErrorMessage = "أدخل حالة اللاعب")]
-        public bool Active { get; set; }
+        public byte Active { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "من فضلك اختر الفئة")]
         public int ClassId { get; set; }
         public Class Class { get; set; }
+        [Required(ErrorMessage = "أدخل  الاعاقة")]
         public string Disabality { get; set; }
         public string Notes { get; set; }
     }

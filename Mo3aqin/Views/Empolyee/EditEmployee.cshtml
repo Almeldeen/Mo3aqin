@@ -19,13 +19,19 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-one">صورة الموظف</label>
-            <input type="file" id="imageUpload1" class="form-control-file">
+            <div class="d-flex align-items-center ">
+                <input type="file" name="file" id="imageUpload1" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload1img"  src="" alt="img" width="150" height="150" />
+            </div>
             <small id="imageUpload1Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة</small>
 
         </div>
         <div class="form-group col-md-6">
             <label for="file-two">مدنية الموظف</label>
-            <input type="file" id="imageUpload2" class="form-control-file">
+            <div class="d-flex align-items-center ">
+                <input type="file" name="file" id="imageUpload2" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload2img" src="" alt="img" width="150" height="150" />
+            </div>
             <small id="imageUpload2Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة</small>
 
         </div>
@@ -34,7 +40,10 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-three">صورة الجواز</label>
-            <input type="file" id="imageUpload3" class="form-control-file">
+            <div class="d-flex align-items-center ">
+                <input type="file" name="file" id="imageUpload3" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload3img"  src="" alt="img" width="150" height="150" />
+            </div>
             <small id="imageUpload3Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة</small>
 
 
@@ -204,6 +213,7 @@
             type: "GET",
             dataType: "json",
             success: function (result) {
+                debugger;
                 $('#name').val(result.empName);
                 $('#jopname').val(result.jopName);
                 $('#date-input-one').val(result.passportExpDate);
@@ -218,6 +228,9 @@
                 $('#PhoneNumber').val(result.phoneNumber);
                 $('#HomeNumber').val(result.homeNumber);
                 $('#notes').val(result.notes);
+                document.getElementById('imageUpload1img').src = "/Images/Emp/" + result.empImageString
+                document.getElementById('imageUpload2img').src = "/Images/Emp/" + result.civilianEmpString
+                document.getElementById('imageUpload3img').src = "/Images/Emp/" + result.passportImageString
 
             }
         });
@@ -328,5 +341,20 @@
     function back() {
 
         window.location.href = "/Empolyee/Index";
+    }
+    document.getElementById('imageUpload1').onchange = function () {
+
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload1img').src = src
+    }
+    document.getElementById('imageUpload2').onchange = function () {
+
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload2img').src = src
+    }
+    document.getElementById('imageUpload3').onchange = function () {
+
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload3img').src = src
     }
 </script>
