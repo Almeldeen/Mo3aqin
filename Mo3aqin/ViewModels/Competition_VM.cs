@@ -11,5 +11,7 @@ namespace Mo3aqin.ViewModels
         public int CompetitionId { get; set; }
         [Required]
         public string CompetitionName { get; set; }
+        public string RaceName { get; set; }
+        public int? RaceId { get; set; }
     }
 }

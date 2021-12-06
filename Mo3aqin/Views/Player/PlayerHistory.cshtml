@@ -1,0 +1,368 @@
+﻿
+@{
+    ViewBag.Titel = "تاريخ الاعبين";
+}
+<form id="" class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تاريخ الاعبين</h2>
+    </div>
+    <input style="display:none" id="hidnId" value="" />
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label for="select-one">الاعبين</label>
+            <select class="form-control select2" id="select-one">
+            </select>
+            <small id="select-oneError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون لاعب</small>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ  </label>
+            <div class="input-group">
+                <input type="text" class="form-control drgpicker" id="DateHistory" value="" aria-describedby="button-addon2">
+                <br />
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <span class="fe fe-calendar fe-16"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label for="text-one">إسم البطولة</label>
+        <input type="text" class="form-control" id="ChampName">
+        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+    </div>
+    <div class="form-group">
+
+        <label for="text-one">رقم الاعب</label>
+        <input type="text" class="form-control" id="PlyerNum">
+        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم</small>
+    </div>
+    <div class="form-group">
+
+        <label for="text-one">مركز الاعب</label>
+        <input type="text" class="form-control" id="playerRating">
+        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون مركز</small>
+    </div>
+
+
+    <div class="form-group">
+        <label class="" for="text-three"> ملاحظات </label>
+        <textarea name="" class="form-control" id="Notes" cols="30" rows="5"></textarea>
+    </div>
+    <button onclick="AddHistory();" id="add" type="button" class="btn btn-primary">حفظ</button>
+    <button onclick="updateHistory()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>اسم الاعب</th>
+            <th>تاريخ </th>
+            <th>البطولة</th>
+            <th>رقم الاعب</th>
+            <th>مركز الاعب</th>
+            <th> ملاحظات</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Data">
+    </tbody>
+</table>
+<!-- pagination -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+    </ul>
+</nav>
+<script>
+    $(document).ready(function () {
+
+        LoadAllPlayers();
+        LoadALLHistory(1);
+    });
+    PgNum = 0;
+    function LoadAllPlayers() {
+        $.ajax({
+            url: "/Player/LoadAllPlayers?pageNumber=" + 1 + "&pageSize=" + 1000000000000,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+
+                var html = '<option value="-1">اختر لاعب</option>';
+                $.each(result.data, function (key, item) {
+
+                    html += '<option value="' + item.playerId + '">' + item.playerName + '</option>';
+
+                });
+
+                $("#select-one").html(html)
+
+            }
+        });
+    }
+    function AddHistory() {
+        $('.error').hide();
+        var player = $('#select-one').val();
+        var date = $("#DateHistory").val();
+        var ChampName = $("#ChampName").val();
+        var PlyerNum = $("#PlyerNum").val();
+        var playerRating = $("#playerRating").val();
+        var note = $("#Notes").val();
+
+        if (player == -1 || player == null) {
+            $('#select-oneError').show();
+        }
+        else if (ChampName == "" || ChampName == null) {
+            $('#ChampNameError').show();
+        }
+        else if (PlyerNum == "" || PlyerNum == null) {
+            $('#PlyerNumError').show();
+        }
+        else if (playerRating == "" || playerRating == null) {
+            $('#playerRatingError').show();
+        }
+        else {
+            var formData = new FormData();
+            formData.append("Id", player);
+            formData.append("HisDate", date);
+            formData.append("ChampName", ChampName);
+            formData.append("PlyerNum", PlyerNum);
+            formData.append("playerRating", playerRating);
+            formData.append("Notes", note);
+
+            $.ajax({
+                url: "/Player/AddPlayerHistory",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+
+                    if (result == true) {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        $('#select-one').val(-1).trigger("change");
+                        LoadALLHistory(1);
+                    }
+                    else {
+                        swal("حدث خطأ", "", "error");
+
+                    }
+                }
+            });
+        }
+
+    }
+    function getHistory(id) {
+
+        $.ajax({
+            url: "/Player/GetHistoryById?HistoryId=" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                $('#hidnId').val(id);
+                $('#select-one').val(result.id).trigger('change');
+                $('#DateHistory').val(result.hisDate.substring(0, 10));
+                $("#ChampName").val(result.champName);
+                $("#PlyerNum").val(result.plyerNum);
+                $("#playerRating").val(result.playerRating);
+                $('#Notes').val(result.notes);
+                $('#add').hide();
+                $('#edit').show();
+            }
+        });
+    }
+    function updateHistory() {
+        debugger;
+        var id = $('#hidnId').val();
+        var player = $('#select-one').val();
+        var date = $("#DateHistory").val();
+        var note = $("#Notes").val();
+        var ChampName = $("#ChampName").val();
+        var PlyerNum = $("#PlyerNum").val();
+        var playerRating = $("#playerRating").val();
+        if (player == -1 || player == null) {
+            $('#select-oneError').show();
+        }
+        else if (ChampName == "" || ChampName == null) {
+            $('#ChampNameError').show();
+        }
+        else if (PlyerNum == "" || PlyerNum == null) {
+            $('#PlyerNumError').show();
+        }
+        else if (playerRating == "" || playerRating == null) {
+            $('#playerRatingError').show();
+        }
+        else {
+            var formData = new FormData();
+            formData.append("Id", player);
+            formData.append("HisId", id);
+            formData.append("HisDate", date);
+            formData.append("ChampName", ChampName);
+            formData.append("PlyerNum", PlyerNum);
+            formData.append("playerRating", playerRating);
+            formData.append("Notes", note);
+            $.ajax({
+                url: "/Player/EditPlayerHistory",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    if (result == false) {
+                        swal("حدث خطأ", "", "error");
+
+                    }
+                    else {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        $('#select-one').val(-1).trigger("change");
+                        LoadALLHistory(PgNum);
+                        $('#add').show();
+                        $('#edit').hide();
+                    }
+                }
+            });
+        }
+
+    }
+    function LoadALLHistory(pageNum) {
+        PgNum = pageNum;
+        $.ajax({
+            url: "/Player/GetPlayerHistory?pageNumber=" + pageNum + "&pageSize=" + 10,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+
+                $(".pagination").empty();
+                $("#Data").empty();
+                var html = '';
+                $.each(result.data, function (key, item) {
+                    $("#Data").append(SeedDataTabel(item))
+                });
+                PaggingTemplate(result.totalPages, result.currentPage);
+
+
+            }
+
+
+        });
+    }
+    function SeedDataTabel(data) {
+        console.log(data)
+        data.notes = data.notes == null ? "لايوجد" : data.notes;
+        return '<tr><td>' + data.name + '</td><td>' + data.hisDate.substring(0, 10) + '</td><td>' + data.champName + '</td><td>' + data.plyerNum + '</td><td>' + data.playerRating + '</td><td>' + data.notes + '</td><td>' +
+            '<a class="btn btn-primary" href="javascript:void(0);" onclick="getHistory(' + data.hisId + ')">تعديل</a>' +
+            '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletHistory(' + data.hisId + ')">حذف</a></td> </tr>'
+
+    }
+    function deletHistory(id) {
+        swal({
+            title: 'هل انت متأكد؟',
+            text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Player/DeletHistory?id=" + id,
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (result) {
+
+                            if (result == true) {
+                                swal("تم الحذف بنجاح", {
+                                    icon: "success",
+                                });
+                                LoadALLHistory(PgNum);
+                            }
+                            else {
+                                swal("حدث خطا او تم استخدام البيانات من قبل", "", "error");
+                            }
+                        }
+                    });
+
+                }
+            });
+    }
+    function PaggingTemplate(totalPage, currentPage) {
+
+        var template = "";
+        var TotalPages = totalPage;
+        var CurrentPage = currentPage;
+        var PageNumberArray = Array();
+
+
+        var countIncr = 1;
+        if (currentPage != 1) {
+
+            for (var i = currentPage - 1; i <= totalPage; i++) {
+
+                PageNumberArray[0] = currentPage - 1;
+                if (PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+        }
+        else {
+            for (var i = currentPage; i <= totalPage; i++) {
+
+                PageNumberArray[0] = currentPage;
+                if (totalPage != currentPage && PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+        }
+        PageNumberArray = PageNumberArray.slice(0, 5);
+        var FirstPage = 1;
+        var LastPage = totalPage;
+        if (totalPage != currentPage) {
+            var ForwardOne = currentPage + 1;
+        }
+        var BackwardOne = 1;
+        if (currentPage > 1) {
+            BackwardOne = currentPage - 1;
+        }
+
+        //template = "<p>" + CurrentPage + " of " + TotalPages + " pages</p>"
+        template = template + '<li class="page-item">' +
+            '<a href="javascript:void(0) onclick="LoadALLHistory(' + BackwardOne + ')" class="page-link"  aria-label="Previous">' +
+            '<span aria-hidden="true">&laquo;</span>' +
+            '<span class="sr-only">Previous</span>' +
+            '</a>' +
+            '</li>';
+
+
+        var numberingLoop = "";
+        for (var i = 0; i < PageNumberArray.length; i++) {
+            if (PageNumberArray[i] == currentPage) {
+                numberingLoop = numberingLoop + '<li  class="page-item active"><a onclick="LoadALLHistory(' + PageNumberArray[i] + ')"  class="page-link" href="javascript:void(0)">' + PageNumberArray[i] + '</a></li>'
+            }
+            else {
+                numberingLoop = numberingLoop + '<li class="page-item"><a onclick="LoadALLHistory(' + PageNumberArray[i] + ')"  class="page-link" href="javascript:void(0)">' + PageNumberArray[i] + '</a></li>'
+            }
+
+        }
+        template = template + numberingLoop + '<li class="page-item">' +
+            ' <a href="javascript:void(0) onclick="LoadALLHistory(' + ForwardOne + ')" class="page-link"  aria-label="Next">' +
+            '<span aria-hidden="true">&raquo;</span>' +
+            '<span class="sr-only">Next</span>' +
+            '</a>' +
+            '</li>';
+
+        $(".pagination").append(template);
+
+
+    }
+</script>
+

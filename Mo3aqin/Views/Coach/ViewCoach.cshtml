@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "تفاصيل مدرب";
+﻿@{ ViewBag.Titel = "تفاصيل مدرب";
 }
 
 <input type="hidden" id="hdncoachId" value="@ViewBag.coachId" />
@@ -9,26 +9,29 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-one">اسم المدرب</label>
-            <input readonly type="text" id="name" class="form-control">
+            <input readonly disabled type="text" id="name" class="form-control">
             <small id="nameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
         </div>
         <div class="form-group col-md-6">
             <label for="text-two">صورة المدرب</label>
-            <input readonly type="file" name="file" id="imageUpload1" class="form-control-file">
-            <small id="imageUpload1Error" style="display:none" class="text-danger  error"> لايمكنك الاضافة بدون صورة المدرب</small>
+            <div class="d-flex align-items-center ">
+                <img class="rounded-circle m-2" id="imageUpload1img"  src="" alt="img" width="150" height="150" />
+            </div>
         </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-one">مدنية المدرب</label>
-            <input readonly type="file" id="imageUpload2" class="form-control-file">
-            <small id="imageUpload2Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة مدنية</small>
+            <div class="d-flex align-items-center ">
+                <img class="rounded-circle m-2" id="imageUpload2img"  src="" alt="img" width="150" height="150" />
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="file-two">صورة الجواز</label>
-            <input readonly type="file" id="imageUpload3" class="form-control-file">
-            <small id="imageUpload3Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون صورة الجواز</small>
+            <div class="d-flex align-items-center ">
+                <img class="rounded-circle m-2" id="imageUpload3img"  src="" alt="img" width="150" height="150" />
+            </div>
         </div>
     </div>
     <hr class="my-2">
@@ -36,7 +39,7 @@
         <div class="form-group col-md-6">
             <label for="date-input-one">تاريخ انتهاء الجواز</label>
             <div class="input-group">
-                <input readonly type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <input readonly disabled type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
                 </div>
@@ -45,7 +48,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="text-three">رقم الجواز</label>
-            <input readonly type="text" id="passnumber" class="form-control">
+            <input readonly disabled type="text" id="passnumber" class="form-control">
             <small id="passnumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم الجواز</small>
         </div>
     </div>
@@ -53,17 +56,15 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="select-one">الجنسية</label>
-            <select readonly class="form-control " id="nationality">
-                <option value="opt-one-one">كويتي</option>
-                <option value="opt-one-two">غير كويتي</option>
-                <option value="opt-one-three">سعودي </option>
+            <select readonly disabled class="form-control " id="nationality">
+                
             </select>
             <small id="nationalityError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الجنسية</small>
         </div>
         <div class="form-group col-md-6">
             <label for="date-input-two">تاريخ ميلاد</label>
             <div class="input-group">
-                <input readonly type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
+                <input readonly disabled type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
                 </div>
@@ -77,11 +78,11 @@
             <label for="check-one">الحالة الإجتماعية</label>
             <div class="d-flex flex-wrap align-items-center" id="check-one">
                 <div class="custom-control custom-radio">
-                    <input readonly type="text" id="one" name="first" value="متزوج" class="custom-control-input">
+                    <input readonly disabled type="text" id="one" name="first" value="متزوج" class="custom-control-input">
                     <label class="custom-control-label" for="one">متزوج</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input readonly type="text" id="two" name="first" value="أعزب" class="custom-control-input" checked>
+                    <input readonly disabled type="text" id="two" name="first" value="أعزب" class="custom-control-input" checked>
                     <label class="custom-control-label" for="two">أعزب</label>
 
                 </div>
@@ -92,12 +93,12 @@
             <label for="check-two">نوع الدوام</label>
             <div class="d-flex flex-wrap align-items-center" id="check-two">
                 <div class="custom-control custom-radio">
-                    <input readonly type="text" id="three" name="second" value="نصف دوام" class="custom-control-input">
+                    <input readonly disabled type="text" id="three" name="second" value="نصف دوام" class="custom-control-input">
                     <label class="custom-control-label" for="three">نصف دوام</label>
 
                 </div>
                 <div class="custom-control custom-radio">
-                    <input readonly type="text" id="four" name="second" value="دوام كامل" class="custom-control-input" checked>
+                    <input readonly disabled type="text" id="four" name="second" value="دوام كامل" class="custom-control-input" checked>
                     <label class="custom-control-label" for="four">دوام كامل</label>
                 </div>
             </div>
@@ -108,12 +109,12 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-four">الرقم المدنى</label>
-            <input readonly type="text" id="CivilianNumber" class="form-control">
+            <input readonly disabled type="text" id="CivilianNumber" class="form-control">
             <small id="CivilianNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الرقم المدني</small>
         </div>
         <div class="form-group col-md-6">
             <label for="text-five">عنوان السكن</label>
-            <input readonly type="text" id="Address" class="form-control">
+            <input readonly disabled type="text" id="Address" class="form-control">
             <small id="AddressError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون عنوان السكن</small>
         </div>
     </div>
@@ -122,19 +123,19 @@
         <p class="col-12 font-weight-bold">الهواتف</p>
         <div class="form-group col-md-6">
             <label for="text-six">الموبايل</label>
-            <input readonly type="text" id="PhoneNumber" class="form-control">
+            <input readonly disabled type="text" id="PhoneNumber" class="form-control">
             <small id="PhoneNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الموبايل</small>
         </div>
         <div class="form-group col-md-6">
             <label for="text-seven">المنزل</label>
-            <input readonly type="text" id="HomeNumber" class="form-control">
+            <input readonly disabled type="text" id="HomeNumber" class="form-control">
         </div>
     </div>
 
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-eight">ملاحظات</label>
-        <textarea readonly id="notes" name="" class="form-control" cols="30" rows="5"></textarea>
+        <textarea readonly disabled id="notes" name="" class="form-control" cols="30" rows="5"></textarea>
     </div>
     <hr class="my-2">
     <div class="form-group text-center">
@@ -145,9 +146,31 @@
 </form>
 <script>
     $(document).ready(function () {
-
+        LoadALLNationality();
         GetCoach();
     });
+    function LoadALLNationality() {
+        $.ajax({
+            url: "/Coach/GetAllNationality",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر جنسية</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.nationalityId + '">' + item.nationalityName + '</option>';
+
+                });
+
+                $("#nationality").html(html)
+
+            }
+
+
+        });
+    }
     function GetCoach() {
 
         var coachId = $('#hdncoachId').val();
@@ -156,19 +179,22 @@
             type: "GET",
             dataType: "json",
             success: function (result) {
-
+                debugger;
                 $('#name').val(result.coachName);
                 $('#date-input-one').val(result.passportExpDate);
                 $('#passnumber').val(result.passportNumber);
-                $('#nationality').val(result.nationality);
+                $('#nationality').val(result.nationalityId);
                 $('#date-input-two').val(result.birthdate);
-                result.maritalStatus == "1" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
-                result.timeType == "1" ? $("#three").prop("checked", true) : $("#four").prop("checked", true);
+                result.maritalStatus == "متزوج" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
+                result.timeType == "دوام كامل" ? $("#three").prop("checked", true) : $("#four").prop("checked", true);
                 $('#CivilianNumber').val(result.civilianNumber);
                 $('#Address').val(result.address);
                 $('#PhoneNumber').val(result.phoneNumber);
                 $('#HomeNumber').val(result.homeNumber);
                 $('#notes').val(result.notes);
+                document.getElementById('imageUpload1img').src = "/Images/Coach/" + result.playerImageStr
+                document.getElementById('imageUpload2img').src = "/Images/Coach/" + result.playerCityImgStr
+                document.getElementById('imageUpload3img').src = "/Images/Coach/" + result.passportImgStr
 
             }
         });

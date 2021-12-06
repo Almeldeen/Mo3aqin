@@ -1,0 +1,128 @@
+﻿@model Championship_VM
+@{
+    ViewBag.Titel = "تسجيل بطولة";
+}
+
+<form asp-action="ChampionshipForm" asp-controller="Championship" method="post" enctype="multipart/form-data" class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تسجيل بطولة جديدة</h2>
+    </div>
+    <div class="form-group">
+        <label for="text-one">إسم البطولة</label>
+        <input type="text" asp-for="ChampName" class="form-control" id="ChampName">
+        <span class="text-danger" asp-validation-for="ChampName"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one"> اللعبة </label>
+        @foreach (var item in ViewBag.Games)
+        {
+            <div class="custom-control custom-checkbox">
+                <input name="GameIds" class="custom-control-input" type="checkbox" value="@item.GameId" id="@item.GameId">
+                <label class="custom-control-label" for="@item.GameId"> @item.GameName</label>
+            </div>
+
+        }
+        <span class="text-danger" asp-validation-for="GameIds"></span>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ بداية البطولة</label>
+            <div class="input-group">
+                <input type="text" asp-for="StartDate" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+                <span class="text-danger" asp-validation-for="StartDate"></span>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-two">تاريخ نهاية البطولة</label>
+            <div class="input-group">
+                <input asp-for="EndDate" type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+                <span class="text-danger" asp-validation-for="EndDate"></span>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-one">الدعوة</label>
+            <input asp-for="Invitaion" type="file" id="file-one" class="form-control-file">
+            <span class="text-danger" asp-validation-for="Invitaion"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="select-one">البلد</label>
+            <select asp-for="CountryId" class="form-control " id="select-one">
+                <option value="-1">اختر بلد</option>
+                @foreach (var item in ViewBag.Country)
+                {
+                    <option value="@item.CountryId">@item.CountryName</option>
+                }
+
+            </select>
+            <span class="text-danger" asp-validation-for="CountryId"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-three">المدينة</label>
+            <input asp-for="City" type="text" id="text-three" class="form-control">
+            <span class="text-danger" asp-validation-for="City"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-four">موسم</label>
+            <input asp-for="Season" type="text" id="text-four" class="form-control">
+            <span class="text-danger" asp-validation-for="Season"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-five">مدة البطولة</label>
+            <input asp-for="ChampDuration" type="text" id="text-five" class="form-control">
+            <span class="text-danger" asp-validation-for="ChampDuration"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-six">عدد الإداريين</label>
+            <input asp-for="EmpsNum" type="text" id="text-six" class="form-control">
+            <span class="text-danger" asp-validation-for="EmpsNum"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-seven">عدد اللاعبين</label>
+            <input asp-for="PlayersNum" type="text" id="text-seven" class="form-control">
+            <span class="text-danger" asp-validation-for="PlayersNum"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-eight">عدد المدربين</label>
+            <input asp-for="CoachsNum" type="text" id="text-eight" class="form-control">
+            <span class="text-danger" asp-validation-for="CoachsNum"></span>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-nine">توصية الدكتور </label>
+        <textarea asp-for="Notes" id="text-nine" name="" class="form-control" id="" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <button class="btn btn-lg btn-primary col-md-5" type="submit">حفظ</button>
+        <div class="form-group col-md-2"></div>
+        <button class="btn btn-lg btn-primary col-md-5" type="submit">ترشيح مدرب</button>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    function add() {
+        var ChampName = $('#ChampName').val();
+        var 
+    }
+</script>

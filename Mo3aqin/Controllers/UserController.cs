@@ -23,16 +23,30 @@ namespace Mo3aqin.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> BasicData()
+        {
+            return View();
+        }
         public async Task<IActionResult> Index()
         {
-            var users = await _userManager.Users.Select(user => new UserViewModel
+            try
+            {
+                var users = await _userManager.Users.Select(user => new UserViewModel
             {
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
                 Roles = _userManager.GetRolesAsync(user).Result
             }).ToListAsync();
+
             return View(users);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
         
         public async Task<IActionResult> ManageRoles(string userId)

@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Titel = "استعلام البطولات";
+}
+
+<form class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">إستعلام البطولات</h2>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">من تاريخ</label>
+            <div class="input-group">
+                <input dir="rtl" type="date" class="form-control " id="start" value="" aria-describedby="button-addon2">
+                
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-two">إلى تاريخ</label>
+            <div class="input-group">
+                <input dir="rtl" type="date" class="form-control " id="end" value="" aria-describedby="button-addon2">
+                
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-one">إسم البطولة</label>
+            <input type="text" class="form-control" id="champname">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-three">الموسم</label>
+            <div class="input-group">
+                <input type="text" class="form-control " id="season" value="" >
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-one">البلد</label>
+            <select class="form-control" id="counrty">
+                <option value="-1">اختر بلد</option>
+                @foreach (var item in ViewBag.Country)
+                {
+                    <option value="@item.CountryId">@item.CountryName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="select-two">المدينة</label>
+            <input type="text" class="form-control " id="city" value="">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one"> اللعبة </label>
+        @foreach (var item in ViewBag.Games)
+        {
+            <div class="custom-control custom-checkbox">
+                <input name="GameIds" class="custom-control-input" type="checkbox" value="@item.GameId" id="@item.GameId">
+                <label class="custom-control-label" for="@item.GameId"> @item.GameName</label>
+            </div>
+
+        }
+    </div>
+    <hr class="my-2">
+    <button class="btn btn-lg btn-primary btn-block" onclick="getData();" type="button">إستعلام</button>
+    <hr class="my-2">
+    <div class="form-row">
+        <table class="table table-bordered mb-0">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <th>اسم البطولة</th>
+                    <th>اللعبة</th>
+                    <th>التاريخ</th>
+                    <th>المكان</th>
+                    <th>مدة البطولة</th>
+                    <th>إجمالي الوفد</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <tr>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    $(document).ready(function () {
+       
+    })
+    function getData() {
+        debugger;
+        var start = $("#start").val();
+        var end = $("#end").val();
+        var champname = $("#champname").val();
+        var counrty = $("#counrty").val();
+        var city = $("#city").val();
+        var GameIds = new Array();
+        $('input[name="GameIds"]:checked').each(function () {
+            GameIds.push($(this).val());
+        });
+        var formData = new FormData();
+        formData.append("StartDate", start)
+        formData.append("EndDate", end)
+        formData.append("CountryId", counrty)
+        formData.append("City", city)
+        formData.append("ChampName", champname)
+        formData.append("GameIds2", JSON.stringify(GameIds))
+        $.ajax({
+            url: "/Championship/ChampionshipFiltr",
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log(result);
+                if (result == false) {
+                    swal("حدث خطأ", "", "error");
+                }
+                else {
+                    var html = "";
+                    $.each(result, function (key, item) {
+                        html += '<tr><td>' + item.champName + '</td><td>' + item.gameName + '</td><td>' + item.startDate.substring(0, 10) + '</td><td>' + item.city + '</td><td>' + item.champDuration + ' أيام</td><td>' + (item.empsNum + item.playersNum + item.coachsNum) + '</td></tr>';
+                    })
+                    $('#data').html(html);
+                }
+            }
+        });
+     
+    }
+</script>

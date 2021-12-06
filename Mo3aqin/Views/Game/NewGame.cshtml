@@ -1,6 +1,7 @@
 ﻿
-@{ ViewData["Title"] = "رياضة جديدة";
-    Layout = "~/Views/Shared/_newLayout.cshtml"; }
+@{ 
+    ViewBag.Titel = "تسجيل لعبة";
+     }
 <form id="" class="">
     <div class="mx-auto text-center my-4">
         <h2 class="my-3">تسجيل لعبة جديدة</h2>
@@ -12,8 +13,7 @@
         <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
     </div>
 
-    <div class="form-row">
-
+    <div class="form-group">
         <div class="form-group col-md-6">
             <label for="select-one">المنافسة</label>
             <select class="form-control" id="select-one">
@@ -57,7 +57,7 @@
             dataType: "json",
             success: function (result) {
 
-                console.log(result);
+               
                 var html = '<option value="-1">اختر منافسة</option>';
                 $.each(result, function (key, item) {
                     debugger;
@@ -103,10 +103,9 @@
         if (Name == "" || Name == null) {
             $('#NameError').show();
         }
-        else if (comp == -1 || comp == null) {
-            $('#select-oneError').show();
-        }
-
+        //else if (comp == -1 || comp == null) {
+        //    $('#select-oneError').show();
+        //}
         else {
 
 

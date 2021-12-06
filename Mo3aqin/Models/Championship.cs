@@ -11,10 +11,12 @@ namespace Mo3aqin.Models
     {
         [Key]
         public int ChampId { get; set; }
+        public string ChampName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Invitaion { get; set; }
-        public string Country { get; set; }
+        [ForeignKey("Country")]
+        public int CountryId { get; set; }
         public string City { get; set; }
         public string Season { get; set; }
         public string ChampDuration { get; set; }
@@ -22,6 +24,8 @@ namespace Mo3aqin.Models
         public int PlayersNum { get; set; }
         public int CoachsNum { get; set; }
         public string Notes { get; set; }
-        public championship_Games Championship_Games { get; set; }
+        public Country Country { get; set; }
+        public List<Game> Games { get; set; }
+        public List<ChampionshipGames> ChampionshipGames { get; set; }
     }
 }

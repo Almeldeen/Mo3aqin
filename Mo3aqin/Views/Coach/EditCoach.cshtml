@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "تعديل مدرب";
+﻿@{ ViewBag.Titel = "تعديل مدرب";
 }
 <input type="hidden" id="hdncoachId" value="@ViewBag.coachId" />
 <form name="form" action="AddCoach" enctype="multipart/form-data" method="post">
@@ -62,9 +62,6 @@
         <div class="form-group col-md-6">
             <label for="select-one">الجنسية</label>
             <select class="form-control " id="nationality">
-                <option value="opt-one-one">كويتي</option>
-                <option value="opt-one-two">غير كويتي</option>
-                <option value="opt-one-three">سعودي </option>
             </select>
             <small id="nationalityError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون الجنسية</small>
         </div>
@@ -85,11 +82,11 @@
             <label for="check-one">الحالة الإجتماعية</label>
             <div class="d-flex flex-wrap align-items-center" id="check-one">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="one" name="first" value="1" class="custom-control-input">
+                    <input type="radio" id="one" name="first" value="متزوج" class="custom-control-input">
                     <label class="custom-control-label" for="one">متزوج</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="two" name="first" value="2" class="custom-control-input" checked>
+                    <input type="radio" id="two" name="first" value="أعزب" class="custom-control-input" checked>
                     <label class="custom-control-label" for="two">أعزب</label>
 
                 </div>
@@ -100,12 +97,12 @@
             <label for="check-two">نوع الدوام</label>
             <div class="d-flex flex-wrap align-items-center" id="check-two">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="three" name="second" value="1" class="custom-control-input">
+                    <input type="radio" id="three" name="second" value="نصف دوام" class="custom-control-input">
                     <label class="custom-control-label" for="three">نصف دوام</label>
 
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="four" name="second" value="2" class="custom-control-input" checked>
+                    <input type="radio" id="four" name="second" value="دوام كامل" class="custom-control-input" checked>
                     <label class="custom-control-label" for="four">دوام كامل</label>
                 </div>
             </div>
@@ -151,9 +148,31 @@
 </form>
 <script>
     $(document).ready(function () {
-
+        LoadALLNationality();
         GetCoach();
     });
+    function LoadALLNationality() {
+        $.ajax({
+            url: "/Coach/GetAllNationality",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر جنسية</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.nationalityId + '">' + item.nationalityName + '</option>';
+
+                });
+
+                $("#nationality").html(html)
+
+            }
+
+
+        });
+    }
     function GetCoach() {
 
         var coachId = $('#hdncoachId').val();
@@ -162,11 +181,11 @@
             type: "GET",
             dataType: "json",
             success: function (result) {
-               
+                debugger;
                 $('#name').val(result.coachName);
                 $('#date-input-one').val(result.passportExpDate);
                 $('#passnumber').val(result.passportNumber);
-                $('#nationality').val(result.nationality);
+                $('#nationality').val(result.nationalityId);
                 $('#date-input-two').val(result.birthdate);
                 result.maritalStatus == "متزوج" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
                 result.timeType == "دوام كامل" ? $("#three").prop("checked", true) : $("#four").prop("checked", true);

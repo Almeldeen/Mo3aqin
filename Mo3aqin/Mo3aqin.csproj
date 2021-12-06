@@ -18,15 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\Coach\33cf9f46-e801-4a4e-93f6-4216c2f5d84ftree-736885__480.jpg" />
-    <None Include="wwwroot\Images\Coach\45796099-7672-432d-a828-2615f6c9b20btree-736885__480.jpg" />
-    <None Include="wwwroot\Images\Coach\50a159c9-db71-4285-a159-dc91215d4bb2tree-736885__480.jpg" />
-    <None Include="wwwroot\Images\Coach\5fe2981f-6300-4999-8bb5-02a0cbcf5daftree-736885__480.jpg" />
-    <None Include="wwwroot\Images\Coach\7434e741-d5f3-4fd7-b3d0-ef3c39df466ftree-736885__480.jpg" />
-    <None Include="wwwroot\Images\Coach\81a5bb9b-42ce-463e-aae7-54f5ec264e91tree-736885__480.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="wwwroot\Images\Champ\" />
+    <Folder Include="wwwroot\Images\Coach\" />
     <Folder Include="wwwroot\Images\Emp\" />
     <Folder Include="wwwroot\Images\Player\" />
   </ItemGroup>

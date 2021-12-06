@@ -89,18 +89,18 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="select-one">الجنسية</label>
-            <select readonly class="form-control " id="nationality">
+            <select readonly disabled class="form-control " id="nationality">
             </select>
         </div>
         <div class="form-group col-md-6">
             <label for="check-one">الحالة الإجتماعية</label>
             <div class="d-flex flex-wrap align-items-center">
                 <div class="custom-control custom-radio">
-                    <input readonly value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
+                    <input readonly disabled value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio-one">متزوج</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input readonly value="اعزب" type="radio" id="two" name="MaritalStatus" class="custom-control-input" checked>
+                    <input readonly disabled value="اعزب" type="radio" id="two" name="MaritalStatus" class="custom-control-input" checked>
                     <label class="custom-control-label" for="customRadio-two">أعزب</label>
                 </div>
             </div>
@@ -166,11 +166,11 @@
         <div class="d-flex flex-wrap align-items-center">
             <label class="m-0 mr-3" for="name">حالة اللاعب</label>
             <div class="custom-control custom-radio">
-                <input readonly value="1" type="radio" id="status_active" name="Active" class="custom-control-input">
+                <input readonly disabled value="1" type="radio" id="status_active" name="Active" class="custom-control-input">
                 <label class="custom-control-label" for="status_active">فعّال</label>
             </div>
             <div class="custom-control custom-radio">
-                <input readonly value="0" type="radio" id="status_not_active" name="Active" class="custom-control-input" checked>
+                <input readonly disabled value="0" type="radio" id="status_not_active" name="Active" class="custom-control-input" checked>
                 <label class="custom-control-label" for="status_not_active">غير فعّال</label>
             </div>
         </div>
@@ -184,23 +184,45 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="select-three"> الفئة</label>
-            <select readonly class="form-control " id="class">
+            <select readonly disabled class="form-control " id="class">
             </select>
         </div>
         <div class="form-group col-md-6">
             <label for="text-fifteen">الإعاقة</label>
             <input readonly type="text" id="Disabality" class="form-control">
         </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ التسجيل</label>
+            <div class="input-group">
+                <input readonly name="RegDate" type="text" class="form-control drgpicker" id="RegDate" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one"> اللعبة </label>
+        @foreach (var item in ViewBag.Games)
+        {
+            <div class="custom-control custom-checkbox">
+                <input readonly disabled name="GameIds" class="custom-control-input" type="checkbox" value="@item.GameId" id="chec_@item.GameId">
+                <label class="custom-control-label" for="chec_@item.GameId"> @item.GameName</label>
+            </div>
+        }
+        
 
+    </div>
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-sixteen"> ملاحظات </label>
         <textarea readonly name="Notes" class="form-control" id="notes" cols="30" rows="5"></textarea>
     </div>
-    <a class="btn btn-lg btn-primary " asp-action="EditPlayer" asp-route-PlayerId="@ViewBag.empId" >تعديل</a>
-    <a class="btn btn-lg btn-secondary " asp-action="Index" >رجوع</a>
+    <a class="btn btn-lg btn-primary " asp-action="EditPlayer" asp-route-PlayerId="@ViewBag.playerId">تعديل</a>
+    <a class="btn btn-lg btn-secondary " asp-action="Index">رجوع</a>
     <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
 </form>
 <script>
@@ -279,24 +301,28 @@
                 $('#OtherNumber').val(result.otherNumber);
                 $('#DocRecommendation').val(result.docRecommendation);
                 $('#class').val(result.classId);
-                $('#Disabality').val(result.classId);               
+                $('#Disabality').val(result.disabality);
                 $('#PhoneNumber').val(result.phoneNumber);
                 $('#HomeNumber').val(result.homeNumber);
                 $('#notes').val(result.notes);
+                $('#RegDate').val(result.regDate);
+                
                 document.getElementById('imageUpload1img').src = "/Images/Player/" + result.playerImageStr
                 document.getElementById('imageUpload2img').src = "/Images/Player/" + result.playerCityImgStr
                 document.getElementById('imageUpload3img').src = "/Images/Player/" + result.passportImgStr
                 document.getElementById('imageUpload4img').src = "/Images/Player/" + result.birthOfDateImageStr
                 document.getElementById('imageUpload5img').src = "/Images/Player/" + result.medicalReportImgStr
                 document.getElementById('imageUpload6img').src = "/Images/Player/" + result.disableImgStr
-
+                $.each(result.gameIds, function (key, item) {
+                    $("#chec_" + item).prop("checked", true)
+                });
             }
         });
     }
-    function editEmp(id) {
+    //function editEmp(id) {
 
-        window.location.href = "/Empolyee/EditEmployee?empId=" + id;
-    }
+    //    window.location.href = "/Empolyee/EditEmployee?empId=" + id;
+    //}
     function back() {
 
         window.location.href = "/Empolyee/Index";

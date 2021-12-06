@@ -1,4 +1,5 @@
-﻿<input type="hidden" id="hdnempId" value="@ViewBag.empId" />
+﻿@{ViewBag.Titel = "تعديل موظف";}
+<input type="hidden" id="hdnempId" value="@ViewBag.empId" />
 <form class="Form">
     <div class="mx-auto text-center my-4">
         <h2 class="my-3">تفاصيل موظف  </h2>
@@ -172,7 +173,7 @@
     </div>
     <hr class="my-2">
     <div class="text-center">
-        <button class="btn btn-lg btn-primary " onclick="EditEmp(@ViewBag.empId);" type="button">تعديل</button>
+        <button class="btn btn-lg btn-primary " onclick="EditEmp();" type="button">تعديل</button>
         <button class="btn btn-lg btn-secondary " onclick="back()" type="button">رجوع</button>
         <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
     </div>
@@ -185,7 +186,7 @@
     });
     function LoadALLNationality() {
         $.ajax({
-            url: "/Coach/GetAllNationality",
+        url: "/Coach/GetAllNationality",
             type: "GET",
 
             dataType: "json",
@@ -209,7 +210,7 @@
 
         var empId = $('#hdnempId').val();
         $.ajax({
-            url: "/Empolyee/GetEmpById?empId=" + empId,
+        url: "/Empolyee/GetEmpById?empId=" + empId,
             type: "GET",
             dataType: "json",
             success: function (result) {
@@ -236,7 +237,7 @@
         });
     }
     function EditEmp() {
-        debugger;
+       
         var empId = $('#hdnempId').val();
         var name = $('#name').val();
         var jopname = $('#jopname').val()
@@ -314,7 +315,7 @@
                 formData.append("PassportImage", file3);
             }
             $.ajax({
-                url: "/Empolyee/EditEmpById",
+            url: "/Empolyee/EditEmpById",
                 type: "POST",
                 data: formData,
                 dataType: 'json',

@@ -15,11 +15,14 @@ namespace Mo3aqin.Models
         [ForeignKey("Competition")]
         public int? CompetitionId { get; set; }
         public string Notes { get; set; }
-        public bool Active { get; set; }
+        //public bool Active { get; set; }
         public Competition Competition { get; set; }
-        public GameDetails GameDetails { get; set; }
-        public championship_Games Championship_Games { get; set; }
-        public Class Class { get; set; }
-        public Championship Championship { get; set; }
+
+        //public GameDetails GameDetails { get; set; }
+        //public championship_Games Championship_Games { get; set; }
+        //public Class Class { get; set; }
+        public List<Championship> Championships { get; set; }
+        public List<ChampionshipGames> ChampionshipGames { get; set; }
+
     }
 }

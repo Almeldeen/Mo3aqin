@@ -199,5 +199,108 @@ namespace Mo3aqin.Controllers
 
 
         }
+        public IActionResult EmployeeDecision()
+        {
+            return View();
+        }
+        public async Task<IActionResult> AddEmpDec(Decision_VM decision)
+        {
+            try
+            {
+                var Dec = new EmployeeDecision() { EmpId = decision.Id, DecDate = decision.DecDate, Notes = decision.Notes };
+                Dec.DecFile = decision.DecFile == null ? null : await Help.SaveFileAsync(decision.DecFile, FilePath.EmpPath);
+                await db.EmployeeDecisions.AddAsync(Dec);
+                int res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+
+        }
+        public async Task<IActionResult> GetEmpDec(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                var Dec = await db.EmployeeDecisions.Select(x => new Decision_VM { Name = x.Employee.EmpName, DecDate = x.DecDate, Notes = x.Notes, DecId = x.DecId }).ToListAsync();
+
+                var pagedData = Pagination.PagedResult(Dec, pageNumber, pageSize);
+                return Json(pagedData);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public async Task<IActionResult> GetDecById(int DecId)
+        {
+            try
+            {
+                return Json(await db.EmployeeDecisions.Where(x => x.DecId == DecId).Select(x => new Decision_VM { Name = x.Employee.EmpName, DecDate = x.DecDate, Notes = x.Notes, DecId = x.DecId, Id = x.EmpId }).FirstOrDefaultAsync());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+        public async Task<IActionResult> EditEmpDec(Decision_VM decision)
+        {
+            try
+            {
+                var dec = await db.EmployeeDecisions.Where(x => x.DecId == decision.DecId).FirstOrDefaultAsync();
+                dec.EmpId = decision.Id;
+                dec.DecDate = decision.DecDate;
+                dec.Notes = decision.Notes;
+                dec.DecFile = decision.DecFile == null ? null : await Help.SaveFileAsync(decision.DecFile, FilePath.EmpPath);
+                int res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+        }
+        public async Task<IActionResult> DeletDec(int id)
+        {
+            try
+            {
+                var dec = await db.EmployeeDecisions.Where(x => x.DecId == id).FirstOrDefaultAsync();
+                db.EmployeeDecisions.Remove(dec);
+                int res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+        }
     }
 }

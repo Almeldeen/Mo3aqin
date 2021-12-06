@@ -1,0 +1,333 @@
+﻿
+@{
+    ViewBag.Titel = "قرارات ومرفقات المدربين";
+}
+<form id="" class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">قرارات ومرفقات المدربين</h2>
+    </div>
+    <input style="display:none" id="hidnId" value="" />
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label for="select-one">المدربين</label>
+            <select class="form-control select2" id="select-one">
+            </select>
+            <small id="select-oneError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون لاعب</small>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ القرار </label>
+            <div class="input-group">
+                <input type="text" class="form-control drgpicker" id="DateDec" value="" aria-describedby="button-addon2">
+                <br />
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <span class="fe fe-calendar fe-16"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label for="file-one">القرار</label>
+            <div class="d-flex align-items-center ">
+                <input type="file" id="imageUpload1" class="form-control-file w-auto">
+                <small id="imageUpload1Error" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون قرار</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="" for="text-three"> ملاحظات </label>
+        <textarea name="" class="form-control" id="Notes" cols="30" rows="5"></textarea>
+    </div>
+    <button onclick="AddDec();" id="add" type="button" class="btn btn-primary">حفظ</button>
+    <button onclick="updateDec()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>اسم الاعب</th>
+            <th>تاريخ القرار</th>
+            <th>ملاحظات</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="Data">
+    </tbody>
+</table>
+<!-- pagination -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+    </ul>
+</nav>
+<script>
+    $(document).ready(function () {
+
+        LoadAllCoach();
+        LoadALLDec(1);
+    });
+    PgNum = 0;
+    function LoadAllCoach() {
+        $.ajax({
+            url: "/Coach/LoadAllCoachs?pageNumber=" + 1 + "&pageSize=" + 1000000000000,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+
+                var html = '<option value="-1">اختر مدرب</option>';
+                $.each(result.data, function (key, item) {
+
+                    html += '<option value="' + item.coachId + '">' + item.coachName + '</option>';
+
+                });
+
+                $("#select-one").html(html)
+
+            }
+        });
+    }
+    function AddDec() {
+        $('.error').hide();
+        var Coach = $('#select-one').val();
+        var date = $("#DateDec").val();
+        var note = $("#Notes").val();
+        var totalFiles1 = document.getElementById("imageUpload1").files.length;
+        if (Coach == -1 || Coach == null) {
+            $('#select-oneError').show();
+        }
+        else if (totalFiles1 <= 0 || totalFiles1 == null) {
+            $('#imageUpload1Error').show();
+        }
+        else {
+            var formData = new FormData();
+            formData.append("Id", Coach);
+            formData.append("DecDate", date);
+            formData.append("Notes", note);
+            for (var i = 0; i < totalFiles1; i++) {
+                var file1 = document.getElementById("imageUpload1").files[i];
+                formData.append("DecFile", file1);
+            }
+            $.ajax({
+                url: "/Coach/AddCoachDec",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+
+                    if (result == true) {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        LoadALLDec(1)
+                        $('#select-one').val(-1).trigger("change");
+                    }
+                    else {
+                        swal("حدث خطأ", "", "error");
+
+                    }
+                }
+            });
+        }
+
+    }
+    function getDec(id) {
+
+        $.ajax({
+            url: "/Coach/GetDecById?DecId=" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                $('#hidnId').val(id);
+                $('#select-one').val(result.id).trigger('change');
+                $('#DateDec').val(result.decDate.substring(0, 10));
+                $('#Notes').val(result.notes);
+                $('#add').hide();
+                $('#edit').show();
+            }
+        });
+    }
+    function updateDec() {
+        debugger;
+        var id = $('#hidnId').val();
+        var Coach = $('#select-one').val();
+        var date = $("#DateDec").val();
+        var note = $("#Notes").val();
+        var totalFiles1 = document.getElementById("imageUpload1").files.length;
+        if (Coach == -1 || Coach == null) {
+            $('#select-oneError').show();
+        }
+        else {
+            var formData = new FormData();
+            formData.append("Id", Coach);
+            formData.append("DecId", id);
+            formData.append("DecDate", date);
+            formData.append("Notes", note);
+            for (var i = 0; i < totalFiles1; i++) {
+                var file1 = document.getElementById("imageUpload1").files[i];
+                formData.append("DecFile", file1);
+            }
+            $.ajax({
+                url: "/Coach/EditCoachDec",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    if (result == false) {
+                        swal("حدث خطأ", "", "error");
+
+                    }
+                    else {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        $('#select-one').val(-1).trigger("change");
+                        LoadALLDec(PgNum);
+                        $('#add').show();
+                        $('#edit').hide();
+                    }
+                }
+            });
+        }
+
+    }
+    function LoadALLDec(pageNum) {
+        PgNum = pageNum;
+        $.ajax({
+            url: "/Coach/GetCoachDec?pageNumber=" + pageNum + "&pageSize=" + 10,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+
+                $(".pagination").empty();
+                $("#Data").empty();
+                var html = '';
+                $.each(result.data, function (key, item) {
+                    $("#Data").append(SeedDataTabel(item))
+                });
+                PaggingTemplate(result.totalPages, result.currentPage);
+
+
+            }
+
+
+        });
+    }
+    function SeedDataTabel(data) {
+        console.log(data)
+        data.notes = data.notes == null ? "لايوجد" : data.notes;
+        return '<tr><td>' + data.name + '</td><td>' + data.decDate.substring(0, 10) + '</td><td>' + data.notes + '</td><td>' +
+            '<a class="btn btn-primary" href="javascript:void(0);" onclick="getDec(' + data.decId + ')">تعديل</a>' +
+            '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletDec(' + data.decId + ')">حذف</a></td> </tr>'
+
+    }
+    function deletDec(id) {
+        swal({
+            title: 'هل انت متأكد؟',
+            text: "اذا قمت بمسح هذا لن تستطيع استرجاعه ثانيتا!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Coach/DeletDec?id=" + id,
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (result) {
+
+                            if (result == true) {
+                                swal("تم الحذف بنجاح", {
+                                    icon: "success",
+                                });
+                                LoadALLDec(PgNum);
+                            }
+                            else {
+                                swal("حدث خطا او تم استخدام البيانات من قبل", "", "error");
+                            }
+                        }
+                    });
+
+                }
+            });
+    }
+    function PaggingTemplate(totalPage, currentPage) {
+
+        var template = "";
+        var TotalPages = totalPage;
+        var CurrentPage = currentPage;
+        var PageNumberArray = Array();
+
+
+        var countIncr = 1;
+        if (currentPage != 1) {
+
+            for (var i = currentPage - 1; i <= totalPage; i++) {
+
+                PageNumberArray[0] = currentPage - 1;
+                if (PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+        }
+        else {
+            for (var i = currentPage; i <= totalPage; i++) {
+
+                PageNumberArray[0] = currentPage;
+                if (totalPage != currentPage && PageNumberArray[countIncr - 1] != totalPage) {
+                    PageNumberArray[countIncr] = i + 1;
+                }
+                countIncr++;
+            };
+        }
+        PageNumberArray = PageNumberArray.slice(0, 5);
+        var FirstPage = 1;
+        var LastPage = totalPage;
+        if (totalPage != currentPage) {
+            var ForwardOne = currentPage + 1;
+        }
+        var BackwardOne = 1;
+        if (currentPage > 1) {
+            BackwardOne = currentPage - 1;
+        }
+
+        //template = "<p>" + CurrentPage + " of " + TotalPages + " pages</p>"
+        template = template + '<li class="page-item">' +
+            '<a href="javascript:void(0) onclick="LoadALLDec(' + BackwardOne + ')" class="page-link"  aria-label="Previous">' +
+            '<span aria-hidden="true">&laquo;</span>' +
+            '<span class="sr-only">Previous</span>' +
+            '</a>' +
+            '</li>';
+
+
+        var numberingLoop = "";
+        for (var i = 0; i < PageNumberArray.length; i++) {
+            if (PageNumberArray[i] == currentPage) {
+                numberingLoop = numberingLoop + '<li  class="page-item active"><a onclick="LoadALLDec(' + PageNumberArray[i] + ')"  class="page-link" href="javascript:void(0)">' + PageNumberArray[i] + '</a></li>'
+            }
+            else {
+                numberingLoop = numberingLoop + '<li class="page-item"><a onclick="LoadALLDec(' + PageNumberArray[i] + ')"  class="page-link" href="javascript:void(0)">' + PageNumberArray[i] + '</a></li>'
+            }
+
+        }
+        template = template + numberingLoop + '<li class="page-item">' +
+            ' <a href="javascript:void(0) onclick="LoadALLDec(' + ForwardOne + ')" class="page-link"  aria-label="Next">' +
+            '<span aria-hidden="true">&raquo;</span>' +
+            '<span class="sr-only">Next</span>' +
+            '</a>' +
+            '</li>';
+
+        $(".pagination").append(template);
+
+
+    }
+</script>
+

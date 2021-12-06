@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>الإستعلام</title>
+    <title>@ViewBag.Titel</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="~/css/simplebar.css">
     <!-- Fonts CSS -->
@@ -32,61 +32,99 @@
             <nav class="vertnav navbar navbar-light">
                 <!-- nav bar -->
                 <div class="w-100 mb-4 d-flex">
-                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
+                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" asp-controller="User" asp-action="Main">
                         <img src="~/assets/images/Mo3aqin-small.png" height="70" alt="">
                     </a>
                 </div>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-controller="User" asp-action="Main">
+                            <i class="fe fe-home fe-16"></i>
+                            <span class="ml-3 item-text">الرئيسية</span>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                            <i class="fe fe-home fe-16"></i>
+                           
                             <span class="ml-3 item-text">بيانات اساسية</span><span class="sr-only">(current)</span>
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="dashboard">
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Coach" asp-action="Nationality"><span class="ml-1 item-text">الجنسيات</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Player" asp-action="Country"><span class="ml-1 item-text">البلاد</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Game" asp-action="Race"><span class="ml-1 item-text">سباقات</span></a>
+                            </li>
                             <li class="nav-item active">
                                 <a class="nav-link pl-3" asp-controller="Game" asp-action="Competition"><span class="ml-1 item-text">المنافسات</span></a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link pl-3" asp-controller="Game" asp-action="Class"><span class="ml-1 item-text">الفئات</span></a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link pl-3" asp-controller="Coach" asp-action="Nationality"><span class="ml-1 item-text">الجنسيات</span></a>
-                            </li>
-                            @*<li class="nav-item">
-            <a class="nav-link pl-3" href="./dashboard-analytics.html"><span class="ml-1 item-text">Analytics</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pl-3" href="./dashboard-sales.html"><span class="ml-1 item-text">E-commerce</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pl-3" href="./dashboard-saas.html"><span class="ml-1 item-text">Saas Dashboard</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link pl-3" href="./dashboard-system.html"><span class="ml-1 item-text">Systems</span></a>
-        </li>*@
+
                         </ul>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav flex-fill w-100 mb-2">
+
                     <li class="nav-item w-100">
                         <a class="nav-link" asp-controller="Game" asp-action="Index">
                             <span class="ml-3 item-text">الالعاب</span>
                         </a>
                     </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-controller="Coach" asp-action="Index">
-                            <span class="ml-3 item-text">المدربين</span>
+                    <li class="nav-item dropdown">
+                        <a href="#Coach" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+
+                            <span class="ml-3 item-text">ادارة المدربين</span><span class="sr-only">(current)</span>
                         </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="Coach">
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Coach" asp-action="Index"><span class="ml-1 item-text"> المدربين</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Coach" asp-action="CoachDecision"><span class="ml-1 item-text">قرارات ومرفقات المدربين</span></a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-controller="Empolyee" asp-action="Index">
-                            <span class="ml-3 item-text">الموظفين</span>
+                    <li class="nav-item dropdown">
+                        <a href="#Empolyee" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+
+                            <span class="ml-3 item-text">ادارة الموظفين</span><span class="sr-only">(current)</span>
                         </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="Empolyee">
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Empolyee" asp-action="Index"><span class="ml-1 item-text"> الموظفين</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Empolyee" asp-action="EmployeeDecision"><span class="ml-1 item-text">قرارات ومرفقات الموظفين</span></a>
+                            </li>
+                        </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#Player" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+
+                            <span class="ml-3 item-text">ادارة الاعبين</span><span class="sr-only">(current)</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="Player">
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Player" asp-action="Index"><span class="ml-1 item-text">  الاعبين</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Player" asp-action="PlayerDecision"><span class="ml-1 item-text">قرارات ومرفقات الاعبين</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link pl-3" asp-controller="Player" asp-action="PlayerHistory"><span class="ml-1 item-text">تاريخ الاعبين</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                   
                     <li class="nav-item w-100">
-                        <a class="nav-link" asp-controller="Player" asp-action="Index">
-                            <span class="ml-3 item-text">الاعبين</span>
+                        <a class="nav-link" asp-controller="Championship" asp-action="Index">
+                            <span class="ml-3 item-text">بطولات</span>
                         </a>
                     </li>
                     @*<li class="nav-item w-100">

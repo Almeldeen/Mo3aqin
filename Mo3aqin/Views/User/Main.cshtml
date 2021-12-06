@@ -1,31 +1,25 @@
 ﻿
 @{
-    ViewData["Title"] = "Main";
+   ViewBag.Titel = "الرئيسية";
 }
 
 <form class="">
     <div class="form-row">
-        <a asp-action="Index" asp-controller="Player" class="btn btn-lg btn-primary col-md-5" >اللاعبين</a>
+        <a asp-action="Index" asp-controller="Player" class="btn btn-lg btn-primary col-md-5">اللاعبين</a>
         <div class="form-group col-md-2"></div>
         <a asp-action="NewGame" asp-controller="Game" class="btn btn-lg btn-primary col-md-5" type="reset">الألعاب</a>
     </div>
     <hr class="my-2">
     <div class="form-row">
-        <button class="btn btn-lg btn-primary col-md-5" type="submit">الموظفين</button>
+        <a asp-action="Index" asp-controller="Empolyee" class="btn btn-lg btn-primary col-md-5">الموظفين</a>
         <div class="form-group col-md-2"></div>
-        <button class="btn btn-lg btn-primary col-md-5" type="reset">البطولات</button>
+        <a asp-action="Index" asp-controller="Championship" class="btn btn-lg btn-primary col-md-5">البطولات</a>
     </div>
     <hr class="my-2">
     <div class="form-row">
-        <button class="btn btn-lg btn-primary col-md-5" type="submit">المدربين</button>
+        <a class="btn btn-lg btn-primary col-md-5" asp-action="Index" asp-controller="Coach">المدربين</a>
         <div class="form-group col-md-2"></div>
-        <button class="btn btn-lg btn-primary col-md-5" type="reset">العهد والمخازن</button>
-    </div>
-    <hr class="my-2">
-    <div class="form-row">
-        <button class="btn btn-lg btn-primary col-md-5" type="submit">صادر ووارد</button>
-        <div class="form-group col-md-2"></div>
-        <button class="btn btn-lg btn-primary col-md-5" type="reset">الإستعلام</button>
+        <a class="btn btn-lg btn-primary col-md-5" asp-action="BasicData" asp-controller="User">بيانات اساسية</a>
     </div>
     <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
 </form>

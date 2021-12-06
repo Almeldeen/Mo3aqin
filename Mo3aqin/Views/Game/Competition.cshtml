@@ -1,26 +1,43 @@
 ﻿
 @{
-    ViewData["Title"] = "اضافة منافسة";
+    ViewBag.Titel = "المنافاسات";
 }
 
-<form>
-    <div class="input-group mb-3">
-        <input style="display:none" id="hidnId" value="" />
-        <input id="Name" class="form-control" placeholder="اسم المنافسة..." />
-        <hr />
-        <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
-        <div class="input-group-append">
-            <button onclick="AddCompetition()" id="add" type="button" class="btn btn-primary">اضافة منافسة جديدة</button>
-            <button onclick="updateCompetition()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
-        </div>
-    </div>
-</form>
 
+    <form id="" class="">
+        <div class="mx-auto text-center my-4">
+            <h2 class="my-3">تسجيل منافسة جديدة</h2>
+        </div>
+        <div class="form-group">
+            <input style="display:none" id="hidnId" value="" />
+            <label for="text-one">إسم المنافسة</label>
+            <input id="Name" class="form-control" placeholder="اسم المنافسة..." />
+            <small id="NameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for="select-one">المسابقة</label>
+                <select class="form-control" id="select-one">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="" for="text-three"> ملاحظات </label>
+            <textarea name="" class="form-control" id="Notes" cols="30" rows="5"></textarea>
+        </div>
+        <button onclick="AddCompetition()" id="add" type="button" class="btn btn-primary">اضافة منافسة جديدة</button>
+        <button onclick="updateCompetition()" id="edit" style="display:none" type="button" class="btn btn-primary">تعديل</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+    </form>
 <table class="table table-striped mt-4">
     <thead>
         <tr class="bg-primary text-white">
 
             <th>اسم المنافسة</th>
+            <th>اسم السباق</th>
             <th></th>
         </tr>
     </thead>
@@ -30,10 +47,33 @@
 
 <script>
     $(document).ready(function () {
-
+        LoadALLRaces();
         LoadALLCompetition();
-
+        
     });
+    function LoadALLRaces() {
+        $.ajax({
+            url: "/Game/GetAllRace",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+
+                console.log(result);
+                var html = '<option value="-1">اختر مسابقة</option>';
+                $.each(result, function (key, item) {
+                    debugger;
+                    html += '<option value="' + item.raceId + '">' + item.raceName + '</option>';
+
+                });
+
+                $("#select-one").html(html)
+
+            }
+
+
+        });
+    }
     function LoadALLCompetition() {
         $.ajax({
             url: "/Game/GetAllCompetition",
@@ -45,8 +85,8 @@
                 console.log(result);
                 var html = '';
                 $.each(result, function (key, item) {
-                    debugger;
-                    html += ' <tr><td>' + item.competitionName + '</td><td>' +
+                    var RaceName = item.raceName == null ? "لا يوجد" : item.raceName;
+                    html += ' <tr><td>' + item.competitionName + '</td><td>' + RaceName + '</td><td>' +
                         '<a class="btn btn-primary" href="javascript:void(0);" onclick="getCompetition(' + item.competitionId + ')">تعديل</a>' +
                         '<a class="btn btn-danger" href="javascript:void(0);" onclick="deletCompetition(' + item.competitionId + ')">حذف</a></td> </tr>'
                 });
@@ -61,6 +101,7 @@
     function AddCompetition() {
 
         var Name = $('#Name').val();
+        var Race = $('#select-one').val();
 
         $('.error').hide();
         if (Name == "" || Name == null) {
@@ -71,13 +112,14 @@
 
 
             $.ajax({
-                url: "/Game/AddCompetition?CompetitionName=" + Name,
+                url: "/Game/AddCompetition?CompetitionName=" + Name + "&RaceId=" + Race,
                 type: "POST",
                 success: function (result) {
 
                     if (result == true) {
                         swal("تم الحفظ بنجاح", "", "success");
                         $('#Name').val("");
+                        $('#select-one').val(-1);
 
                         LoadALLCompetition();
                     }
@@ -103,7 +145,8 @@
 
                 console.log(result);
                 $('#hidnId').val(id);
-                $('#Name').val(result);
+                $('#Name').val(result.competitionName);
+                $('#select-one').val(result.raceId)
                 $('#add').hide();
                 $('#edit').show();
 
@@ -119,8 +162,9 @@
     function updateCompetition() {
         var id = $('#hidnId').val();
         var Name = $('#Name').val();
+        var Race = $('#select-one').val();
         $.ajax({
-            url: "/Game/UpdateCompetitionById?Id=" + id + "&Name=" + Name,
+            url: "/Game/UpdateCompetitionById?Id=" + id + "&Name=" + Name + "&RaceId=" + Race,
             type: "POST",
 
             dataType: 'json',
@@ -130,7 +174,7 @@
                 if (result == true) {
                     swal("تم الحفظ بنجاح", "", "success");
                     $('#Name').val("");
-
+                    $('#select-one').val(-1)
                     LoadALLCompetition();
                     $('#add').show();
                     $('#edit').hide();

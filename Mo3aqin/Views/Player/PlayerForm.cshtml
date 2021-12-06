@@ -89,7 +89,7 @@
             <div class="d-flex align-items-center ">
                 <input asp-for="MedicalReportImg" type="file" id="imageUpload5" class="form-control-file w-auto">
                 <img class="rounded-circle m-2" id="imageUpload5img" style="display:none" src="" alt="img" width="150" height="150" />
-            </div>           
+            </div>
             <span asp-validation-for="MedicalReportImg" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
@@ -200,6 +200,7 @@
                 <label class="custom-control-label" for="status_not_active">غير فعّال</label>
             </div>
         </div>
+     
     </div>
     <hr class="my-2">
     <div class="form-group">
@@ -219,9 +220,32 @@
             <input asp-for="Disabality" type="text" id="text-fifteen" class="form-control">
             <span class="text-danger" asp-validation-for="Disabality"></span>
         </div>
+        <div class="form-group col-md-6">
+            <label for="RegDate">تاريخ التسجيل</label>
+            <div class="input-group">
+                <input asp-for="RegDate" name="RegDate" type="text" class="form-control drgpicker" id="RegDate" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <span asp-validation-for="RegDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one"> اللعبة </label>
+        @foreach (var item in ViewBag.Games)
+        {
+            <div class="custom-control custom-checkbox">
+                <input name="GameIds" class="custom-control-input" type="checkbox" value="@item.GameId" id="@item.GameId">
+                <label class="custom-control-label" for="@item.GameId"> @item.GameName</label>
+            </div>
+        }
+        <span class="text-danger" asp-validation-for="GameIds"></span>
 
+    </div>
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-sixteen"> ملاحظات </label>

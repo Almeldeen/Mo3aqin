@@ -215,6 +215,159 @@ namespace Mo3aqin.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.Champ", b =>
+                {
+                    b.Property<int>("ChampId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChampDuration")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChampName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CoachsNum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmpsNum")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GameName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Invitaion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlayersNum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Season")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ChampId");
+
+                    b.ToTable("champs");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.ChampPLayers", b =>
+                {
+                    b.Property<int>("ChampId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ChampId", "PlayerId")
+                        .HasName("PK_ChampPLayers");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("ChampPLayers");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.ChampStatus", b =>
+                {
+                    b.Property<int>("ChampStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("AddresTheauthChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("BookTicketChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("BookTicketLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChampId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("ChampInvChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("ChampInvLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("DelegChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("FinancialChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("NominationPlayerChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("PRChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("PayOfFeesChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("PromisChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("RePortChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("RegByNamesChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("RegByNamesLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("RegNumChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("RegNumlink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("ResidenceChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("ResultsChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("ResultsLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("SportFreeTimeChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("UniformChek")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("VisaChek")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("ChampStatusId");
+
+                    b.HasIndex("ChampId");
+
+                    b.ToTable("ChampStatuses");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Championship", b =>
                 {
                     b.Property<int>("ChampId")
@@ -225,14 +378,17 @@ namespace Mo3aqin.Migrations
                     b.Property<string>("ChampDuration")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ChampName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CoachsNum")
                         .HasColumnType("int");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
                     b.Property<int>("EmpsNum")
                         .HasColumnType("int");
@@ -257,7 +413,24 @@ namespace Mo3aqin.Migrations
 
                     b.HasKey("ChampId");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Championships");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.ChampionshipGames", b =>
+                {
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChampId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GameId", "ChampId");
+
+                    b.HasIndex("ChampId");
+
+                    b.ToTable("ChampionshipGames");
                 });
 
             modelBuilder.Entity("Mo3aqin.Models.Class", b =>
@@ -345,6 +518,32 @@ namespace Mo3aqin.Migrations
                     b.ToTable("Coaches");
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.CoachDecision", b =>
+                {
+                    b.Property<int>("DecId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CoachId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DecDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DecFile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DecId");
+
+                    b.HasIndex("CoachId");
+
+                    b.ToTable("CoachDecisions");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Coach_Emp_Games", b =>
                 {
                     b.Property<int>("CoachId")
@@ -376,9 +575,29 @@ namespace Mo3aqin.Migrations
                     b.Property<string>("CompetitionName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RaceId")
+                        .HasColumnType("int");
+
                     b.HasKey("CompetitionId");
 
+                    b.HasIndex("RaceId");
+
                     b.ToTable("Competitions");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Mo3aqin.Models.Employee", b =>
@@ -446,21 +665,38 @@ namespace Mo3aqin.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.EmployeeDecision", b =>
+                {
+                    b.Property<int>("DecId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DecDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DecFile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EmpId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DecId");
+
+                    b.HasIndex("EmpId");
+
+                    b.ToTable("EmployeeDecisions");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Game", b =>
                 {
                     b.Property<int>("GameId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ChampionshipChampId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("CompetitionId")
                         .HasColumnType("int");
@@ -472,10 +708,6 @@ namespace Mo3aqin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GameId");
-
-                    b.HasIndex("ChampionshipChampId");
-
-                    b.HasIndex("ClassId");
 
                     b.HasIndex("CompetitionId")
                         .IsUnique()
@@ -514,8 +746,7 @@ namespace Mo3aqin.Migrations
 
                     b.HasIndex("EmpId");
 
-                    b.HasIndex("GameId")
-                        .IsUnique();
+                    b.HasIndex("GameId");
 
                     b.HasIndex("SupervisorId");
 
@@ -604,8 +835,8 @@ namespace Mo3aqin.Migrations
                     b.Property<string>("PassportImg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PassportNum")
-                        .HasColumnType("int");
+                    b.Property<string>("PassportNum")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -622,6 +853,9 @@ namespace Mo3aqin.Migrations
                     b.Property<string>("Plot")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("RegDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Regain")
                         .HasColumnType("nvarchar(max)");
 
@@ -635,6 +869,32 @@ namespace Mo3aqin.Migrations
                     b.HasIndex("NationalityId");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.PlayerDecision", b =>
+                {
+                    b.Property<int>("DecId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DecDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DecFile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DecId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("playerDecisions");
                 });
 
             modelBuilder.Entity("Mo3aqin.Models.PlayerGames", b =>
@@ -653,24 +913,51 @@ namespace Mo3aqin.Migrations
                     b.ToTable("PlayerGames");
                 });
 
-            modelBuilder.Entity("Mo3aqin.Models.championship_Games", b =>
+            modelBuilder.Entity("Mo3aqin.Models.PlayerHistory", b =>
                 {
-                    b.Property<int>("ChampId")
+                    b.Property<int>("HisId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChampName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("HisDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GameId")
+                    b.Property<int>("PlyerNum")
                         .HasColumnType("int");
 
-                    b.HasKey("ChampId", "GameId")
-                        .HasName("PK_championship_Games");
+                    b.Property<int>("playerRating")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ChampId")
-                        .IsUnique();
+                    b.HasKey("HisId");
 
-                    b.HasIndex("GameId")
-                        .IsUnique();
+                    b.HasIndex("PlayerId");
 
-                    b.ToTable("Championship_Games");
+                    b.ToTable("PlayerHistories");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.Race", b =>
+                {
+                    b.Property<int>("RaceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RaceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RaceId");
+
+                    b.ToTable("Races");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -724,6 +1011,66 @@ namespace Mo3aqin.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.ChampPLayers", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Championship", "Championship")
+                        .WithMany()
+                        .HasForeignKey("ChampId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mo3aqin.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Championship");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.ChampStatus", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Championship", "Championship")
+                        .WithMany()
+                        .HasForeignKey("ChampId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Championship");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.Championship", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.ChampionshipGames", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Championship", "Championship")
+                        .WithMany("ChampionshipGames")
+                        .HasForeignKey("ChampId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mo3aqin.Models.Game", "Game")
+                        .WithMany("ChampionshipGames")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Championship");
+
+                    b.Navigation("Game");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Coach", b =>
                 {
                     b.HasOne("Mo3aqin.Models.Championship", "Championship")
@@ -739,6 +1086,15 @@ namespace Mo3aqin.Migrations
                     b.Navigation("Championship");
 
                     b.Navigation("Nationality");
+                });
+
+            modelBuilder.Entity("Mo3aqin.Models.CoachDecision", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Coach", "Coach")
+                        .WithMany()
+                        .HasForeignKey("CoachId");
+
+                    b.Navigation("Coach");
                 });
 
             modelBuilder.Entity("Mo3aqin.Models.Coach_Emp_Games", b =>
@@ -768,6 +1124,15 @@ namespace Mo3aqin.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.Competition", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId");
+
+                    b.Navigation("Race");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Employee", b =>
                 {
                     b.HasOne("Mo3aqin.Models.Nationality", "Nationality")
@@ -779,23 +1144,20 @@ namespace Mo3aqin.Migrations
                     b.Navigation("Nationality");
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.EmployeeDecision", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmpId");
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.Game", b =>
                 {
-                    b.HasOne("Mo3aqin.Models.Championship", "Championship")
-                        .WithMany()
-                        .HasForeignKey("ChampionshipChampId");
-
-                    b.HasOne("Mo3aqin.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
                     b.HasOne("Mo3aqin.Models.Competition", "Competition")
                         .WithOne("Game")
                         .HasForeignKey("Mo3aqin.Models.Game", "CompetitionId");
-
-                    b.Navigation("Championship");
-
-                    b.Navigation("Class");
 
                     b.Navigation("Competition");
                 });
@@ -821,8 +1183,8 @@ namespace Mo3aqin.Migrations
                         .IsRequired();
 
                     b.HasOne("Mo3aqin.Models.Game", "Game")
-                        .WithOne("GameDetails")
-                        .HasForeignKey("Mo3aqin.Models.GameDetails", "GameId")
+                        .WithMany()
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -862,6 +1224,15 @@ namespace Mo3aqin.Migrations
                     b.Navigation("Nationality");
                 });
 
+            modelBuilder.Entity("Mo3aqin.Models.PlayerDecision", b =>
+                {
+                    b.HasOne("Mo3aqin.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Mo3aqin.Models.PlayerGames", b =>
                 {
                     b.HasOne("Mo3aqin.Models.Game", "Game")
@@ -881,28 +1252,18 @@ namespace Mo3aqin.Migrations
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("Mo3aqin.Models.championship_Games", b =>
+            modelBuilder.Entity("Mo3aqin.Models.PlayerHistory", b =>
                 {
-                    b.HasOne("Mo3aqin.Models.Championship", "Championship")
-                        .WithOne("Championship_Games")
-                        .HasForeignKey("Mo3aqin.Models.championship_Games", "ChampId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Mo3aqin.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId");
 
-                    b.HasOne("Mo3aqin.Models.Game", "Game")
-                        .WithOne("Championship_Games")
-                        .HasForeignKey("Mo3aqin.Models.championship_Games", "GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Championship");
-
-                    b.Navigation("Game");
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("Mo3aqin.Models.Championship", b =>
                 {
-                    b.Navigation("Championship_Games");
+                    b.Navigation("ChampionshipGames");
                 });
 
             modelBuilder.Entity("Mo3aqin.Models.Competition", b =>
@@ -912,9 +1273,7 @@ namespace Mo3aqin.Migrations
 
             modelBuilder.Entity("Mo3aqin.Models.Game", b =>
                 {
-                    b.Navigation("Championship_Games");
-
-                    b.Navigation("GameDetails");
+                    b.Navigation("ChampionshipGames");
                 });
 #pragma warning restore 612, 618
         }

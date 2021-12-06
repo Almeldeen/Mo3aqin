@@ -99,7 +99,7 @@ namespace Mo3aqin.Controllers
                 CoachName = x.CoachName,
                 HomeNumber = x.HomeNumber,
                 MaritalStatus = x.MaritalStatus,
-                //Nationality = x.Nationality,
+                NationalityId=x.NationalityId,
                 Notes = x.Notes,
                 PassportExpDate = x.PassportExpDate,
                 PassportImageString = x.PassportImage,
@@ -193,12 +193,114 @@ namespace Mo3aqin.Controllers
             ViewBag.coachId = coachId;
             return View();
         }
+        public IActionResult CoachDecision()
+        {
+            return View();
+        }
+        public async Task<IActionResult> AddCoachDec(Decision_VM decision)
+        {
+            try
+            {
+                var Dec = new CoachDecision() { CoachId = decision.Id, DecDate = decision.DecDate, Notes = decision.Notes };
+                Dec.DecFile = decision.DecFile == null ? null : await Help.SaveFileAsync(decision.DecFile, FilePath.CoachPath);
+                await db.CoachDecisions.AddAsync(Dec);
+                int res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+
+        }
+        public async Task<IActionResult> GetCoachDec(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                var Dec = await db.CoachDecisions.Select(x => new Decision_VM { Name = x.Coach.CoachName, DecDate = x.DecDate, Notes = x.Notes, DecId = x.DecId }).ToListAsync();
+
+                var pagedData = Pagination.PagedResult(Dec, pageNumber, pageSize);
+                return Json(pagedData);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public async Task<IActionResult> GetDecById(int DecId)
+        {
+            try
+            {
+                return Json(await db.CoachDecisions.Where(x => x.DecId == DecId).Select(x => new Decision_VM { Name = x.Coach.CoachName, DecDate = x.DecDate, Notes = x.Notes, DecId = x.DecId, Id = x.CoachId }).FirstOrDefaultAsync());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+        public async Task<IActionResult> EditCoachDec(Decision_VM decision)
+        {
+            try
+            {
+                var dec = await db.CoachDecisions.Where(x => x.DecId == decision.DecId).FirstOrDefaultAsync();
+                dec.CoachId = decision.Id;
+                dec.DecDate = decision.DecDate;
+                dec.Notes = decision.Notes;
+                dec.DecFile = decision.DecFile == null ? null : await Help.SaveFileAsync(decision.DecFile, FilePath.CoachPath);
+                int res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+        }
+        public async Task<IActionResult> DeletDec(int id)
+        {
+            try
+            {
+                var dec = await db.CoachDecisions.Where(x => x.DecId == id).FirstOrDefaultAsync();
+                db.CoachDecisions.Remove(dec);
+                int res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+        }
+        #region Nationality
         public async Task<IActionResult> Nationality()
         {
             return View();
         }
-        #region Competition
-      
         public async Task<JsonResult> GetAllNationality()
         {
             var res = await db.Nationalities.ToListAsync();

@@ -10,5 +10,6 @@ namespace Mo3aqin.Constane
          static public readonly string CoachPath = "/wwwroot/Images/Coach/";
         static public readonly string EmpPath = "/wwwroot/Images/Emp/";
         static public readonly string PlayerPath = "/wwwroot/Images/Player/";
+        static public readonly string ChampPath = "/wwwroot/Images/Champ/";
     }
 }

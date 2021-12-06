@@ -33,7 +33,7 @@ namespace Mo3aqin.Controllers
         }
         public async Task<JsonResult> GetAllCompetition()
         {
-            var res = await db.Competitions.Select(x => new Competition_VM { CompetitionId = x.CompetitionId, CompetitionName = x.CompetitionName }).ToListAsync();
+            var res = await db.Competitions.Select(x => new Competition_VM { CompetitionId = x.CompetitionId, CompetitionName = x.CompetitionName,RaceName=x.Race.RaceName }).ToListAsync();
             return Json(res);
         }
         [HttpPost]
@@ -41,7 +41,7 @@ namespace Mo3aqin.Controllers
         {
             
                 
-            Competition comp = new Competition() { CompetitionName = competition.CompetitionName };
+            Competition comp = new Competition() { CompetitionName = competition.CompetitionName,RaceId=competition.RaceId==-1?null:competition.RaceId };
             await db.Competitions.AddAsync(comp);
                 var res =await db.SaveChangesAsync();
             if (res>0)
@@ -58,7 +58,7 @@ namespace Mo3aqin.Controllers
         {
             try
             {
-                return Json (await db.Competitions.Where(x => x.CompetitionId == CompetitionId).Select(x => x.CompetitionName).FirstOrDefaultAsync());
+                return Json (await db.Competitions.Where(x => x.CompetitionId == CompetitionId).Select(x => new Competition_VM {CompetitionName=x.CompetitionName,RaceId=x.RaceId }).FirstOrDefaultAsync());
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace Mo3aqin.Controllers
                 return Json(ex);
             }
         }
-        public async Task<IActionResult> UpdateCompetitionById(int Id,string Name)
+        public async Task<IActionResult> UpdateCompetitionById(int Id,string Name,int RaceId)
         {
             try
             {
@@ -78,6 +78,7 @@ namespace Mo3aqin.Controllers
                 else
                 {
                     copm.CompetitionName = Name;
+                    copm.RaceId = RaceId==-1?null:RaceId;
                     var res = await db.SaveChangesAsync();
                     if (res > 0)
                     {
@@ -134,18 +135,30 @@ namespace Mo3aqin.Controllers
         }
         public async Task<IActionResult> AddNewGame(Game game)
         {
+            try
+            {
+                if (game.CompetitionId == -1)
+                {
+                    game.CompetitionId = null;
+                }
+                await db.Games.AddAsync(game);
+                var res = await db.SaveChangesAsync();
+                if (res > 0)
+                {
 
-            await db.Games.AddAsync(game);
-            var res = await db.SaveChangesAsync();
-            if (res > 0)
-            {
-                
-                return Json(new Game_VM {GameId=game.GameId,CompetitionName=db.Competitions.Where(x=> x.CompetitionId==game.CompetitionId).Select(x=> x.CompetitionName).FirstOrDefault(),GameName=game.GameName,Notes=game.Notes });
+                    return Json(new Game_VM { GameId = game.GameId, CompetitionName = db.Competitions.Where(x => x.CompetitionId == game.CompetitionId).Select(x => x.CompetitionName).FirstOrDefault(), GameName = game.GameName, Notes = game.Notes });
+                }
+                else
+                {
+                    return Json(false);
+                }
             }
-            else
+            catch (Exception ex)
             {
+
                 return Json(false);
             }
+           
         }
         public async Task<JsonResult> GetAllGames()
         {
@@ -332,6 +345,107 @@ namespace Mo3aqin.Controllers
                 else
                 {
                     db.Classes.Remove(game);
+                    var res = await db.SaveChangesAsync();
+                    if (res > 0)
+                    {
+                        return Json(true);
+                    }
+                    else
+                    {
+                        return Json(false);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+        #endregion
+        #region Race
+        public async Task<IActionResult> Race()
+        {
+            return View();
+        }
+        public async Task<JsonResult> GetAllRace()
+        {
+            var res = await db.Races.Select(x => new Race_VM { RaceId = x.RaceId, RaceName = x.RaceName }).ToListAsync();
+            return Json(res);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddRace(Race race)
+        {
+
+
+           
+            await db.Races.AddAsync(race);
+            var res = await db.SaveChangesAsync();
+            if (res > 0)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
+
+        }
+        public async Task<IActionResult> GetRaceById(int RaceId)
+        {
+            try
+            {
+                return Json(await db.Races.Where(x => x.RaceId == RaceId).Select(x => x.RaceName).FirstOrDefaultAsync());
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+        public async Task<IActionResult> UpdateRaceById(int Id, string Name)
+        {
+            try
+            {
+                var race = await db.Races.Where(x => x.RaceId == Id).FirstOrDefaultAsync();
+                if (race == null)
+                {
+                    return Json(false);
+                }
+                else
+                {
+                    race.RaceName = Name;
+                    var res = await db.SaveChangesAsync();
+                    if (res > 0)
+                    {
+                        return Json(true);
+                    }
+                    else
+                    {
+                        return Json(false);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+        public async Task<IActionResult> DeletRace(int RaceId)
+        {
+            try
+            {
+                var race = await db.Races.Where(x => x.RaceId == RaceId).FirstOrDefaultAsync();
+                if (race == null)
+                {
+                    return Json(false);
+                }
+                else
+                {
+                    db.Races.Remove(race);
                     var res = await db.SaveChangesAsync();
                     if (res > 0)
                     {

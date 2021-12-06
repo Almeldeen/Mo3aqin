@@ -13,7 +13,7 @@ namespace Mo3aqin.Models
         public int PlayerId { get; set; }
         public string PlayerName { get; set; }
         public string MemberId { get; set; }
-        public int PassportNum { get; set; }
+        public string PassportNum { get; set; }
         public DateTime PassportExpDate { get; set; }
         public string PassportImg { get; set; }
         public string PlayerImage { get; set; }
@@ -45,5 +45,6 @@ namespace Mo3aqin.Models
         public Class Class { get; set; }
         public string Disabality { get; set; }
         public string Notes { get; set; }
+        public DateTime RegDate { get; set; }
     }
 }

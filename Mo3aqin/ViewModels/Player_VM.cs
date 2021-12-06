@@ -17,19 +17,20 @@ namespace Mo3aqin.ViewModels
         [Required(ErrorMessage = "أدخل رقم العضوية")]
         public string MemberId { get; set; }
         [Required(ErrorMessage = "أدخل رقم الجواز")]
-        public int PassportNum { get; set; }
+        public string PassportNum { get; set; }
       
         public DateTime PassportExpDate { get; set; }
-        [Required(ErrorMessage = "أدخل صورة الجواز")]
+        public DateTime RegDate { get; set; }
+       
         public IFormFile PassportImg { get; set; }
         public string PassportImgStr { get; set; }
-        [Required(ErrorMessage = "أدخل صورة اللاعب")]
+        
         public IFormFile PlayerImage { get; set; }
         public string PlayerImageStr { get; set; }
-        [Required(ErrorMessage = "أدخل المدينة")]
+       
         public IFormFile PlayerCityImg { get; set; }
         public string PlayerCityImgStr { get; set; }
-        [Required(ErrorMessage = "أدخل شهادة الميلاد")]
+       
         public IFormFile BirthOfDateImage { get; set; }
         public string BirthOfDateImageStr { get; set; }
        
@@ -39,10 +40,10 @@ namespace Mo3aqin.ViewModels
         public Nationality Nationality { get; set; }
 
         public string MaritalStatus { get; set; }
-        [Required(ErrorMessage = "أدخل التقرير الطبى")]
+        
         public IFormFile MedicalReportImg { get; set; }
         public string MedicalReportImgStr { get; set; }
-        [Required(ErrorMessage = "  الميلاد شهادة الاعاقة")]
+       
         public IFormFile DisableImg { get; set; }
         public string DisableImgStr { get; set; }
         [Required(ErrorMessage = "أدخل الرقم المدنى")]
@@ -69,6 +70,9 @@ namespace Mo3aqin.ViewModels
         public Class Class { get; set; }
         [Required(ErrorMessage = "أدخل  الاعاقة")]
         public string Disabality { get; set; }
+        [Required(ErrorMessage = "اختر لعبة علي الاقل")]
+        public int[] GameIds { get; set; }
+        public string GameIds2 { get; set; }
         public string Notes { get; set; }
     }
 }

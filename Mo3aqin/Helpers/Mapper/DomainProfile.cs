@@ -21,6 +21,9 @@ namespace Mo3aqin.Helpers.Mapper
 
             CreateMap<Player, Player_VM>();
             CreateMap<Player_VM, Player>();
+
+            CreateMap<Championship, Championship_VM>();
+            CreateMap<Championship_VM, Championship>();
         }
     }
 }

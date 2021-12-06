@@ -1,0 +1,518 @@
+﻿
+<input type="hidden" id="hdnplayerIdId" value="@ViewBag.playerId" />
+<form class="Form"  enctype="multipart/form-data" method="post">
+    <input type="hidden"  id="hdnplayerIdId" value="@ViewBag.playerId" />
+
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">تسجيل لاعب جديد </h2>
+    </div>
+    <div class="form-group">
+        <label for="text-one">اسم اللاعب</label>
+        <input  type="text" id="name" class="form-control">
+        <small id="nameError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون اسم</small>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-two">رقم العضوية</label>
+            <input  type="text" id="memberId" class="form-control">
+            <small id="memberIdError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم</small>
+
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-three">رقم الجواز</label>
+            <input  type="text" id="passnumber" class="form-control">
+            <small id="passnumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم</small>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">تاريخ انتهاء الجواز</label>
+            <div class="input-group">
+                <input  name="PassportExpDate" type="text" class="form-control drgpicker" id="PassportExpDate" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <small id="PassportExpDateError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون تاريخ</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-one">صورة الجواز</label>
+            <div class="d-flex align-items-center ">
+                <input  type="file" id="imageUpload1" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload1img" src="" alt="img" width="150" height="150" />
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="file-two">صورة اللاعب</label>
+            <div class="d-flex align-items-center ">
+                <input  type="file" id="imageUpload2" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload2img" src="" alt="img" width="150" height="150" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-three">مدنية اللاعب</label>
+            <div class="d-flex align-items-center ">
+                <input  type="file" id="imageUpload3" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload3img" src="" alt="img" width="150" height="150" />
+            </div>
+
+
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-three">تاريخ ميلاد</label>
+            <div class="input-group">
+                <input  name="BirthOfDate" type="text" class="form-control drgpicker" id="BirthOfDate" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date">
+                        <small id="BirthOfDateError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون تاريخ</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-four">شهادة الميلاد</label>
+            <div class="d-flex align-items-center ">
+                <input  type="file" id="imageUpload4" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload4img" src="" alt="img" width="150" height="150" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-five"> تقرير طبي</label>
+            <div class="d-flex align-items-center ">
+                <input  type="file" id="imageUpload5" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload5img" src="" alt="img" width="150" height="150" />
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="file-six">شهادة إعاقة</label>
+            <div class="d-flex align-items-center ">
+                <input  type="file" id="imageUpload6" class="form-control-file w-auto">
+                <img class="rounded-circle m-2" id="imageUpload6img" src="" alt="img" width="150" height="150" />
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-one">الجنسية</label>
+            <select  class="form-control " id="nationality">
+            </select>
+            <small id="nationalityError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون جنسية</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="check-one">الحالة الإجتماعية</label>
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="custom-control custom-radio">
+                    <input  value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio-one">متزوج</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input  value="اعزب" type="radio" id="two" name="MaritalStatus" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="customRadio-two">أعزب</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-four">الرقم المدنى</label>
+            <input  type="text" id="CivilianNumber" class="form-control">
+            <small id="CivilianNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-five">مكان العمل</label>
+            <input  type="text" id="WorkPlace" class="form-control">
+            <small id="WorkPlaceError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون مكان</small>
+
+        </div>
+    </div>
+    <hr class="col-12">
+    <div class="d-flex flex-wrap w-100">
+        <p class="col-12 font-weight-bold">عنوان السكن</p>
+        <div class="form-group col-md-6">
+            <label for="text-six">	المحافظة</label>
+            <input  type="text" id="Governorate" class="form-control">
+            <small id="GovernorateError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون المحافظة</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-seven"> المنطقة</label>
+            <input  type="text" id="Regain" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-eight">			قطعة</label>
+            <input  type="text" id="Plot" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-nine">			جادة</label>
+            <input  type="text" id="Gada" class="form-control">
+        </div>
+    </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="d-flex flex-wrap w-100">
+            <p class="col-12 font-weight-bold"> هواتف</p>
+            <div class="form-group col-md-6">
+                <label for="text-ten">		الوالد</label>
+                <input  type="text" id="ParentNumber" class="form-control">
+                <small id="ParentNumberError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم الهاتف</small>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-eleven">			المنزل</label>
+                <input  type="text" id="HomeNumber" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-twelve">				الموبايل</label>
+                <input  type="text" id="PhoneNumber" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="text-thirteen">				اخرى</label>
+                <input  type="text" id="OtherNumber" class="form-control">
+
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <div class="d-flex flex-wrap align-items-center">
+            <label class="m-0 mr-3" for="name">حالة اللاعب</label>
+            <div class="custom-control custom-radio">
+                <input  value="1" type="radio" id="status_active" name="Active" class="custom-control-input">
+                <label class="custom-control-label" for="status_active">فعّال</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input  value="0" type="radio" id="status_not_active" name="Active" class="custom-control-input" checked>
+                <label class="custom-control-label" for="status_not_active">غير فعّال</label>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-fourteen">توصية الدكتور </label>
+        <textarea  name="" class="form-control" id="DocRecommendation" cols="30" rows="5"></textarea>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-three"> الفئة</label>
+            <select  class="form-control " id="class">
+            </select>
+            <small id="classError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم فئة</small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="text-fifteen">الإعاقة</label>
+            <input  type="text" id="Disabality" class="form-control">
+            <small id="DisabalityError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون رقم اعاقة</small>
+        </div>
+    </div>
+
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one"> اللعبة </label>
+        @foreach (var item in ViewBag.Games)
+        {
+            <div class="custom-control custom-checkbox">
+                <input name="GameIds" class="custom-control-input" type="checkbox" value="@item.GameId" id="chec_@item.GameId">
+                <label class="custom-control-label" for="chec_@item.GameId"> @item.GameName</label>
+            </div>
+        }
+        <small id="GameIdsError" style="display:none" class="text-danger  error">لايمكنك الاضافة بدون لعبة علي الاقل</small>
+
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="text-sixteen"> ملاحظات </label>
+        <textarea  name="Notes" class="form-control" id="text-sixteen" cols="30" rows="5"></textarea>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-lg btn-primary " onclick="EditPlayer();" type="button">تعديل</button>
+        <a class="btn btn-lg btn-secondary " asp-action="Index">رجوع</a>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    $(document).ready(function () {
+
+        LoadALLNationality();
+        LoadALLClass();
+        GetPlayer();
+    });
+    function LoadALLNationality() {
+        $.ajax({
+            url: "/Coach/GetAllNationality",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر جنسية</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.nationalityId + '">' + item.nationalityName + '</option>';
+
+                });
+
+                $("#nationality").html(html)
+
+            }
+
+
+        });
+    }
+    function LoadALLClass() {
+        $.ajax({
+            url: "/Game/GetAllClass",
+            type: "GET",
+
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                var html = '<option value="-1">اختر فئة</option>';
+                $.each(result, function (key, item) {
+
+                    html += '<option value="' + item.classId + '">' + item.className + '</option>';
+
+                });
+
+                $("#class").html(html)
+
+            }
+
+
+        });
+    }
+    function GetPlayer() {
+
+        var playerId = $('#hdnplayerIdId').val();
+        $.ajax({
+            url: "/Player/GetPlayerById?PlayerId=" + playerId,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                $('#name').val(result.playerName);
+                $('#WorkPlace').val(result.workPlace);
+                $('#memberId').val(result.memberId);
+                $('#PassportExpDate').val(result.passportExpDate);
+                $('#passnumber').val(result.passportNum);
+                $('#nationality').val(result.nationalityId);
+                $('#BirthOfDate').val(result.birthOfDate);
+                result.maritalStatus == "متزوج" ? $("#one").prop("checked", true) : $("#two").prop("checked", true);
+                result.active == 1 ? $("#status_active").prop("checked", true) : $("#status_not_active").prop("checked", true);
+                $('#CivilianNumber').val(result.civilianNumber);
+                $('#Governorate').val(result.governorate);
+                $('#Regain').val(result.regain);
+                $('#Plot').val(result.plot);
+                $('#Gada').val(result.gada);
+                $('#ParentNumber').val(result.parentNumber);
+                $('#OtherNumber').val(result.otherNumber);
+                $('#DocRecommendation').val(result.docRecommendation);
+                $('#class').val(result.classId);
+                $('#Disabality').val(result.disabality);
+                $('#PhoneNumber').val(result.phoneNumber);
+                $('#HomeNumber').val(result.homeNumber);
+                $('#notes').val(result.notes);
+                document.getElementById('imageUpload1img').src = "/Images/Player/" + result.playerImageStr
+                document.getElementById('imageUpload2img').src = "/Images/Player/" + result.playerCityImgStr
+                document.getElementById('imageUpload3img').src = "/Images/Player/" + result.passportImgStr
+                document.getElementById('imageUpload4img').src = "/Images/Player/" + result.birthOfDateImageStr
+                document.getElementById('imageUpload5img').src = "/Images/Player/" + result.medicalReportImgStr
+                document.getElementById('imageUpload6img').src = "/Images/Player/" + result.disableImgStr
+                $.each(result.gameIds, function (key, item) {
+                    $("#chec_" + item).prop("checked", true)
+                });
+            }
+        });
+    }
+    function EditPlayer() {
+        var PlayerId = $('#hdnplayerIdId').val();
+        var name=$('#name').val();
+        var WorkPlace=$('#WorkPlace').val();
+        var memberId=$('#memberId').val();
+        var PassportExpDate=$('#PassportExpDate').val();
+        var passnumber = $('#passnumber').val();
+        var nationality=$('#nationality').val();
+        var BirthOfDate=$('#BirthOfDate').val();
+        var status = $('input[name="MaritalStatus"]:checked').val();
+        var Active = $('input[name="Active"]:checked').val();
+        var CivilianNumber=$('#CivilianNumber').val();
+        var Governorate=$('#Governorate').val();
+        var Regain=$('#Regain').val();
+        var Plot=$('#Plot').val();
+        var Gada=$('#Gada').val();
+        var ParentNumber=$('#ParentNumber').val();
+        var OtherNumber=$('#OtherNumber').val();
+        var DocRecommendation=$('#DocRecommendation').val();
+        var Class=$('#class').val();
+        var Disabality=$('#Disabality').val();
+        var PhoneNumber=$('#PhoneNumber').val();
+        var HomeNumber=$('#HomeNumber').val();
+        var notes=$('#notes').val();
+        var GameIds = new Array();
+        $('input[name="GameIds"]:checked').each(function () {
+            GameIds.push($(this).val());
+        });
+        
+        var formData = new FormData();
+        var totalFiles1 = document.getElementById("imageUpload1").files.length;
+        var totalFiles2 = document.getElementById("imageUpload2").files.length;
+        var totalFiles3 = document.getElementById("imageUpload3").files.length;
+        var totalFiles4 = document.getElementById("imageUpload4").files.length;
+        var totalFiles5 = document.getElementById("imageUpload5").files.length;
+        var totalFiles6 = document.getElementById("imageUpload6").files.length;
+        $('.error').hide();
+        if (name == "" || name == null) {
+            $('#nameError').show();
+        }
+        if (memberId == "" || memberId == null) {
+            $('#memberIdError').show();
+        }
+         else if (passnumber == "" || passnumber == null) {
+            $('#passnumberError').show();
+        }
+        else if (PassportExpDate == "" || PassportExpDate == null) {
+            $('#passportExpDateError').show();
+        }
+        else if (BirthOfDate == "" || BirthOfDate == null) {
+            $('#BirthOfDateError').show();
+        }
+        else if (nationality == -1 || nationality == null) {
+            $('#nationalityError').show();
+        }
+        
+        else if (CivilianNumber == "" || CivilianNumber == null) {
+            $('#CivilianNumberError').show();
+        }
+        else if (WorkPlace == "" || WorkPlace == null) {
+            $('#WorkPlaceError').show();
+        }
+        else if (Governorate == "" || Governorate == null) {
+            $('#GovernorateError').show();
+        }
+        else if (PhoneNumber == "" || passnumber == null) {
+            $('#PhoneNumberError').show();
+        }
+        else if (Class == -1 || Class == null) {
+            $('#classError').show();
+        }
+        else if (Disabality == "" || Disabality == null) {
+            $('#DisabalityError').show();
+        }
+        else if (GameIds.length <=0) {
+            $('#GameIdsError').show();
+        }
+        else {
+            formData.append("PlayerId", PlayerId)
+            formData.append("PlayerName", name)
+            formData.append("PassportExpDate", PassportExpDate)
+            formData.append("PassportNum", passnumber)
+            formData.append("NationalityId", nationality)
+            formData.append("BirthOfDate", BirthOfDate)
+            formData.append("MaritalStatus", status)
+            formData.append("PhoneNumber", PhoneNumber)
+            formData.append("HomeNumber", HomeNumber)
+            formData.append("Notes", notes)
+            formData.append("Active", Active)
+            formData.append("WorkPlace", WorkPlace)
+            formData.append("MemberId", memberId)          
+            formData.append("Governorate", Governorate)
+            formData.append("Regain", Regain)
+            formData.append("Plot", Plot)
+            formData.append("Gada", Gada)
+            formData.append("ParentNumber", ParentNumber)
+            formData.append("OtherNumber", OtherNumber)
+            formData.append("ClassId", Class)
+            formData.append("DocRecommendation", DocRecommendation)
+            formData.append("Disabality", Disabality)
+            formData.append("CivilianNumber", CivilianNumber)
+            formData.append("GameIds2", JSON.stringify(GameIds))
+            
+            for (var i = 0; i < totalFiles1; i++) {
+                var file1 = document.getElementById("imageUpload1").files[i];
+                formData.append("PassportImg", file1);
+            }
+            for (var i = 0; i < totalFiles2; i++) {
+                var file2 = document.getElementById("imageUpload2").files[i];
+                formData.append("PlayerImage", file2);
+            }
+            for (var i = 0; i < totalFiles3; i++) {
+                var file3 = document.getElementById("imageUpload3").files[i];
+                formData.append("PlayerCityImg", file3);
+            }
+            for (var i = 0; i < totalFiles4; i++) {
+                var file4 = document.getElementById("imageUpload4").files[i];
+                formData.append("BirthOfDateImage", file4);
+            }
+            for (var i = 0; i < totalFiles5; i++) {
+                var file5 = document.getElementById("imageUpload5").files[i];
+                formData.append("MedicalReportImg", file5);
+            }
+            for (var i = 0; i < totalFiles6; i++) {
+                var file6 = document.getElementById("imageUpload6").files[i];
+                formData.append("DisableImg", file6);
+            }
+            
+            $.ajax({
+                url: "/Player/EditPlayerById",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (result) {
+
+                    if (result == true) {
+                        swal("تم الحفظ بنجاح", "", "success");
+                        $("form")[0].reset();
+                        window.location.href = "/Player/Index";
+                    }
+                    else {
+                        swal("حدث خطأ", "", "error");
+
+                    }
+                }
+            });
+        }
+
+
+    }
+    document.getElementById('imageUpload1').onchange = function () {
+        $('#imageUpload1img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload1img').src = src
+    }
+    document.getElementById('imageUpload2').onchange = function () {
+        $('#imageUpload2img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload2img').src = src
+    }
+    document.getElementById('imageUpload3').onchange = function () {
+        $('#imageUpload3img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload3img').src = src
+    }
+    document.getElementById('imageUpload4').onchange = function () {
+        $('#imageUpload4img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload4img').src = src
+    }
+    document.getElementById('imageUpload5').onchange = function () {
+        $('#imageUpload5img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload5img').src = src
+    }
+    document.getElementById('imageUpload6').onchange = function () {
+        $('#imageUpload6img').show();
+        var src = URL.createObjectURL(this.files[0])
+        document.getElementById('imageUpload6img').src = src
+    }
+</script>

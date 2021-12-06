@@ -1,0 +1,354 @@
+﻿
+@{
+    ViewBag.Titel = "متابعة البطولات";
+}
+
+<form class="">
+    <div class="mx-auto text-center my-4">
+        <h2 id="champname" class="my-3"></h2>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="select-one">اسم البطولة</label>
+            <select class="form-control select2" id="champ">
+                <option value="-1">اختر بطولة</option>
+                @foreach (var item in ViewBag.Champ)
+                {
+                    <option value="@item.ChampId">@item.ChampName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="game">اللعبة</label>
+            <input readonly disabled type="text" class="form-control" id="game">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="date-input-one">من تاريخ</label>
+            <div class="input-group">
+                <input readonly disabled type="text" class="form-control drgpicker" id="start" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="date-input-two">إلى تاريخ</label>
+            <div class="input-group">
+                <input readonly disabled type="text" class="form-control drgpicker" id="end" value="" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="text-one">المكان</label>
+            <input readonly disabled type="text" class="form-control" id="city">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="invcheck">
+                <label class="custom-control-label" for="invcheck"> دعوة البطولة</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">الدعوة</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="regnumcheck">
+                <label class="custom-control-label" for="regnumcheck">التسجيل بالأرقام</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">رابط التسجيل</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="nominationPlayerChek">
+                <label class="custom-control-label" for="nominationPlayerChek">ترشيح اللاعبين</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">ترشيح المدرب</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="delegChek">
+                <label class="custom-control-label" for="delegChek">كشف الوفد</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">كشف الوفد</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="SportFreeTimeChek">
+                <label class="custom-control-label" for="SportFreeTimeChek">التفرغات الرياضية</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="AddresTheauthChek">
+                <label class="custom-control-label" for="AddresTheauthChek">مخاطبة الهيئة</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="PayOfFeesChek">
+                <label class="custom-control-label" for="PayOfFeesChek">دفع الرسوم</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="RegByNamesChek">
+                <label class="custom-control-label" for="RegByNamesChek">التسجيل بالأسماء</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">رابط التسجيل</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="PromisChek">
+                <label class="custom-control-label" for="PromisChek">تعهد المشاركة</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="BookTicketChek">
+                <label class="custom-control-label" for="BookTicketChek">حجز التذاكر</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">التذكرة</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="ResidenceChek">
+                <label class="custom-control-label" for="ResidenceChek">الإقامة</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="VisaChek">
+                <label class="custom-control-label" for="VisaChek">الفيزا</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="FinancialChek">
+                <label class="custom-control-label" for="FinancialChek">المخصصات المالية</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="PRChek">
+                <label class="custom-control-label" for="PRChek">اللجنة الاعلامية, العلاقات العامة</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">كتاب العلاقات العامة</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="UniformChek">
+                <label class="custom-control-label" for="UniformChek">تفصيل الزي</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="ResultsChek">
+                <label class="custom-control-label" for="ResultsChek">جدول الألعاب والنتائج</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-4">
+            <button class="btn btn-sm btn-primary btn-block" type="submit">رابط النتائج</button>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="1" id="RePortChek">
+                <label class="custom-control-label" for="RePortChek">التقارير</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3"></div>
+    </div>
+    <hr class="my-2">
+    <button class="btn btn-lg btn-primary btn-block" onclick="AddChampStatus()" type="button">حفظ</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    $(document).ready(function () {
+        $('#champ').on('change', function () {
+            $.ajax({
+                url: "/Championship/GetChampById?champId=" + this.value,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+                    $('#champname').html(result.champName);
+                    $('#game').val(result.gameIds);
+                    $('#start').val(result.startDate.substring(0, 10));
+                    $('#end').val(result.endDate.substring(0, 10));
+                    $('#city').val(result.city);
+                    result.champInvChek == 1 ? $("#invcheck").prop("checked", true) : $("#invcheck").prop("checked", false);
+                    result.regNumChek == 1 ? $("#regnumcheck").prop("checked", true) : $("#regnumcheck").prop("checked", false);
+                    result.delegChek == 1 ? $("#delegChek").prop("checked", true) : $("#delegChek").prop("checked", false);
+                    result.nominationPlayerChek == 1 ? $("#nominationPlayerChek").prop("checked", true) : $("#nominationPlayerChek").prop("checked", false);                   
+                    result.sportFreeTimeChek == 1 ? $("#SportFreeTimeChek").prop("checked", true) : $("#SportFreeTimeChek").prop("checked", false);
+                    result.addresTheauthChek == 1 ? $("#AddresTheauthChek").prop("checked", true) : $("#AddresTheauthChek").prop("checked", false);
+                    result.payOfFeesChek == 1 ? $("#PayOfFeesChek").prop("checked", true) : $("#PayOfFeesChek").prop("checked", false);
+                    result.regByNamesChek == 1 ? $("#RegByNamesChek").prop("checked", true) : $("#RegByNamesChek").prop("checked", false);
+                    result.promisChek == 1 ? $("#PromisChek").prop("checked", true) : $("#PromisChek").prop("checked", false);
+                    result.bookTicketChek == 1 ? $("#BookTicketChek").prop("checked", true) : $("#BookTicketChek").prop("checked", false);
+                    result.residenceChek == 1 ? $("#ResidenceChek").prop("checked", true) : $("#ResidenceChek").prop("checked", false);
+                    result.pRChek == 1 ? $("#PRChek").prop("checked", true) : $("#PRChek").prop("checked", false);
+                    result.uniformChek == 1 ? $("#UniformChek").prop("checked", true) : $("#UniformChek").prop("checked", false);
+                    result.resultsChek == 1 ? $("#ResultsChek").prop("checked", true) : $("#ResultsChek").prop("checked", false);
+                    result.rePortChek == 1 ? $("#RePortChek").prop("checked", true) : $("#RePortChek").prop("checked", false);
+                    result.financialChek == 1 ? $("#FinancialChek").prop("checked", true) : $("#FinancialChek").prop("checked", false);
+                }
+            });
+        });
+    })
+    function AddChampStatus() {
+        var champid = $('#champ').val();
+        var invcheck = $('#invcheck:checked').val();
+        var regnumcheck = $('#regnumcheck:checked').val();
+        var delegChek = $('#delegChek:checked').val();
+        var nominationPlayerChek = $('#nominationPlayerChek:checked').val();
+        var SportFreeTimeChek = $('#SportFreeTimeChek:checked').val();
+        var AddresTheauthChek = $('#AddresTheauthChek:checked').val();
+        var PayOfFeesChek = $('#PayOfFeesChek:checked').val();
+        var RegByNamesChek = $('#RegByNamesChek:checked').val();
+        var PromisChek = $('#PromisChek:checked').val();
+        var BookTicketChek = $('#BookTicketChek:checked').val();
+        var ResidenceChek = $('#ResidenceChek:checked').val();
+        var VisaChek = $('#VisaChek:checked').val();
+        var PRChek = $('#PRChek:checked').val();
+        var UniformChek = $('#UniformChek:checked').val();
+        var ResultsChek = $('#ResultsChek:checked').val();
+        var RePortChek = $('#RePortChek:checked').val();
+        var FinancialChek = $('#FinancialChek:checked').val();
+        
+        var formdata = new FormData();
+        formdata.append("ChampId", champid);
+        formdata.append("ChampInvChek", invcheck);
+        formdata.append("RegNumChek", regnumcheck);
+        formdata.append("DelegChek", delegChek);
+        formdata.append("NominationPlayerChek", nominationPlayerChek);
+        formdata.append("SportFreeTimeChek", SportFreeTimeChek);
+        formdata.append("AddresTheauthChek", AddresTheauthChek);
+        formdata.append("PayOfFeesChek", PayOfFeesChek);
+        formdata.append("PromisChek", PromisChek);
+        formdata.append("BookTicketChek", BookTicketChek);
+        formdata.append("VisaChek", VisaChek);
+        formdata.append("PRChek", PRChek);
+        formdata.append("UniformChek", UniformChek);
+        formdata.append("ResidenceChek", ResidenceChek);
+        formdata.append("ResultsChek", ResultsChek);
+        formdata.append("RePortChek", RePortChek);
+        formdata.append("RegByNamesChek", RegByNamesChek);
+        formdata.append("FinancialChek", FinancialChek);
+
+        $.ajax({
+            url: "/Championship/AddChampStatus",
+            type: "POST",
+            data: formdata,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+
+                if (result == true) {
+                    swal("تم الحفظ بنجاح", "", "success");
+                }
+                else {
+                    swal("حدث خطأ", "", "error");
+
+                }
+            }
+        });
+
+    }
+</script>

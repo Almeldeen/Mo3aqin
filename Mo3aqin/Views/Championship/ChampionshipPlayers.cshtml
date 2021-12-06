@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Titel = "ترشيح الاعبين";
+}
+
+<form class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">ترشيح اللاعبين</h2>
+    </div>
+    <div class="form-row">
+        <label for="select-one">اسم البطولة</label>
+        <select class="form-control " id="champ">
+            <option value="-1">اختر بطولة</option>
+            @foreach (var item in ViewBag.Champ)
+            {
+                <option value="@item.ChampId">@item.ChampName</option>
+            }
+        </select>
+    </div>
+    <hr class="my-2">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            
+            <label for="game">اللعبة</label>
+            <input readonly disabled type="text" class="form-control" id="game">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="Comp">المنافسة</label>
+            <input readonly disabled type="text" class="form-control" id="Comp">
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="form-group">
+        <label class="" for="check-one">اللاعبين</label>
+        <div id="data">
+            
+        </div>
+        
+    </div>
+    <hr class="my-2">
+    <button class="btn btn-lg btn-primary btn-block" onclick="AddChampPlayer()" type="button">حفظ</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+<script>
+    $(document).ready(function () {
+        $('#champ').on('change', function () {
+            $.ajax({
+                url: "/Championship/GetChampPlayerById?champId=" + this.value,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+                    /*$('#champname').html(result.champName);*/
+                    $('#game').val(result.gameIds);
+                    $('#Comp').val(result.comptions);
+                    var html = "";
+                    $.each(result.players, function (key, item) {
+                        html += '<div class="custom-control custom-checkbox">' +
+                            '<input class="custom-control-input" name="players" type = "checkbox" value = "' + item.playerId + '" id ="pl_' + item.playerId + '" >' +
+                            '<label class="custom-control-label" for="pl_' + item.playerId + '">' + item.playerName + '</label></div >'
+                    });
+                   
+                    $('#data').html(html);
+                    if (result.playerschIds != null) {
+                        $.each(result.playerschIds, function (key, item) {
+                            debugger;
+                            $("#pl_" + item).prop("checked", true)
+                        });
+                    }
+                }
+            });
+        });
+    })
+    function AddChampPlayer() {
+        var champId = $('#champ').val();
+        var PlayerIds = new Array();
+        $('input[name="players"]:checked').each(function () {
+            PlayerIds.push($(this).val());
+        });
+        var formData = new FormData();
+        formData.append("ChampId", champId);
+        formData.append("PlayersIds", JSON.stringify(PlayerIds))
+        $.ajax({
+            url: "/Championship/AddChampPlayers",
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+
+                if (result == true) {
+                    swal("تم الحفظ بنجاح", "", "success");
+                    $("form")[0].reset();
+                    
+                }
+                else {
+                    swal("حدث خطأ", "", "error");
+
+                }
+            }
+        });
+    }
+</script>

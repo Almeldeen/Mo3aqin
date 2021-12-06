@@ -1,4 +1,4 @@
-﻿@{ ViewData["Title"] = "تفاصيل موظف";
+﻿@{ ViewBag.Titel = "تفاصيل موظف";
 }
 
 <input type="hidden" id="hdnempId" value="@ViewBag.empId" />
@@ -9,35 +9,40 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-one">اسم الموظف</label>
-            <input readonly type="text" id="name" class="form-control">
+            <input readonly disabled type="text" id="name" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-two">المسمى الوظيفي</label>
-            <input readonly type="text" id="jopname" class="form-control">
+            <input readonly disabled type="text" id="jopname" class="form-control">
         </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-one">صورة الموظف</label>
-            <input readonly type="file" id="file-one" class="form-control-file">
+            <div class="d-flex align-items-center ">
+                <img class="rounded-circle m-2" id="imageUpload1img" src="" alt="img" width="150" height="150" />
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="file-two">مدنية الموظف</label>
-            <input readonly type="file" id="file-two" class="form-control-file">
+            <div class="d-flex align-items-center ">
+                <img class="rounded-circle m-2" id="imageUpload2img" src="" alt="img" width="150" height="150" />
+            </div>
         </div>
     </div>
     <hr class="my-2">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="file-three">صورة الجواز</label>
-            <input readonly type="file" id="file-three" class="form-control-file">
-
+            <div class="d-flex align-items-center ">
+                <img class="rounded-circle m-2" id="imageUpload3img" src="" alt="img" width="150" height="150" />
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="date-input-one">تاريخ الميلاد </label>
             <div class="input-group">
-                <input readonly type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
+                <input readonly disabled type="text" class="form-control drgpicker" id="date-input-two" value="" aria-describedby="button-addon2">
                 <br />
 
                 <div class="input-group-append">
@@ -50,7 +55,7 @@
         <div class="form-group col-md-6">
             <label for="date-input-one">تاريخ انتهاء الجواز</label>
             <div class="input-group">
-                <input readonly type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
+                <input readonly disabled type="text" class="form-control drgpicker" id="date-input-one" value="" aria-describedby="button-addon2">
                 <br />
 
                 <div class="input-group-append">
@@ -66,12 +71,12 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-three">رقم الجواز</label>
-            <input readonly type="text" id="passnumber" class="form-control">
+            <input readonly disabled type="text" id="passnumber" class="form-control">
 
         </div>
         <div class="form-group col-md-6">
             <label for="select-one">الجنسية</label>
-            <select readonly class="form-control " id="nationality">
+            <select readonly disabled class="form-control " id="nationality">
             </select>
 
         </div>
@@ -80,11 +85,11 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="text-four">الرقم المدنى</label>
-            <input readonly type="text" id="CivilianNumber" class="form-control">
+            <input readonly disabled type="text" id="CivilianNumber" class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="text-five">عنوان السكن</label>
-            <input readonly type="text" id="Address" class="form-control">
+            <input readonly disabled type="text" id="Address" class="form-control">
         </div>
     </div>
     <hr class="my-2">
@@ -93,11 +98,11 @@
             <label for="check-one">الحالة الإجتماعية</label>
             <div class="d-flex flex-wrap align-items-center" id="check-one">
                 <div class="custom-control custom-radio">
-                    <input readonly value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
+                    <input disabled readonly value="متزوج" type="radio" id="one" name="MaritalStatus" class="custom-control-input">
                     <label class="custom-control-label" for="one">متزوج</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input readonly type="radio" id="two" value="أعزب" name="MaritalStatus" class="custom-control-input" checked>
+                    <input disabled readonly type="radio" id="two" value="أعزب" name="MaritalStatus" class="custom-control-input" checked>
                     <label class="custom-control-label" for="two">أعزب</label>
                 </div>
             </div>
@@ -106,11 +111,11 @@
             <label for="check-two">نوع الدوام</label>
             <div class="d-flex flex-wrap align-items-center" id="check-two">
                 <div class="custom-control custom-radio">
-                    <input readonly value="نصف دوام" type="radio" id="three" name="TimeType" class="custom-control-input">
+                    <input disabled readonly value="نصف دوام" type="radio" id="three" name="TimeType" class="custom-control-input">
                     <label class="custom-control-label" for="three">نصف دوام</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input readonly value="دوام كامل" type="radio" id="four" name="TimeType" class="custom-control-input" checked>
+                    <input disabled readonly value="دوام كامل" type="radio" id="four" name="TimeType" class="custom-control-input" checked>
                     <label class="custom-control-label" for="four">دوام كامل</label>
                 </div>
             </div>
@@ -134,11 +139,11 @@
         <div class="d-flex flex-wrap align-items-center">
             <label class="m-0 mr-3" for="name">حالة الموظف</label>
             <div class="custom-control custom-radio">
-                <input readonly type="radio" id="status_active" value="1" name="Active" class="custom-control-input" checked>
+                <input disabled readonly type="radio" id="status_active" value="1" name="Active" class="custom-control-input" checked>
                 <label class="custom-control-label" for="status_active">فعّال</label>
             </div>
             <div class="custom-control custom-radio">
-                <input readonly type="radio" id="status_not_active" value="0" name="Active" class="custom-control-input">
+                <input readonly disabled type="radio" id="status_not_active" value="0" name="Active" class="custom-control-input">
                 <label class="custom-control-label" for="status_not_active">غير فعّال</label>
             </div>
         </div>
@@ -146,7 +151,7 @@
     <hr class="my-2">
     <div class="form-group">
         <label class="" for="text-nine">ملاحظات</label>
-        <textarea readonly id="notes" name="Notes" class="form-control" cols="30" rows="5"></textarea>
+        <textarea readonly disabled id="notes" name="Notes" class="form-control" cols="30" rows="5"></textarea>
     </div>
     <hr class="my-2">
     <div class="text-center">
@@ -205,7 +210,9 @@
                 $('#PhoneNumber').val(result.phoneNumber);
                 $('#HomeNumber').val(result.homeNumber);
                 $('#notes').val(result.notes);
-
+                document.getElementById('imageUpload1img').src = "/Images/Emp/" + result.playerImageStr
+                document.getElementById('imageUpload2img').src = "/Images/Emp/" + result.playerCityImgStr
+                document.getElementById('imageUpload3img').src = "/Images/Emp/" + result.passportImgStr
             }
         });
     }

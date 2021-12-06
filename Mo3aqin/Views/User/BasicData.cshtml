@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Titel = "بيانات اساسية";
+}
+
+<form class="">
+    <div class="mx-auto text-center my-4">
+        <h2 class="my-3">بيانات اساسية</h2>
+    </div>
+    <hr class="my-2">
+    <a asp-controller="Coach" asp-action="Nationality" class="btn btn-lg btn-primary btn-block">الجنسيات</a>
+    <hr class="my-2">
+    <a asp-controller="Player" asp-action="Country" class="btn btn-lg btn-primary btn-block">البلاد</a>
+    <hr class="my-2">
+    <a asp-controller="Game" asp-action="Race" class="btn btn-lg btn-primary btn-block">سباقات</a>
+    <hr class="my-2">
+    <a asp-controller="Game" asp-action="Competition" class="btn btn-lg btn-primary btn-block">المنافسات</a>
+    <hr class="my-2">
+    <a asp-controller="Game" asp-action="Class" class="btn btn-lg btn-primary btn-block">الفئات</a>
+
+    <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+</form>
+
